@@ -3,6 +3,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
+import { isCampusRoomMode } from "../device/campus-host";
 import {
   Button,
   Flex,
@@ -152,8 +153,14 @@ export const ProjectToolbarItems = () => {
   const handleSave = useCallback(() => {
     void saveHex();
   }, [saveHex]);
-  useShortcut(keyboardShortcuts.saveSession, handleSave);
+  useShortcut(keyboardShortcuts.saveSession, handleSave, {
+    enabled: !isCampusRoomMode(),
+  });
 
+  if (isCampusRoomMode()) {
+    // Campus saves the project, and its room is home.
+    return null;
+  }
   return (
     <>
       <Button
@@ -196,6 +203,10 @@ export const ProjectMenuItems = () => {
     void saveHex();
   }, [saveHex]);
 
+  if (isCampusRoomMode()) {
+    // Campus saves the project, and its room is home.
+    return null;
+  }
   return (
     <>
       <MenuItem

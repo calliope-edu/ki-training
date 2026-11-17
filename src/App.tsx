@@ -24,6 +24,8 @@ import {
 } from "react-router-dom";
 import "theme-package/fonts/fonts.css";
 import { BufferedDataProvider } from "./buffered-data-hooks";
+import { startCampusRoom } from "./campus-room";
+import CampusRoomGate from "./components/CampusRoomGate";
 import EditCodeDialog from "./components/EditCodeDialog";
 import ErrorBoundary from "./components/ErrorBoundary";
 import ErrorHandlerErrorView from "./components/ErrorHandlerErrorView";
@@ -33,7 +35,11 @@ import { ConnectStatusProvider } from "./connect-status-hooks";
 import { ConnectionStageProvider } from "./connection-stage-hooks";
 import { deployment, useDeployment } from "./deployment";
 import { CampusBluetoothConnection } from "./device/campusBluetooth";
-import { getCampusHost, isCampusMode } from "./device/campus-host";
+import {
+  getCampusHost,
+  isCampusMode,
+  isCampusRoomMode,
+} from "./device/campus-host";
 import { MockWebBluetoothConnection } from "./device/mockBluetooth";
 import { MockRadioBridgeConnection } from "./device/mockRadioBridge";
 import { MockWebUSBConnection } from "./device/mockUsb";
@@ -82,6 +88,10 @@ const bluetooth = isMockDeviceMode()
   : isCampusMode()
   ? new CampusBluetoothConnection(getCampusHost())
   : createWebBluetoothConnection({ logging });
+// In a Campus room, Campus keeps the project (see campus-room.ts).
+if (isCampusRoomMode()) {
+  startCampusRoom();
+}
 const radioBridge = isMockDeviceMode()
   ? new MockRadioBridgeConnection(usb)
   : createRadioBridgeConnection(usb, { logging });
@@ -159,7 +169,9 @@ const Layout = () => {
       <ScrollRestoration />
       <ProjectProvider driverRef={driverRef}>
         <EditCodeDialog ref={driverRef} />
-        <Outlet />
+        <CampusRoomGate>
+          <Outlet />
+        </CampusRoomGate>
       </ProjectProvider>
     </ErrorBoundary>
   );

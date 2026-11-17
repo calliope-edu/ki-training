@@ -49,6 +49,8 @@ import { BufferedData } from "./buffered-data";
 import { getDetectedAction } from "./utils/prediction";
 import { getTour as getTourSpec } from "./tours";
 import { createPromise, PromiseInfo } from "./hooks/use-promise-ref";
+import { isCampusRoomMode } from "./device/campus-host";
+import { isReadonly } from "./campus-room-state";
 
 export const modelUrl = "indexeddb://micro:bit-ai-creator-model";
 
@@ -97,7 +99,10 @@ export const buildDataWindowForDuration = (duration: number): DataWindow => {
     1,
     Math.round(duration / deviceSamplesPeriod)
   );
-  const minSamples = Math.max(1, Math.round(deviceSamplesLength * minSamplesRatio));
+  const minSamples = Math.max(
+    1,
+    Math.round(deviceSamplesLength * minSamplesRatio)
+  );
   return {
     duration,
     minSamples,
@@ -266,6 +271,16 @@ export interface Actions {
 
   loadDataset(actions: ActionData[]): void;
   loadProject(project: MakeCodeProject, name: string): void;
+  /**
+   * Opens the project a Campus room hands over (src/campus-room.ts), or a new
+   * one named `name` when it has none yet.
+   */
+  loadCampusProject(
+    project: MakeCodeProject | null,
+    name: string,
+    model: tf.LayersModel | undefined,
+    dataWindow: DataWindow | undefined
+  ): void;
   setEditorOpen(open: boolean): void;
   recordingStarted(): void;
   recordingStopped(): void;
@@ -339,7 +354,9 @@ export interface Actions {
 type Store = State & Actions;
 
 const createMlStore = (logging: Logging) => {
-  console.log("[MAKECODE] createMlStore() - creating store and editor promises (editorReady/editorContentLoaded)");
+  console.log(
+    "[MAKECODE] createMlStore() - creating store and editor promises (editorReady/editorContentLoaded)"
+  );
   return create<Store>()(
     devtools(
       persist(
@@ -501,6 +518,10 @@ const createMlStore = (logging: Logging) => {
           },
 
           addNewAction() {
+            // A teacher looking at a student's KI-Training in Campus.
+            if (isReadonly()) {
+              return;
+            }
             return set(({ project, projectEdited, actions, dataWindow }) => {
               const newActions = [
                 ...actions,
@@ -529,6 +550,9 @@ const createMlStore = (logging: Logging) => {
           },
 
           addActionRecordings(id: ActionData["ID"], recs: RecordingData[]) {
+            if (isReadonly()) {
+              return;
+            }
             return set(({ actions }) => {
               const updatedActions = actions.map((action) => {
                 if (action.ID === id) {
@@ -547,13 +571,14 @@ const createMlStore = (logging: Logging) => {
           },
 
           deleteAction(id: ActionData["ID"]) {
+            if (isReadonly()) {
+              return;
+            }
             return set(({ project, projectEdited, actions, dataWindow }) => {
               const newActions = actions.filter((a) => a.ID !== id);
               const newDataWindow =
                 newActions.length === 0
-                  ? buildDataWindowForDuration(
-                      get().settings.recordingDuration
-                    )
+                  ? buildDataWindowForDuration(get().settings.recordingDuration)
                   : dataWindow;
               return {
                 actions:
@@ -572,6 +597,9 @@ const createMlStore = (logging: Logging) => {
           },
 
           setActionName(id: ActionData["ID"], name: string) {
+            if (isReadonly()) {
+              return;
+            }
             return set(
               ({ project, projectEdited, actions, model, dataWindow }) => {
                 const newActions = actions.map((action) =>
@@ -592,6 +620,9 @@ const createMlStore = (logging: Logging) => {
           },
 
           setActionIcon(id: ActionData["ID"], icon: MakeCodeIcon) {
+            if (isReadonly()) {
+              return;
+            }
             return set(
               ({ project, projectEdited, actions, model, dataWindow }) => {
                 // If we're changing the action to use an icon that's already in use
@@ -624,6 +655,9 @@ const createMlStore = (logging: Logging) => {
           },
 
           setRequiredConfidence(id: ActionData["ID"], value: number) {
+            if (isReadonly()) {
+              return;
+            }
             return set(
               ({ project, projectEdited, actions, model, dataWindow }) => {
                 const newActions = actions.map((a) =>
@@ -644,6 +678,9 @@ const createMlStore = (logging: Logging) => {
           },
 
           deleteActionRecording(id: ActionData["ID"], recordingIdx: number) {
+            if (isReadonly()) {
+              return;
+            }
             return set(({ project, projectEdited, actions, dataWindow }) => {
               const newActions = actions.map((action) => {
                 if (id !== action.ID) {
@@ -660,9 +697,7 @@ const createMlStore = (logging: Logging) => {
               );
               const newDataWindow =
                 numRecordings === 0
-                  ? buildDataWindowForDuration(
-                      get().settings.recordingDuration
-                    )
+                  ? buildDataWindowForDuration(get().settings.recordingDuration)
                   : dataWindow;
               return {
                 actions: newActions,
@@ -680,6 +715,9 @@ const createMlStore = (logging: Logging) => {
           },
 
           deleteAllActions() {
+            if (isReadonly()) {
+              return;
+            }
             return set(({ project, projectEdited }) => {
               const newDataWindow = buildDataWindowForDuration(
                 get().settings.recordingDuration
@@ -716,6 +754,9 @@ const createMlStore = (logging: Logging) => {
           },
 
           loadDataset(newActions: ActionData[]) {
+            if (isReadonly()) {
+              return;
+            }
             set(({ project, projectEdited, settings }) => {
               const dataWindow = getDataWindowFromActions(newActions);
               return {
@@ -787,6 +828,35 @@ const createMlStore = (logging: Logging) => {
             });
           },
 
+          loadCampusProject(project, name, model, dataWindow) {
+            if (!project) {
+              get().newSession(name);
+              return;
+            }
+            const newActions = getActionsFromProject(project);
+            set(
+              ({ settings }) => ({
+                settings: {
+                  ...settings,
+                  toursCompleted: Array.from(
+                    new Set([...settings.toursCompleted, "DataSamplesRecorded"])
+                  ),
+                },
+                actions: newActions,
+                dataWindow: dataWindow ?? getDataWindowFromActions(newActions),
+                model,
+                // The trainer's own project in a room is never edited in
+                // MakeCode: that happens in the room's MakeCode programs.
+                project: renameProject(project, name),
+                projectEdited: false,
+                appEditNeedsFlushToEditor: true,
+                timestamp: Date.now(),
+              }),
+              false,
+              "loadCampusProject"
+            );
+          },
+
           closeTrainModelDialogs() {
             set({
               trainModelDialogStage: TrainModelDialogStage.Closed,
@@ -794,6 +864,9 @@ const createMlStore = (logging: Logging) => {
           },
 
           async trainModelFlowStart(callback?: () => void) {
+            if (isReadonly()) {
+              return;
+            }
             const {
               settings: { showPreTrainHelp },
               actions,
@@ -814,6 +887,9 @@ const createMlStore = (logging: Logging) => {
           },
 
           async trainModel() {
+            if (isReadonly()) {
+              return false;
+            }
             const { actions, dataWindow } = get();
             logging.event({
               type: "model-train",
@@ -1263,18 +1339,27 @@ const createMlStore = (logging: Logging) => {
             set({ isFeedbackFormOpen: true });
           },
           deleteAllActionsDialogOnOpen() {
+            if (isReadonly()) {
+              return;
+            }
             set({ isDeleteAllActionsDialogOpen: true });
           },
           nameProjectDialogOnOpen() {
             set({ isNameProjectDialogOpen: true });
           },
           recordingDialogOnOpen() {
+            if (isReadonly()) {
+              return;
+            }
             set({ isRecordingDialogOpen: true });
           },
           connectToRecordDialogOnOpen() {
             set({ isConnectToRecordDialogOpen: true });
           },
           deleteActionDialogOnOpen() {
+            if (isReadonly()) {
+              return;
+            }
             set({ isDeleteActionDialogOpen: true });
           },
           incompatibleEditorDeviceDialogOnOpen() {
@@ -1338,21 +1423,27 @@ const createMlStore = (logging: Logging) => {
 
         {
           version: 1,
-          name: "ml",
+          // In a Campus room the project comes from Campus, one per program,
+          // so only the settings are kept here, apart from the standalone
+          // trainer's session on the same origin.
+          name: isCampusRoomMode() ? "ml-campus-room" : "ml",
           partialize: ({
             actions,
             project,
             projectEdited,
             settings,
             timestamp,
-          }) => ({
-            actions,
-            project,
-            projectEdited,
-            settings,
-            timestamp,
-            // The model itself is in IndexDB
-          }),
+          }) =>
+            isCampusRoomMode()
+              ? { settings }
+              : {
+                  actions,
+                  project,
+                  projectEdited,
+                  settings,
+                  timestamp,
+                  // The model itself is in IndexDB
+                },
           migrate(persistedStateUnknown, version) {
             switch (version) {
               case 0: {
@@ -1417,31 +1508,46 @@ useStore.setState(
   "setDataWindow"
 );
 
-tf.loadLayersModel(modelUrl)
-  .then((model) => {
-    if (model) {
-      useStore.setState({ model }, false, "loadModel");
-    }
-  })
-  .catch(() => {
-    // This happens if there's no model.
-  });
+// In a Campus room the model travels with the project (src/campus-room.ts).
+if (!isCampusRoomMode()) {
+  tf.loadLayersModel(modelUrl)
+    .then((model) => {
+      if (model) {
+        useStore.setState({ model }, false, "loadModel");
+      }
+    })
+    .catch(() => {
+      // This happens if there's no model.
+    });
 
-useStore.subscribe((state, prevState) => {
-  const { model: newModel } = state;
-  const { model: previousModel } = prevState;
-  if (newModel !== previousModel) {
-    if (!newModel) {
-      tf.io.removeModel(modelUrl).catch(() => {
-        // No IndexedDB/no model.
-      });
-    } else {
-      newModel.save(modelUrl).catch(() => {
-        // IndexedDB not available?
-      });
+  useStore.subscribe((state, prevState) => {
+    const { model: newModel } = state;
+    const { model: previousModel } = prevState;
+    if (newModel !== previousModel) {
+      if (!newModel) {
+        tf.io.removeModel(modelUrl).catch(() => {
+          // No IndexedDB/no model.
+        });
+      } else {
+        newModel.save(modelUrl).catch(() => {
+          // IndexedDB not available?
+        });
+      }
     }
-  }
-});
+  });
+}
+
+/**
+ * The project with its generated files (dataset.json, autogenerated.ts, and
+ * the start blocks unless edited in MakeCode) up to date. Recording leaves
+ * them behind until the next edit, so this is what to hand over.
+ */
+export const getProjectWithCurrentFiles = (): MakeCodeProject => {
+  const { project, projectEdited, actions, model, dataWindow } =
+    useStore.getState();
+  return updateProject(project, projectEdited, actions, model, dataWindow)
+    .project as MakeCodeProject;
+};
 
 export const useHasActions = () => {
   const actions = useStore((s) => s.actions);

@@ -4,6 +4,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
+import { useIsReadonly } from "../campus-room-state";
 import {
   Button,
   ButtonGroup,
@@ -103,6 +104,8 @@ const TestingModelPage = () => {
     openEditor,
   ]);
   const [editorLoading, setEditorLoading] = useState(false);
+  // Read-only in Campus: the room's MakeCode programs are its owner's.
+  const readonly = useIsReadonly();
   const continueToEditor = useCallback(async () => {
     setEditorLoading(true);
     await openEditor();
@@ -152,37 +155,39 @@ const TestingModelPage = () => {
           borderColor="gray.200"
           alignItems="center"
         >
-          <Menu>
-            <ButtonGroup isAttached>
-              <ButtonWithLoading
-                variant="primary"
-                onClick={maybeOpenEditor}
-                className={tourElClassname.editInMakeCodeButton}
-                isLoading={
-                  editorLoading && !isIncompatibleEditorDeviceDialogOpen
-                }
-              >
-                <FormattedMessage id="edit-in-makecode-action" />
-              </ButtonWithLoading>
-              <MoreMenuButton
-                variant="primary"
-                aria-label={intl.formatMessage({
-                  id: "more-edit-in-makecode-options",
-                })}
-              />
-              <Portal>
-                <MenuList>
-                  <MenuItem
-                    icon={<RiDeleteBin2Line />}
-                    onClick={resetProject}
-                    isDisabled={!projectEdited}
-                  >
-                    <FormattedMessage id="reset-to-default-action" />
-                  </MenuItem>
-                </MenuList>
-              </Portal>
-            </ButtonGroup>
-          </Menu>
+          {!readonly && (
+            <Menu>
+              <ButtonGroup isAttached>
+                <ButtonWithLoading
+                  variant="primary"
+                  onClick={maybeOpenEditor}
+                  className={tourElClassname.editInMakeCodeButton}
+                  isLoading={
+                    editorLoading && !isIncompatibleEditorDeviceDialogOpen
+                  }
+                >
+                  <FormattedMessage id="edit-in-makecode-action" />
+                </ButtonWithLoading>
+                <MoreMenuButton
+                  variant="primary"
+                  aria-label={intl.formatMessage({
+                    id: "more-edit-in-makecode-options",
+                  })}
+                />
+                <Portal>
+                  <MenuList>
+                    <MenuItem
+                      icon={<RiDeleteBin2Line />}
+                      onClick={resetProject}
+                      isDisabled={!projectEdited}
+                    >
+                      <FormattedMessage id="reset-to-default-action" />
+                    </MenuItem>
+                  </MenuList>
+                </Portal>
+              </ButtonGroup>
+            </Menu>
+          )}
         </HStack>
         <LiveGraphPanel
           showPredictedAction

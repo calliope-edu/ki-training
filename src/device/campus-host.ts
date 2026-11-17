@@ -13,14 +13,25 @@
  *                       {type: "mltrainer", action: "connect", reqId}
  *                       {type: "mltrainer", action: "flash", reqId, hex, name}
  *                       {type: "mltrainer", action: "view", view: "trainer" | "makecode"}
+ *                       {type: "mltrainer", action: "save", project, model}       (room mode)
+ *                       {type: "mltrainer", action: "makecode", project, model}   (room mode)
  *                       {type: "calliope.read", serviceId, characteristicId, reqId}
  *                       {type: "calliope.subscribe" | "calliope.unsubscribe", serviceId, characteristicId}
  *   campus -> trainer:  {type: "mltrainer", action: "status", ble, usb, boardVersion, flashing}
  *                       {type: "mltrainer", action: "result", reqId, ok, error?}
+ *                       {type: "mltrainer", action: "load", project, model, name, readonly}   (room mode)
  *                       {source: "calliope-host", type: "calliope.readResult", reqId, message}
  *                       {source: "calliope-host", type: "calliope.notify", serviceId, characteristicId, message}
  * GATT messages carry their bytes base64-encoded.
+ *
+ * Room mode (`&project=campus`): the trainer is a program of a Campus room.
+ * Campus keeps its project and hands it over with `load` (null for a new
+ * one); the trainer sends it back with `save` after each change, and "Edit in
+ * MakeCode" sends `makecode` instead of opening MakeCode itself. The trained
+ * model travels beside the project (null until trained; Campus keeps it as it
+ * is), so it need not be trained again after a reload. See src/campus-room.ts.
  */
+import { MakeCodeProject } from "@microbit/makecode-embed/react";
 import { BoardVersion } from "@microbit/microbit-connection";
 
 const params = new URLSearchParams(window.location.search);
@@ -42,6 +53,10 @@ export const isCampusMode = (): boolean =>
   params.get("controller") === "2" &&
   parentOrigin !== null &&
   window.parent !== window;
+
+/** True in a Campus room, where Campus keeps the project (see src/campus-room.ts). */
+export const isCampusRoomMode = (): boolean =>
+  isCampusMode() && params.get("project") === "campus";
 
 export type CampusLinkStatus = "connected" | "connecting" | "disconnected";
 
@@ -66,7 +81,51 @@ interface IncomingMessage {
   serviceId?: unknown;
   characteristicId?: unknown;
   message?: unknown;
+  project?: unknown;
+  name?: unknown;
+  readonly?: unknown;
+  model?: unknown;
 }
+
+/**
+ * A trained model as Campus keeps it: the tf.js topology, weight specs and
+ * weight data (base64), and the recording window it was trained for.
+ */
+export interface CampusModel {
+  topology: object;
+  weightSpecs: object[];
+  weights: string;
+  dataWindow?: unknown;
+}
+
+/** What Campus hands a room's trainer: its project, null for a new one. */
+export interface CampusLoad {
+  project: MakeCodeProject | null;
+  model: CampusModel | null;
+  name: string;
+  readonly: boolean;
+}
+
+const isModel = (value: unknown): value is CampusModel => {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+  const model = value as Record<string, unknown>;
+  return (
+    !!model.topology &&
+    typeof model.topology === "object" &&
+    Array.isArray(model.weightSpecs) &&
+    typeof model.weights === "string"
+  );
+};
+
+const isProject = (value: unknown): value is MakeCodeProject => {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+  const text = (value as { text?: unknown }).text;
+  return !!text && typeof text === "object";
+};
 
 const linkStatus = (value: unknown): CampusLinkStatus =>
   value === "connected" || value === "connecting" ? value : "disconnected";
@@ -85,6 +144,7 @@ const charKey = (serviceId: string, characteristicId: string) =>
 
 type StatusListener = (status: CampusStatus) => void;
 type NotifyListener = (data: DataView) => void;
+type LoadListener = (load: CampusLoad) => void;
 
 /**
  * The trainer's side of the Campus link: requests to Campus, its answers,
@@ -105,6 +165,9 @@ export class CampusHost {
   private pendingReads = new Map<number, (data: DataView) => void>();
   private statusListeners = new Set<StatusListener>();
   private notifyListeners = new Map<string, NotifyListener>();
+  private loadListener: LoadListener | undefined;
+  // `load` may come before the app is ready for it.
+  private pendingLoad: CampusLoad | undefined;
 
   constructor() {
     window.addEventListener("message", this.onMessage);
@@ -138,6 +201,18 @@ export class CampusHost {
           flashing: data.flashing === true,
         };
         this.statusListeners.forEach((listener) => listener(this.status));
+      } else if (data.action === "load") {
+        const load: CampusLoad = {
+          project: isProject(data.project) ? data.project : null,
+          model: isModel(data.model) ? data.model : null,
+          name: typeof data.name === "string" ? data.name : "",
+          readonly: data.readonly === true,
+        };
+        if (this.loadListener) {
+          this.loadListener(load);
+        } else {
+          this.pendingLoad = load;
+        }
       } else if (data.action === "result" && typeof data.reqId === "number") {
         const resolve = this.pendingResults.get(data.reqId);
         this.pendingResults.delete(data.reqId);
@@ -191,6 +266,26 @@ export class CampusHost {
   /** Tell Campus what is on screen, so its connection button stays clear of MakeCode's toolbar. */
   setView(view: "trainer" | "makecode") {
     this.post({ type: "mltrainer", action: "view", view });
+  }
+
+  /** Hand the room's project back to Campus, which keeps it. */
+  save(project: MakeCodeProject, model: CampusModel | null) {
+    this.post({ type: "mltrainer", action: "save", project, model });
+  }
+
+  /** "Edit in MakeCode" in a room: Campus opens the room's MakeCode program for it. */
+  editInMakeCode(project: MakeCodeProject, model: CampusModel | null) {
+    this.post({ type: "mltrainer", action: "makecode", project, model });
+  }
+
+  /** Called with each project Campus hands over, including one that came already. */
+  setLoadListener(listener: LoadListener) {
+    this.loadListener = listener;
+    const pending = this.pendingLoad;
+    this.pendingLoad = undefined;
+    if (pending) {
+      listener(pending);
+    }
   }
 
   addStatusListener(listener: StatusListener): () => void {

@@ -3,6 +3,8 @@
  *
  * SPDX-License-Identifier: MIT
  */
+import { editInMakeCodeProgram } from "../campus-room";
+import { isCampusRoomMode } from "../device/campus-host";
 import { useToast } from "@chakra-ui/react";
 import {
   EditorWorkspaceSaveRequest,
@@ -272,6 +274,11 @@ export const ProjectProvider = ({
     logging.event({
       type: "edit-in-makecode",
     });
+    if (isCampusRoomMode()) {
+      // Campus opens the room's MakeCode program for this KI-Training.
+      await editInMakeCodeProgram();
+      return;
+    }
     try {
       await doAfterEditorUpdate(() => {
         navigate(createCodePageUrl());

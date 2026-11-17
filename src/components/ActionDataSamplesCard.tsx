@@ -3,6 +3,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
+import { useIsReadonly } from "../campus-room-state";
 import {
   Box,
   BoxProps,
@@ -62,6 +63,7 @@ const ActionDataSamplesCard = ({
   const intl = useIntl();
   const deleteActionRecording = useStore((s) => s.deleteActionRecording);
   const view = useStore((s) => s.settings.dataSamplesView);
+  const readonly = useIsReadonly();
   if (view === DataSamplesView.GraphAndDataFeatures) {
     // We split the cards in this case
     return (
@@ -86,27 +88,29 @@ const ActionDataSamplesCard = ({
             selected={selected}
             key={recording.ID}
           >
-            <CloseButton
-              aria-label={intl.formatMessage(
-                {
-                  id: "delete-recording-aria",
-                },
-                {
-                  sample: value.recordings.length - idx,
-                  numSamples: value.recordings.length,
-                  action: value.name,
-                }
-              )}
-              position="absolute"
-              top={-2}
-              right={-2}
-              rounded="full"
-              bgColor="white"
-              zIndex={1}
-              borderColor="blackAlpha.500"
-              boxShadow="sm"
-              onClick={() => deleteActionRecording(value.ID, idx)}
-            />
+            {!readonly && (
+              <CloseButton
+                aria-label={intl.formatMessage(
+                  {
+                    id: "delete-recording-aria",
+                  },
+                  {
+                    sample: value.recordings.length - idx,
+                    numSamples: value.recordings.length,
+                    action: value.name,
+                  }
+                )}
+                position="absolute"
+                top={-2}
+                right={-2}
+                rounded="full"
+                bgColor="white"
+                zIndex={1}
+                borderColor="blackAlpha.500"
+                boxShadow="sm"
+                onClick={() => deleteActionRecording(value.ID, idx)}
+              />
+            )}
             <DataSample
               recording={recording}
               numRecordings={value.recordings.length}
@@ -150,7 +154,7 @@ const ActionDataSamplesCard = ({
           actionId={value.ID}
           actionName={value.name}
           recordingIndex={idx}
-          hasClose={!preview}
+          hasClose={!preview && !readonly}
           recording={recording}
           numRecordings={value.recordings.length}
           isNew={newRecordingId === recording.ID}
