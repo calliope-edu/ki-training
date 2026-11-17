@@ -3,8 +3,9 @@
  *
  * SPDX-License-Identifier: MIT
  */
-import { BoxProps, HStack, StackProps } from "@chakra-ui/react";
+import { Box, BoxProps, HStack, StackProps } from "@chakra-ui/react";
 import { ReactNode } from "react";
+import { isCampusMode } from "../../device/campus-host";
 
 export interface ActionBarProps extends BoxProps {
   itemsLeft?: ReactNode;
@@ -41,6 +42,8 @@ const ActionBar = ({
       {itemsCenter && <HStack justifyContent="center">{itemsCenter}</HStack>}
       <HStack flex="1 0" justifyContent="flex-end">
         {itemsRight}
+        {/* Room for Campus' connection button, which floats over this corner. */}
+        {isCampusMode() && <Box flexShrink={0} w="52px" aria-hidden />}
       </HStack>
     </HStack>
   );

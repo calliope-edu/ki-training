@@ -17,6 +17,7 @@ import {
   ConnectionStage,
   ConnectionType,
 } from "./connection-stage-hooks";
+import { isCampusMode } from "./device/campus-host";
 import { getHexFileUrl, HexType } from "./device/get-hex-file";
 import { HexUrl } from "./model";
 import { downloadHex } from "./utils/fs-util";
@@ -44,6 +45,12 @@ export class ConnectionStageActions {
   startConnect = (options?: ConnectOptions) => {
     this.dataCollectionMicrobitStartConnect(options);
     this.setStatus(ConnectionStatus.NotConnected);
+    if (isCampusMode()) {
+      // Campus picks the mini and flashes the data collection program itself,
+      // so the steps of the connection flow are not needed.
+      void this.connectBluetooth(false);
+      return;
+    }
     const { isWebBluetoothSupported, isWebUsbSupported } = this.stage;
     this.setStage({
       ...this.stage,
@@ -324,6 +331,10 @@ export class ConnectionStageActions {
   };
 
   onTryAgain = () => {
+    if (isCampusMode()) {
+      void this.connectBluetooth(false);
+      return;
+    }
     this.setFlowStep(
       this.stage.flowStep === ConnectionFlowStep.TryAgainBluetoothSelectMicrobit
         ? ConnectionFlowStep.EnterBluetoothPattern

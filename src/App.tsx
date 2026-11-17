@@ -19,6 +19,7 @@ import {
   Outlet,
   RouterProvider,
   ScrollRestoration,
+  useLocation,
   useNavigate,
 } from "react-router-dom";
 import "theme-package/fonts/fonts.css";
@@ -31,6 +32,8 @@ import { ConnectProvider } from "./connect-actions-hooks";
 import { ConnectStatusProvider } from "./connect-status-hooks";
 import { ConnectionStageProvider } from "./connection-stage-hooks";
 import { deployment, useDeployment } from "./deployment";
+import { CampusBluetoothConnection } from "./device/campusBluetooth";
+import { getCampusHost, isCampusMode } from "./device/campus-host";
 import { MockWebBluetoothConnection } from "./device/mockBluetooth";
 import { MockRadioBridgeConnection } from "./device/mockRadioBridge";
 import { MockWebUSBConnection } from "./device/mockUsb";
@@ -73,8 +76,11 @@ const logging = deployment.logging;
 const usb = isMockDeviceMode()
   ? new MockWebUSBConnection()
   : createWebUSBConnection({ logging });
+// In Campus, Campus holds the Bluetooth link (see device/campus-host.ts).
 const bluetooth = isMockDeviceMode()
   ? new MockWebBluetoothConnection()
+  : isCampusMode()
+  ? new CampusBluetoothConnection(getCampusHost())
   : createWebBluetoothConnection({ logging });
 const radioBridge = isMockDeviceMode()
   ? new MockRadioBridgeConnection(usb)
@@ -112,6 +118,16 @@ const Layout = () => {
   const navigate = useNavigate();
   const toast = useToast();
   const intl = useIntl();
+
+  // Campus moves its connection button out of MakeCode's toolbar.
+  const { pathname } = useLocation();
+  useEffect(() => {
+    if (isCampusMode()) {
+      getCampusHost().setView(
+        pathname === createCodePageUrl() ? "makecode" : "trainer"
+      );
+    }
+  }, [pathname]);
 
   useEffect(() => {
     return useStore.subscribe(
