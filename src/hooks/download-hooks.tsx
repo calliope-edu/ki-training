@@ -17,6 +17,7 @@ import { useConnectActions } from "../connect-actions-hooks";
 import { ConnectionStatus } from "../connect-status-hooks";
 import { ConnectionStageActions } from "../connection-stage-actions";
 import { ConnectionStage, useConnectionStage } from "../connection-stage-hooks";
+import { getCampusHost, isCampusMode } from "../device/campus-host";
 import {
   DownloadState,
   DownloadStep,
@@ -53,6 +54,9 @@ export class DownloadProjectActions {
   };
 
   start = async (download: HexData) => {
+    if (isCampusMode()) {
+      return this.flashViaCampus(download);
+    }
     if (
       this.state.usbDevice &&
       this.state.usbDevice.status === UsbConnectionStatus.CONNECTED
@@ -76,6 +80,19 @@ export class DownloadProjectActions {
         hex: download,
       });
     }
+  };
+
+  // In Campus the connection widget transfers the program: to the connected
+  // mini, or it asks for one. It shows the progress and any error itself
+  // (including the way to save the program as a file).
+  private flashViaCampus = async (download: HexData) => {
+    if (this.connectionStatus !== ConnectionStatus.NotConnected) {
+      // The program replaces the data collection program. Disconnect first so
+      // the trainer doesn't warn about the lost connection.
+      await this.connectionStageActions.disconnectInputMicrobit();
+    }
+    this.updateStage({ step: DownloadStep.None, hex: download });
+    await getCampusHost().flash(download.hex, download.name);
   };
 
   onHelpNext = async (isSkipNextTime: boolean, state?: DownloadState) => {
