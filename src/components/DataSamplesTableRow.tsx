@@ -4,6 +4,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
+import { useIsReadonly } from "../campus-room-state";
 import { Box, GridItem } from "@chakra-ui/react";
 import { useIntl } from "react-intl";
 import { ActionData } from "../model";
@@ -39,6 +40,13 @@ const DataSamplesTableRow = ({
   renameShortcutScopeRef,
 }: DataSamplesTableRowProps) => {
   const intl = useIntl();
+  // Read-only in Campus: no recording, renaming or deleting.
+  const readonly = useIsReadonly();
+  if (readonly) {
+    onRecord = undefined;
+    onDeleteAction = undefined;
+    showHints = false;
+  }
 
   return (
     <>
@@ -63,6 +71,8 @@ const DataSamplesTableRow = ({
             viewMode={
               preview
                 ? ActionCardNameViewMode.Preview
+                : readonly
+                ? ActionCardNameViewMode.ReadOnly
                 : ActionCardNameViewMode.Editable
             }
           />

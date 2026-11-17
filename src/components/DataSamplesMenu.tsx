@@ -3,6 +3,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
+import { useIsReadonly } from "../campus-room-state";
 import {
   Icon,
   IconButton,
@@ -47,6 +48,7 @@ const DataSamplesMenu = () => {
   const nameProjectDialogOnOpen = useStore((s) => s.nameProjectDialogOnOpen);
   const isUntitled = useProjectIsUntitled();
   const setProjectName = useStore((s) => s.setProjectName);
+  const readonly = useIsReadonly();
 
   const download = useCallback(() => {
     logging.event({
@@ -119,21 +121,25 @@ const DataSamplesMenu = () => {
         />
         <Portal>
           <MenuList>
-            <LoadProjectMenuItem icon={<RiUpload2Line />} accept=".json">
-              <FormattedMessage id="import-data-samples-action" />
-            </LoadProjectMenuItem>
+            {!readonly && (
+              <LoadProjectMenuItem icon={<RiUpload2Line />} accept=".json">
+                <FormattedMessage id="import-data-samples-action" />
+              </LoadProjectMenuItem>
+            )}
             <MenuItem
               icon={<RiDownload2Line />}
               onClick={handleDownloadDataset}
             >
               <FormattedMessage id="download-data-samples-action" />
             </MenuItem>
-            <MenuItem
-              icon={<RiDeleteBin2Line />}
-              onClick={deleteAllActionsDialogOnOpen}
-            >
-              <FormattedMessage id="delete-data-samples-action" />
-            </MenuItem>
+            {!readonly && (
+              <MenuItem
+                icon={<RiDeleteBin2Line />}
+                onClick={deleteAllActionsDialogOnOpen}
+              >
+                <FormattedMessage id="delete-data-samples-action" />
+              </MenuItem>
+            )}
             <MenuDivider />
             <ViewDataFeaturesMenuItem />
           </MenuList>

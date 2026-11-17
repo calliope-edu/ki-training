@@ -4,6 +4,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
+import { useIsReadonly } from "../campus-room-state";
 import { Button, Flex, HStack, VStack } from "@chakra-ui/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { RiAddLine, RiArrowRightLine } from "react-icons/ri";
@@ -41,6 +42,8 @@ const DataSamplesPage = () => {
   }, [isConnected, tourStart]);
 
   const hasSufficientData = useHasSufficientDataForTraining();
+  // Read-only in Campus: the project can be looked at, not changed or trained.
+  const readonly = useIsReadonly();
   const isAddNewActionDisabled = actions.some((a) => a.name.length === 0);
 
   const handleNavigateToModel = useCallback(() => {
@@ -53,7 +56,7 @@ const DataSamplesPage = () => {
     addNewAction();
   }, [addNewAction, actions]);
   useShortcut(keyboardShortcuts.addAction, handleAddNewAction, {
-    enabled: !isAddNewActionDisabled,
+    enabled: !isAddNewActionDisabled && !readonly,
   });
   const intl = useIntl();
   return (
@@ -87,15 +90,17 @@ const DataSamplesPage = () => {
             alignItems="center"
           >
             <HStack gap={2} alignItems="center">
-              <Button
-                className={tourElClassname.addActionButton}
-                variant={hasSufficientData ? "secondary" : "primary"}
-                leftIcon={<RiAddLine />}
-                onClick={handleAddNewAction}
-                isDisabled={isAddNewActionDisabled}
-              >
-                <FormattedMessage id="add-action-action" />
-              </Button>
+              {!readonly && (
+                <Button
+                  className={tourElClassname.addActionButton}
+                  variant={hasSufficientData ? "secondary" : "primary"}
+                  leftIcon={<RiAddLine />}
+                  onClick={handleAddNewAction}
+                  isDisabled={isAddNewActionDisabled}
+                >
+                  <FormattedMessage id="add-action-action" />
+                </Button>
+              )}
             </HStack>
             <HStack>
               {model ? (
@@ -107,7 +112,7 @@ const DataSamplesPage = () => {
                 >
                   <FormattedMessage id="testing-model-title" />
                 </Button>
-              ) : (
+              ) : readonly ? null : (
                 <Button
                   ref={trainButtonRef}
                   className={tourElClassname.trainModelButton}
