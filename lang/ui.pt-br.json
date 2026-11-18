@@ -268,7 +268,7 @@
     "description": "Calliope mini radio connection error message"
   },
   "connect-help-alt": {
-    "defaultMessage": "Diálogo de conexão WebUSB com a entrada BBC Calliope mini rotulada como 1 e botão Conectar rotulado como 2",
+    "defaultMessage": "Diálogo de conexão WebUSB com a entrada Calliope mini rotulada como 1 e botão Conectar rotulado como 2",
     "description": "Alt text for image in connect help dialog"
   },
   "connect-micro-usb-cable": {
@@ -296,7 +296,7 @@
     "description": "Instruction for dialog that previews the Bluetooth/WebUSB permission dialog"
   },
   "connect-popup-bluetooth-alt": {
-    "defaultMessage": "Diálogo de conexão Web Bluetooth com uma entrada do BBC Calliope mini rotulada como 1 e o botão de emparelhamento rotulado como 2.",
+    "defaultMessage": "Diálogo de conexão Web Bluetooth com uma entrada do Calliope mini rotulada como 1 e o botão de emparelhamento rotulado como 2.",
     "description": "Alt text"
   },
   "connect-popup-bluetooth-instruction2": {
@@ -824,7 +824,7 @@
     "description": "Home page description"
   },
   "homepage-how-it-works": {
-    "defaultMessage": "Como funciona:",
+    "defaultMessage": "Esta é a aparência de uma rede neural",
     "description": "Home page section heading"
   },
   "homepage-how-it-works-paragraph": {
@@ -844,8 +844,12 @@
     "description": "Home page section heading"
   },
   "homepage-subtitle": {
-    "defaultMessage": "Crie IA no seu BBC Calliope mini usando movimento e aprendizado de máquina.",
+    "defaultMessage": "Crie IA no seu Calliope mini usando movimento e aprendizado de máquina.",
     "description": "Home page subtitle"
+  },
+  "homepage-title": {
+    "defaultMessage": "Calliope-ML",
+    "description": "Main heading on the home page"
   },
   "homepage-video-alt": {
     "defaultMessage": "Vídeo de Introdução",
@@ -1394,6 +1398,14 @@
   "recording-data-for-numbered": {
     "defaultMessage": "Gravar {sample} de {numSamples} para a ação \"{action}\"",
     "description": "Text in recording dialog"
+  },
+  "recording-duration-helper": {
+    "defaultMessage": "Duração de cada gravação de gesto. Intervalo: {min} s – {max} s. As alterações se aplicam a todas as gravações subsequentes.",
+    "description": "Helper text for the recording length setting in the settings dialog. {min} and {max} are numbers of seconds"
+  },
+  "recording-duration-label": {
+    "defaultMessage": "Duração da gravação",
+    "description": "Label for the recording length setting in the settings dialog"
   },
   "recording-fingerprint-label": {
     "defaultMessage": "Mapa de calor mostrando os recursos dos dados do acelerômetro x, y, z do Calliope mini para uma gravação.",

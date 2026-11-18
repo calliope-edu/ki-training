@@ -268,7 +268,7 @@
     "description": "Calliope mini radio connection error message"
   },
   "connect-help-alt": {
-    "defaultMessage": "WebUSB verbinding dialoogvenster met BBC Calliope mini item gelabeld 1 en Connect knop gelabeld 2",
+    "defaultMessage": "WebUSB verbinding dialoogvenster met Calliope mini item gelabeld 1 en Connect knop gelabeld 2",
     "description": "Alt text for image in connect help dialog"
   },
   "connect-micro-usb-cable": {
@@ -296,7 +296,7 @@
     "description": "Instruction for dialog that previews the Bluetooth/WebUSB permission dialog"
   },
   "connect-popup-bluetooth-alt": {
-    "defaultMessage": "Web Bluetooth-verbinding dialoog met BBC Calliope mini item gelabeld 1 en Koppelen-knop gelabeld 2",
+    "defaultMessage": "Web Bluetooth-verbinding dialoog met Calliope mini item gelabeld 1 en Koppelen-knop gelabeld 2",
     "description": "Alt text"
   },
   "connect-popup-bluetooth-instruction2": {
@@ -436,7 +436,7 @@
     "description": "Aria label for data collection image"
   },
   "data-connection-region": {
-    "defaultMessage": "micro: bit data verbinding",
+    "defaultMessage": "Calliope mini data verbinding",
     "description": "Region label for data connection area"
   },
   "data-features-hide-action": {
@@ -516,7 +516,7 @@
     "description": "Disconnect (from bluetooth/radio) action"
   },
   "disconnected-during-recording": {
-    "defaultMessage": "micro: bit losgekoppeld tijdens opname",
+    "defaultMessage": "Calliope mini losgekoppeld tijdens opname",
     "description": "Error when the Calliope mini is disconnected during recording"
   },
   "disconnected-warning-bluetooth-heading": {
@@ -824,7 +824,7 @@
     "description": "Home page description"
   },
   "homepage-how-it-works": {
-    "defaultMessage": "Zo werkt het",
+    "defaultMessage": "Zo ziet een neuraal netwerk eruit",
     "description": "Home page section heading"
   },
   "homepage-how-it-works-paragraph": {
@@ -844,8 +844,12 @@
     "description": "Home page section heading"
   },
   "homepage-subtitle": {
-    "defaultMessage": "Maak AI aan op je BBC Calliope mini met behulp van beweging en machine learning.",
+    "defaultMessage": "Maak AI aan op je Calliope mini met behulp van beweging en machine learning.",
     "description": "Home page subtitle"
+  },
+  "homepage-title": {
+    "defaultMessage": "Calliope-ML",
+    "description": "Main heading on the home page"
   },
   "homepage-video-alt": {
     "defaultMessage": "Introductievideo",
@@ -1394,6 +1398,14 @@
   "recording-data-for-numbered": {
     "defaultMessage": "Neem {sample} op van {numSamples} voor actie \"{action}\"",
     "description": "Text in recording dialog"
+  },
+  "recording-duration-helper": {
+    "defaultMessage": "Lengte van elke gebaaropname. Bereik: {min} s – {max} s. Wijzigingen zijn van toepassing op alle volgende opnames.",
+    "description": "Helper text for the recording length setting in the settings dialog. {min} and {max} are numbers of seconds"
+  },
+  "recording-duration-label": {
+    "defaultMessage": "Opnameduur",
+    "description": "Label for the recording length setting in the settings dialog"
   },
   "recording-fingerprint-label": {
     "defaultMessage": "heatmap met Calliope mini x, y, z accelerometer data functies voor één opname",

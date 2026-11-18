@@ -2447,18 +2447,6 @@
       "value": "\""
     }
   ],
-  "recording-fingerprint-label": [
-    {
-      "type": 0,
-      "value": "gràfic que mostra les de dades de l'acceleròmetre Calliope mini x, y, z per a un enregistrament"
-    }
-  ],
-  "recording-graph-label": [
-    {
-      "type": 0,
-      "value": "gràfic que mostra les dades de l'acceleròmetre de la  Calliope mini x, y, z per a un enregistrament"
-    }
-  ],
   "recording-duration-helper": [
     {
       "type": 0,
@@ -2485,6 +2473,18 @@
     {
       "type": 0,
       "value": "Durada de l'enregistrament"
+    }
+  ],
+  "recording-fingerprint-label": [
+    {
+      "type": 0,
+      "value": "gràfic que mostra les de dades de l'acceleròmetre Calliope mini x, y, z per a un enregistrament"
+    }
+  ],
+  "recording-graph-label": [
+    {
+      "type": 0,
+      "value": "gràfic que mostra les dades de l'acceleròmetre de la  Calliope mini x, y, z per a un enregistrament"
     }
   ],
   "recording-options-aria": [

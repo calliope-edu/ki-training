@@ -2445,18 +2445,6 @@
       "value": " 기록"
     }
   ],
-  "recording-fingerprint-label": [
-    {
-      "type": 0,
-      "value": "Calliope mini x, y, z 가속도계 데이터 기록 1개를 보여주는 히트 맵"
-    }
-  ],
-  "recording-graph-label": [
-    {
-      "type": 0,
-      "value": "Calliope mini x, y, z 가속도계 데이터 기록 1개를 보여주는 그래프"
-    }
-  ],
   "recording-duration-helper": [
     {
       "type": 0,
@@ -2483,6 +2471,18 @@
     {
       "type": 0,
       "value": "녹음 길이"
+    }
+  ],
+  "recording-fingerprint-label": [
+    {
+      "type": 0,
+      "value": "Calliope mini x, y, z 가속도계 데이터 기록 1개를 보여주는 히트 맵"
+    }
+  ],
+  "recording-graph-label": [
+    {
+      "type": 0,
+      "value": "Calliope mini x, y, z 가속도계 데이터 기록 1개를 보여주는 그래프"
     }
   ],
   "recording-options-aria": [

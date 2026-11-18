@@ -71,6 +71,10 @@
     "defaultMessage": "Modifier les échantillons de données",
     "description": "Back button text"
   },
+  "blocks-preview-title": {
+    "defaultMessage": "Blocks preview",
+    "description": "Blocks preview heading text"
+  },
   "bluetooth-unsupported-advice": {
     "defaultMessage": "Nous recommandons Google Chrome ou Microsoft Edge pour que vous puissiez vous connecter directement à votre Calliope mini.",
     "description": "Note on supported browsers"
@@ -264,7 +268,7 @@
     "description": "Calliope mini radio connection error message"
   },
   "connect-help-alt": {
-    "defaultMessage": "Boîte de dialogue de connexion WebUSB avec une entrée pour le BBC Calliope mini étiquetée avec le numéro 1 et le bouton Connexion étiqueté avec le numéro 2",
+    "defaultMessage": "Boîte de dialogue de connexion WebUSB avec une entrée pour le Calliope mini étiquetée avec le numéro 1 et le bouton Connexion étiqueté avec le numéro 2",
     "description": "Alt text for image in connect help dialog"
   },
   "connect-micro-usb-cable": {
@@ -292,7 +296,7 @@
     "description": "Instruction for dialog that previews the Bluetooth/WebUSB permission dialog"
   },
   "connect-popup-bluetooth-alt": {
-    "defaultMessage": "Dialogue de connexion Web Bluetooth avec l'élément BBC Calliope mini étiqueté 1 et le bouton Associer étiqueté 2",
+    "defaultMessage": "Dialogue de connexion Web Bluetooth avec l'élément Calliope mini étiqueté 1 et le bouton Associer étiqueté 2",
     "description": "Alt text"
   },
   "connect-popup-bluetooth-instruction2": {
@@ -442,6 +446,10 @@
   "data-features-show-action": {
     "defaultMessage": "Afficher les fonctionnalités des données",
     "description": "Show data features button text"
+  },
+  "data-preview-title": {
+    "defaultMessage": "Data preview",
+    "description": "Data preview heading text"
   },
   "data-samples-actions-region": {
     "defaultMessage": "Barre d'outils d'échantillons de données",
@@ -816,7 +824,7 @@
     "description": "Home page description"
   },
   "homepage-how-it-works": {
-    "defaultMessage": "Comment ça marche",
+    "defaultMessage": "Voici à quoi ressemble un réseau neuronal",
     "description": "Home page section heading"
   },
   "homepage-how-it-works-paragraph": {
@@ -836,8 +844,12 @@
     "description": "Home page section heading"
   },
   "homepage-subtitle": {
-    "defaultMessage": "Créez une IA sur votre BBC Calliope mini en utilisant le mouvement et l'apprentissage automatique.",
+    "defaultMessage": "Créez une IA sur votre Calliope mini en utilisant le mouvement et l'apprentissage automatique.",
     "description": "Home page subtitle"
+  },
+  "homepage-title": {
+    "defaultMessage": "Calliope-ML",
+    "description": "Main heading on the home page"
   },
   "homepage-video-alt": {
     "defaultMessage": "Vidéo d'introduction",
@@ -1112,7 +1124,7 @@
     "description": "Makecode block alt text prefix"
   },
   "makecode-block-show-icon": {
-    "defaultMessage": "montrer l'icône",
+    "defaultMessage": "afficher l'icône",
     "description": "Makecode block text. The translation should match MakeCode translations."
   },
   "makecode-load-error-dialog-body": {
@@ -1234,6 +1246,34 @@
   "open-file-dropped": {
     "defaultMessage": "Ouvrir le fichier lorsqu’il est déposé",
     "description": "Aria label for file drop target"
+  },
+  "open-project-action": {
+    "defaultMessage": "Open project",
+    "description": "Open project button text"
+  },
+  "open-project-setup-description": {
+    "defaultMessage": "Opening this project will overwrite any existing session. You may want to <link>save your existing session</link> first.",
+    "description": "Open project setup description"
+  },
+  "open-shared-project-blocks-preview-description": {
+    "defaultMessage": "Preview of the MakeCode code contained within this project.",
+    "description": "Blocks preview description text"
+  },
+  "open-shared-project-data-preview-description": {
+    "defaultMessage": "Preview of the actions and data contained within this project.",
+    "description": "Data preview description text"
+  },
+  "open-shared-project-description": {
+    "defaultMessage": "This is a Microsoft MakeCode shared project compatible with ML-Machine.",
+    "description": "Import shared ML-Machine project description"
+  },
+  "open-shared-project-error-description": {
+    "defaultMessage": "Check the link you followed is correct, and make sure you are connected to the internet before trying again.",
+    "description": "Import shared ML-Machine error description"
+  },
+  "open-shared-project-title": {
+    "defaultMessage": "Open shared ML-Machine project",
+    "description": "Import shared ML-Machine project title"
   },
   "other-tabs-body1": {
     "defaultMessage": "Un autre processus est connecté à cet appareil.",
@@ -1358,6 +1398,14 @@
   "recording-data-for-numbered": {
     "defaultMessage": "Enregistrement {sample} sur {numSamples} pour l'action \"{action}\"",
     "description": "Text in recording dialog"
+  },
+  "recording-duration-helper": {
+    "defaultMessage": "Durée de chaque enregistrement de geste. Plage : {min} s – {max} s. Les modifications s'appliquent à tous les enregistrements suivants.",
+    "description": "Helper text for the recording length setting in the settings dialog. {min} and {max} are numbers of seconds"
+  },
+  "recording-duration-label": {
+    "defaultMessage": "Durée d'enregistrement",
+    "description": "Label for the recording length setting in the settings dialog"
   },
   "recording-fingerprint-label": {
     "defaultMessage": "carte thermique montrant les fonctionnalités des données de l'accéléromètre Calliope mini x, y, z pour un enregistrement",
@@ -1515,6 +1563,10 @@
     "defaultMessage": "Test du modèle",
     "description": "Testing model page title"
   },
+  "third-party-content-description": {
+    "defaultMessage": "This project is provided by a user, and not endorsed by Microsoft or the Calliope mini Educational Foundation. Visit the <link>MakeCode shared project</link> to report abuse to Microsoft MakeCode if you think it's not appropriate.",
+    "description": "Notify user of third party content"
+  },
   "tour-action": {
     "defaultMessage": "Visite",
     "description": "Button label that starts a tour of the app's features"
@@ -1620,7 +1672,7 @@
     "description": "Tour step description"
   },
   "tour-trainModel-makeCodeBlocks-content": {
-    "defaultMessage": "Ces blocs MakeCode montreront des icônes pour chaque action détectée lorsque vous transférez votre code et votre modèle sur un Calliope mini.",
+    "defaultMessage": "Ces blocs MakeCode afficheront des icônes pour chaque action détectée lorsque vous transférez votre code et votre modèle sur un Calliope mini.",
     "description": "Tour step description"
   },
   "tour-trainModel-makeCodeBlocks-title": {

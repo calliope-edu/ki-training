@@ -268,7 +268,7 @@
     "description": "Calliope mini radio connection error message"
   },
   "connect-help-alt": {
-    "defaultMessage": "WebUSB 連線對話框，帶有標記為 1 的 BBC Calliope mini 項目和標記為 2 的「連線」按鈕",
+    "defaultMessage": "WebUSB 連線對話框，帶有標記為 1 的 Calliope mini 項目和標記為 2 的「連線」按鈕",
     "description": "Alt text for image in connect help dialog"
   },
   "connect-micro-usb-cable": {
@@ -296,7 +296,7 @@
     "description": "Instruction for dialog that previews the Bluetooth/WebUSB permission dialog"
   },
   "connect-popup-bluetooth-alt": {
-    "defaultMessage": "網路藍牙連線對話框，帶有標記為 1 的 BBC Calliope mini 項目和標記為 2 的「配對」按鈕",
+    "defaultMessage": "網路藍牙連線對話框，帶有標記為 1 的 Calliope mini 項目和標記為 2 的「配對」按鈕",
     "description": "Alt text"
   },
   "connect-popup-bluetooth-instruction2": {
@@ -824,7 +824,7 @@
     "description": "Home page description"
   },
   "homepage-how-it-works": {
-    "defaultMessage": "運作方式",
+    "defaultMessage": "這是神經網絡的外觀",
     "description": "Home page section heading"
   },
   "homepage-how-it-works-paragraph": {
@@ -844,8 +844,12 @@
     "description": "Home page section heading"
   },
   "homepage-subtitle": {
-    "defaultMessage": "利用移動和機器學習在您的 BBC Calliope mini 上建立 AI。",
+    "defaultMessage": "利用移動和機器學習在您的 Calliope mini 上建立 AI。",
     "description": "Home page subtitle"
+  },
+  "homepage-title": {
+    "defaultMessage": "Calliope-ML",
+    "description": "Main heading on the home page"
   },
   "homepage-video-alt": {
     "defaultMessage": "介紹視訊",
@@ -1394,6 +1398,14 @@
   "recording-data-for-numbered": {
     "defaultMessage": "記錄對於動作「{action}」的 {numSamples} 個記錄 {sample}",
     "description": "Text in recording dialog"
+  },
+  "recording-duration-helper": {
+    "defaultMessage": "每次手勢錄製的長度。範圍：{min} 秒 – {max} 秒。變更將套用至所有後續錄製。",
+    "description": "Helper text for the recording length setting in the settings dialog. {min} and {max} are numbers of seconds"
+  },
+  "recording-duration-label": {
+    "defaultMessage": "錄製時長",
+    "description": "Label for the recording length setting in the settings dialog"
   },
   "recording-fingerprint-label": {
     "defaultMessage": "顯示一次記錄的 Calliope mini x、y、z 加速度計數據功能的熱圖",

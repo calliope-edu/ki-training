@@ -268,7 +268,7 @@
     "description": "Calliope mini radio connection error message"
   },
   "connect-help-alt": {
-    "defaultMessage": "BBC Calliope mini entry 레이블 1 및 연결 버튼 레이블 2의 WebUSB 연결 대화 상자 ",
+    "defaultMessage": "Calliope mini entry 레이블 1 및 연결 버튼 레이블 2의 WebUSB 연결 대화 상자 ",
     "description": "Alt text for image in connect help dialog"
   },
   "connect-micro-usb-cable": {
@@ -296,7 +296,7 @@
     "description": "Instruction for dialog that previews the Bluetooth/WebUSB permission dialog"
   },
   "connect-popup-bluetooth-alt": {
-    "defaultMessage": "BBC Calliope mini entry 레이블 1 및 페어링 버튼 레이블 2의 Web Bluetooth 연결 대화 상자",
+    "defaultMessage": "Calliope mini entry 레이블 1 및 페어링 버튼 레이블 2의 Web Bluetooth 연결 대화 상자",
     "description": "Alt text"
   },
   "connect-popup-bluetooth-instruction2": {
@@ -824,7 +824,7 @@
     "description": "Home page description"
   },
   "homepage-how-it-works": {
-    "defaultMessage": "설명",
+    "defaultMessage": "신경망은 이렇게 생겼습니다",
     "description": "Home page section heading"
   },
   "homepage-how-it-works-paragraph": {
@@ -844,8 +844,12 @@
     "description": "Home page section heading"
   },
   "homepage-subtitle": {
-    "defaultMessage": "움직임과 기계 학습을 사용하여 BBC Calliope mini에서 AI를 만들어 보세요.",
+    "defaultMessage": "움직임과 기계 학습을 사용하여 Calliope mini에서 AI를 만들어 보세요.",
     "description": "Home page subtitle"
+  },
+  "homepage-title": {
+    "defaultMessage": "Calliope-ML",
+    "description": "Main heading on the home page"
   },
   "homepage-video-alt": {
     "defaultMessage": "소개 동영상",
@@ -1394,6 +1398,14 @@
   "recording-data-for-numbered": {
     "defaultMessage": "\"{action}\" 행동에 대한 {numSamples}개의 {sample} 기록",
     "description": "Text in recording dialog"
+  },
+  "recording-duration-helper": {
+    "defaultMessage": "각 제스처 녹음의 길이. 범위: {min}초 – {max}초. 변경 사항은 이후의 모든 녹음에 적용됩니다.",
+    "description": "Helper text for the recording length setting in the settings dialog. {min} and {max} are numbers of seconds"
+  },
+  "recording-duration-label": {
+    "defaultMessage": "녹음 길이",
+    "description": "Label for the recording length setting in the settings dialog"
   },
   "recording-fingerprint-label": {
     "defaultMessage": "Calliope mini x, y, z 가속도계 데이터 기록 1개를 보여주는 히트 맵",

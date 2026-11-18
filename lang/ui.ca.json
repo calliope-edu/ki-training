@@ -268,7 +268,7 @@
     "description": "Calliope mini radio connection error message"
   },
   "connect-help-alt": {
-    "defaultMessage": "Diàleg de connexió WebUSB amb l'entrada de BBC Calliope mini etiquetada com 1 i el botó de connexió etiquetat com 2",
+    "defaultMessage": "Diàleg de connexió WebUSB amb l'entrada de Calliope mini etiquetada com 1 i el botó de connexió etiquetat com 2",
     "description": "Alt text for image in connect help dialog"
   },
   "connect-micro-usb-cable": {
@@ -296,7 +296,7 @@
     "description": "Instruction for dialog that previews the Bluetooth/WebUSB permission dialog"
   },
   "connect-popup-bluetooth-alt": {
-    "defaultMessage": "Diàleg de connexió de la Web Bluetooth amb l'entrada de la Calliope mini de la BBC amb l'etiqueta 1 i el botó d'aparellament amb l'etiqueta 2",
+    "defaultMessage": "Diàleg de connexió de la Web Bluetooth amb l'entrada de la Calliope mini de la  amb l'etiqueta 1 i el botó d'aparellament amb l'etiqueta 2",
     "description": "Alt text"
   },
   "connect-popup-bluetooth-instruction2": {
@@ -824,7 +824,7 @@
     "description": "Home page description"
   },
   "homepage-how-it-works": {
-    "defaultMessage": "Com funciona",
+    "defaultMessage": "Com funciona una xarxa neuronal",
     "description": "Home page section heading"
   },
   "homepage-how-it-works-paragraph": {
@@ -844,8 +844,12 @@
     "description": "Home page section heading"
   },
   "homepage-subtitle": {
-    "defaultMessage": "Crea IA a la teva Calliope mini de la BBC utilitzant el moviment i l'aprenentatge automàtic.",
+    "defaultMessage": "Crea IA a la teva Calliope mini de la utilitzant el moviment i l'aprenentatge automàtic.",
     "description": "Home page subtitle"
+  },
+  "homepage-title": {
+    "defaultMessage": "Calliope-ML",
+    "description": "Main heading on the home page"
   },
   "homepage-video-alt": {
     "defaultMessage": "Vídeo de presentació",
@@ -864,11 +868,11 @@
     "description": "Title of import error dialog"
   },
   "incompatible-device-body-alt": {
-    "defaultMessage": "Torna enrere per seleccionar una Calliope mini diferent, o bé <link>desa l'hexadecimal del projecte</link> que es pot transferir a una Calliope mini més tard.",
+    "defaultMessage": "Torna enrere per seleccionar una Calliope mini diferent, o bé <link>desa l'hexadecimal del projecte</link> que es pot transferir a una Calliope mini V3 més tard.",
     "description": "Incompatible device dialog body text"
   },
   "incompatible-device-body1": {
-    "defaultMessage": "Continua a MakeCode per editar el programa. A continuació, pots desar l'hex del projecte que es pot transferir a una Calliope mini V2.",
+    "defaultMessage": "Continua a MakeCode per editar el programa. A continuació, pots desar l'hex del projecte que es pot transferir a una Calliope mini V3.",
     "description": "Incompatible device dialog body text"
   },
   "incompatible-device-body2": {
@@ -880,7 +884,7 @@
     "description": "Incompatible device dialog heading"
   },
   "incompatible-device-subtitle": {
-    "defaultMessage": "Estàs utilitzant una Calliope mini V1, però els projectes d'aprenentatge automàtic necessiten el processador més ràpid en una Calliope mini V2. <link>Més informació sobre les versions de les Calliope mini.</link>",
+    "defaultMessage": "Estàs utilitzant una Calliope mini V1, però els projectes d'aprenentatge automàtic necessiten el processador més ràpid en una Calliope mini V3. <link>Més informació sobre les versions de les Calliope mini.</link>",
     "description": "Incompatible device dialog subtitle"
   },
   "insufficient-data-body": {
@@ -1395,6 +1399,14 @@
     "defaultMessage": "Registre {sample} de {numSamples} per a l'acció \"{action}\"",
     "description": "Text in recording dialog"
   },
+  "recording-duration-helper": {
+    "defaultMessage": "Durada de cada enregistrament de gest. Interval: {min} s – {max} s. Els canvis s'apliquen als enregistraments posteriors.",
+    "description": "Helper text for the recording length setting in the settings dialog. {min} and {max} are numbers of seconds"
+  },
+  "recording-duration-label": {
+    "defaultMessage": "Durada de l'enregistrament",
+    "description": "Label for the recording length setting in the settings dialog"
+  },
   "recording-fingerprint-label": {
     "defaultMessage": "gràfic que mostra les de dades de l'acceleròmetre Calliope mini x, y, z per a un enregistrament",
     "description": "Label for recording fingerprint heatmap"
@@ -1732,7 +1744,7 @@
     "description": "Unplug radio link Calliope mini dialog title"
   },
   "unsupported-device-explain": {
-    "defaultMessage": "Malauradament, només admetem l'ús de Calliope mini V2 quan ens connectem mitjançant la ràdio Calliope mini. Has connectat una <link>Calliope mini V1</link>.",
+    "defaultMessage": "Malauradament, només admetem l'ús de Calliope mini V3 quan ens connectem mitjançant la ràdio Calliope mini. Has connectat una <link>Calliope mini V1</link>.",
     "description": "Unsupported device dialog"
   },
   "unsupported-device-header": {

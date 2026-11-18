@@ -2429,18 +2429,6 @@
       "value": " を記録"
     }
   ],
-  "recording-fingerprint-label": [
-    {
-      "type": 0,
-      "value": "記録について、Calliope miniのx、y、z加速度センサーデータ特性を表示するヒートマップ"
-    }
-  ],
-  "recording-graph-label": [
-    {
-      "type": 0,
-      "value": "Calliope mini の加速度センサーのx軸、y軸、z軸の各データを示しているグラフ"
-    }
-  ],
   "recording-duration-helper": [
     {
       "type": 0,
@@ -2467,6 +2455,18 @@
     {
       "type": 0,
       "value": "録音時間"
+    }
+  ],
+  "recording-fingerprint-label": [
+    {
+      "type": 0,
+      "value": "記録について、Calliope miniのx、y、z加速度センサーデータ特性を表示するヒートマップ"
+    }
+  ],
+  "recording-graph-label": [
+    {
+      "type": 0,
+      "value": "Calliope mini の加速度センサーのx軸、y軸、z軸の各データを示しているグラフ"
     }
   ],
   "recording-options-aria": [
