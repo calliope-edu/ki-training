@@ -238,7 +238,7 @@
   "certainty-tooltip": [
     {
       "type": 0,
-      "value": "Wie sicher sich das Modell ist, dass du gerade jede Aktion ausführst."
+      "value": "Wie sicher sich das Modell ist, dass du gerade diese Aktion ausführst."
     }
   ],
   "click-to-reload-page-action": [
@@ -340,7 +340,7 @@
   "connect-bluetooth-invalid-pattern": [
     {
       "type": 0,
-      "value": "Das von dir gezeichnete Muster ist ungültig."
+      "value": "Das gezeichnete Muster ist ungültig."
     }
   ],
   "connect-bluetooth-start-heading": [
@@ -406,7 +406,7 @@
   "connect-data-collection-heading": [
     {
       "type": 0,
-      "value": "USB-Kabel mit Calliope mini 1 verbinden"
+      "value": "USB-Kabel mit Calliope mini A verbinden"
     }
   ],
   "connect-data-collection-subtitle": [
@@ -560,13 +560,13 @@
   "connect-popup-usb-radio-data-collection-title": [
     {
       "type": 0,
-      "value": "Datenerfassungsprogramm auf Calliope mini 1/2 herunterladen"
+      "value": "Datenerfassungsprogramm auf Calliope mini herunterladen"
     }
   ],
   "connect-popup-usb-radio-link-title": [
     {
       "type": 0,
-      "value": "Funk-Programm auf Calliope mini herunterladen"
+      "value": "Funkverbindungsprogramm auf Calliope mini herunterladen"
     }
   ],
   "connect-popup-webusb-instruction2": [
@@ -596,7 +596,7 @@
   "connect-radio-link-heading": [
     {
       "type": 0,
-      "value": "USB-C-Kabel mit Calliope mini 3 verbinden"
+      "value": "Verbinde das USB-Kabel mit Calliope mini B"
     }
   ],
   "connect-radio-link-subtitle": [
@@ -662,7 +662,7 @@
   "connect-troubleshoot": [
     {
       "type": 0,
-      "value": "Probleme bei der Verbindung mit deinem Calliope mini beheben"
+      "value": "Probleme beim Verbinden des Calliope mini beheben"
     }
   ],
   "connect-troubleshooting": [
@@ -1048,7 +1048,7 @@
     },
     {
       "type": 1,
-      "value": "Aktion"
+      "value": "action"
     },
     {
       "type": 0,
@@ -2461,18 +2461,6 @@
       "value": " auf.\""
     }
   ],
-  "recording-fingerprint-label": [
-    {
-      "type": 0,
-      "value": "Heatmap mit den Datenmerkmalen des Calliope mini x, y, z-Beschleunigungsmessers für eine Aufzeichnung"
-    }
-  ],
-  "recording-graph-label": [
-    {
-      "type": 0,
-      "value": "Grafik mit den Daten des Calliope mini X, Y, Z-Beschleunigungsmessers für eine Aufzeichnung"
-    }
-  ],
   "recording-duration-helper": [
     {
       "type": 0,
@@ -2499,6 +2487,18 @@
     {
       "type": 0,
       "value": "Aufnahmedauer"
+    }
+  ],
+  "recording-fingerprint-label": [
+    {
+      "type": 0,
+      "value": "Heatmap mit den Datenmerkmalen des Calliope mini x, y, z-Beschleunigungsmessers für eine Aufzeichnung"
+    }
+  ],
+  "recording-graph-label": [
+    {
+      "type": 0,
+      "value": "Grafik mit den Daten des Calliope mini X, Y, Z-Beschleunigungsmessers für eine Aufzeichnung"
     }
   ],
   "recording-options-aria": [
@@ -2548,7 +2548,7 @@
   "restore-defaults-confirm-heading": [
     {
       "type": 0,
-      "value": "Standardeinstellungen wiederherstellen"
+      "value": "Standardeinstellungen"
     }
   ],
   "restore-defaults-helper": [
@@ -2904,7 +2904,7 @@
   "tour-dataSamples-liveGraph-content": [
     {
       "type": 0,
-      "value": "Das Diagramm zeigt Bewegungsdaten vom Beschleunigungsmesser des Calliope mini. Bewege den Calliope mini zur Datenerfassung und beobachte, wie sich die Grafik verändert."
+      "value": "Die Grafik zeigt Bewegungsdaten vom Beschleunigungssensor des Calliope mini. Bewege deinen Datenerfassungs-Calliope mini und siehe, wie sich die Grafik verändert."
     }
   ],
   "tour-makecode-intro-content1": [

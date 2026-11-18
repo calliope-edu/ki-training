@@ -268,7 +268,7 @@
     "description": "Calliope mini radio connection error message"
   },
   "connect-help-alt": {
-    "defaultMessage": "「1」のラベルが付いたBBC Calliope miniエントリと「2」のラベルが付いた接続ボタンを持つWebUSB接続ダイアログ",
+    "defaultMessage": "「1」のラベルが付いたCalliope miniエントリと「2」のラベルが付いた接続ボタンを持つWebUSB接続ダイアログ",
     "description": "Alt text for image in connect help dialog"
   },
   "connect-micro-usb-cable": {
@@ -296,7 +296,7 @@
     "description": "Instruction for dialog that previews the Bluetooth/WebUSB permission dialog"
   },
   "connect-popup-bluetooth-alt": {
-    "defaultMessage": "ラベル 1 で示している BBC Calliope mini のエントリとラベル 2 で示しているペアリングボタンのあるWeb Bluetooth ダイアログ",
+    "defaultMessage": "ラベル 1 で示している Calliope mini のエントリとラベル 2 で示しているペアリングボタンのあるWeb Bluetooth ダイアログ",
     "description": "Alt text"
   },
   "connect-popup-bluetooth-instruction2": {
@@ -824,7 +824,7 @@
     "description": "Home page description"
   },
   "homepage-how-it-works": {
-    "defaultMessage": "動作の仕組み",
+    "defaultMessage": "これがニューラルネットワークの構造です",
     "description": "Home page section heading"
   },
   "homepage-how-it-works-paragraph": {
@@ -844,8 +844,12 @@
     "description": "Home page section heading"
   },
   "homepage-subtitle": {
-    "defaultMessage": "動作と機械学習を使ってBBC Calliope miniでAIを作ります。",
+    "defaultMessage": "動作と機械学習を使ってCalliope miniでAIを作ります。",
     "description": "Home page subtitle"
+  },
+  "homepage-title": {
+    "defaultMessage": "Calliope-ML",
+    "description": "Main heading on the home page"
   },
   "homepage-video-alt": {
     "defaultMessage": "紹介動画",
@@ -1394,6 +1398,14 @@
   "recording-data-for-numbered": {
     "defaultMessage": "アクション「{action}」の {numSamples} 個の {sample} を記録",
     "description": "Text in recording dialog"
+  },
+  "recording-duration-helper": {
+    "defaultMessage": "各ジェスチャー録音の長さ。範囲：{min} 秒 〜 {max} 秒。変更は以降のすべての録音に適用されます。",
+    "description": "Helper text for the recording length setting in the settings dialog. {min} and {max} are numbers of seconds"
+  },
+  "recording-duration-label": {
+    "defaultMessage": "録音時間",
+    "description": "Label for the recording length setting in the settings dialog"
   },
   "recording-fingerprint-label": {
     "defaultMessage": "記録について、Calliope miniのx、y、z加速度センサーデータ特性を表示するヒートマップ",

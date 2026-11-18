@@ -2461,18 +2461,6 @@
       "value": "\""
     }
   ],
-  "recording-fingerprint-label": [
-    {
-      "type": 0,
-      "value": "heatmap showing Calliope mini x, y, z accelerometer data features for one recording"
-    }
-  ],
-  "recording-graph-label": [
-    {
-      "type": 0,
-      "value": "graph showing Calliope mini x, y, z accelerometer data for one recording"
-    }
-  ],
   "recording-duration-helper": [
     {
       "type": 0,
@@ -2499,6 +2487,18 @@
     {
       "type": 0,
       "value": "Recording length"
+    }
+  ],
+  "recording-fingerprint-label": [
+    {
+      "type": 0,
+      "value": "heatmap showing Calliope mini x, y, z accelerometer data features for one recording"
+    }
+  ],
+  "recording-graph-label": [
+    {
+      "type": 0,
+      "value": "graph showing Calliope mini x, y, z accelerometer data for one recording"
     }
   ],
   "recording-options-aria": [

@@ -847,6 +847,10 @@
     "defaultMessage": "crwdns363040:0crwdne363040:0",
     "description": "Home page subtitle"
   },
+  "homepage-title": {
+    "defaultMessage": "Calliope-ML",
+    "description": "Main heading on the home page"
+  },
   "homepage-video-alt": {
     "defaultMessage": "crwdns363042:0crwdne363042:0",
     "description": "Home page video alt text"
@@ -1395,6 +1399,14 @@
     "defaultMessage": "crwdns363290:0{sample}crwdnd363290:0{numSamples}crwdnd363290:0{action}crwdne363290:0",
     "description": "Text in recording dialog"
   },
+  "recording-duration-helper": {
+    "defaultMessage": "Length of each gesture recording. Range: {min} s – {max} s. Changes apply to all subsequent recordings.",
+    "description": "Helper text for the recording length setting in the settings dialog. {min} and {max} are numbers of seconds"
+  },
+  "recording-duration-label": {
+    "defaultMessage": "Recording length",
+    "description": "Label for the recording length setting in the settings dialog"
+  },
   "recording-fingerprint-label": {
     "defaultMessage": "crwdns363292:0crwdne363292:0",
     "description": "Label for recording fingerprint heatmap"
@@ -1552,7 +1564,7 @@
     "description": "Testing model page title"
   },
   "third-party-content-description": {
-    "defaultMessage": "The content above is provided by a third party, and is not endorsed by the Calliope mini Educational Foundation.",
+    "defaultMessage": "The content above is provided by a third party, and is not endorsed by Calliope.",
     "description": "Notify user of third party content"
   },
   "tour-action": {

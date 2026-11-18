@@ -2337,18 +2337,6 @@
       "value": "crwdne363290:0"
     }
   ],
-  "recording-fingerprint-label": [
-    {
-      "type": 0,
-      "value": "crwdns363292:0crwdne363292:0"
-    }
-  ],
-  "recording-graph-label": [
-    {
-      "type": 0,
-      "value": "crwdns363294:0crwdne363294:0"
-    }
-  ],
   "recording-duration-helper": [
     {
       "type": 0,
@@ -2375,6 +2363,18 @@
     {
       "type": 0,
       "value": "Recording length"
+    }
+  ],
+  "recording-fingerprint-label": [
+    {
+      "type": 0,
+      "value": "crwdns363292:0crwdne363292:0"
+    }
+  ],
+  "recording-graph-label": [
+    {
+      "type": 0,
+      "value": "crwdns363294:0crwdne363294:0"
     }
   ],
   "recording-options-aria": [

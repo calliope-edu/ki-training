@@ -2445,18 +2445,6 @@
       "value": "\""
     }
   ],
-  "recording-fingerprint-label": [
-    {
-      "type": 0,
-      "value": "Mapa de calor mostrando os recursos dos dados do acelerômetro x, y, z do Calliope mini para uma gravação."
-    }
-  ],
-  "recording-graph-label": [
-    {
-      "type": 0,
-      "value": "gráfico mostrando os dados do acelerômetro Calliope mini x, y, z para uma gravação"
-    }
-  ],
   "recording-duration-helper": [
     {
       "type": 0,
@@ -2483,6 +2471,18 @@
     {
       "type": 0,
       "value": "Duração da gravação"
+    }
+  ],
+  "recording-fingerprint-label": [
+    {
+      "type": 0,
+      "value": "Mapa de calor mostrando os recursos dos dados do acelerômetro x, y, z do Calliope mini para uma gravação."
+    }
+  ],
+  "recording-graph-label": [
+    {
+      "type": 0,
+      "value": "gráfico mostrando os dados do acelerômetro Calliope mini x, y, z para uma gravação"
     }
   ],
   "recording-options-aria": [

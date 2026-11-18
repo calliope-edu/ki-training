@@ -268,7 +268,7 @@
     "description": "Calliope mini radio connection error message"
   },
   "connect-help-alt": {
-    "defaultMessage": "Okno dialogowe połączenia WebUSB z BBC Calliope miniem oznaczonym jako 1 i przycisk Połącz oznaczony jako 2",
+    "defaultMessage": "Okno dialogowe połączenia WebUSB z Calliope miniem oznaczonym jako 1 i przycisk Połącz oznaczony jako 2",
     "description": "Alt text for image in connect help dialog"
   },
   "connect-micro-usb-cable": {
@@ -284,11 +284,11 @@
     "description": "Heading for Bluetooth pattern connection dialog"
   },
   "connect-pattern-input-label": {
-    "defaultMessage": "Kolumna {colNum} - liczba diod LED włączonych na wyświetlaczu Calliope minia",
+    "defaultMessage": "Kolumna {colNum} - liczba diod LED włączonych na wyświetlaczu Calliope mini",
     "description": "Screen reader text for numeric pattern input"
   },
   "connect-pattern-subtitle": {
-    "defaultMessage": "Skopiuj wzór wyświetlany na micro:bicie.",
+    "defaultMessage": "Skopiuj wzór wyświetlany na Calliope mini.",
     "description": "Instruction for bluetooth pattern dialog"
   },
   "connect-popup": {
@@ -296,7 +296,7 @@
     "description": "Instruction for dialog that previews the Bluetooth/WebUSB permission dialog"
   },
   "connect-popup-bluetooth-alt": {
-    "defaultMessage": "Dialog połączenia internetowego Bluetooth z wpisem BBC Calliope mini oznaczonym jako 1 i przyciskiem Pair oznaczonym jako 2",
+    "defaultMessage": "Dialog połączenia internetowego Bluetooth z wpisem Calliope mini oznaczonym jako 1 i przyciskiem Pair oznaczonym jako 2",
     "description": "Alt text"
   },
   "connect-popup-bluetooth-instruction2": {
@@ -576,7 +576,7 @@
     "description": "Download project different Calliope mini option"
   },
   "download-project-intro-description": {
-    "defaultMessage": "Twój program zawiera model uczenia maszynowego, który utworzyłeś. Model działa na micro:bicie, więc możesz go użyć bez połączenia z {appNameFull}.",
+    "defaultMessage": "Twój program zawiera model uczenia maszynowego, który utworzyłeś. Model działa na Calliope mini, więc możesz go użyć bez połączenia z {appNameFull}.",
     "description": "Download project intro dialog description"
   },
   "download-project-intro-title": {
@@ -724,7 +724,7 @@
     "description": "Tooltip for data feature of a recording"
   },
   "firmware-outdated-content1": {
-    "defaultMessage": "Połączenie z Calliope miniem nie powiodło się, ponieważ oprogramowanie firmowe na micro:bicie jest zbyt stare.",
+    "defaultMessage": "Połączenie z Calliope miniem nie powiodło się, ponieważ oprogramowanie firmowe na Calliope mini jest zbyt stare.",
     "description": "Connection error dialog"
   },
   "firmware-outdated-content2": {
@@ -820,11 +820,11 @@
     "description": "Alt text for image in homepage"
   },
   "homepage-description": {
-    "defaultMessage": "Wytrenuj model uczenia maszynowego na danych z własnych ruchów i uruchom go na swoim micro:bicie.",
+    "defaultMessage": "Wytrenuj model uczenia maszynowego na danych z własnych ruchów i uruchom go na swoim Calliope mini.",
     "description": "Home page description"
   },
   "homepage-how-it-works": {
-    "defaultMessage": "Jak to działa",
+    "defaultMessage": "Tak wygląda sieć neuronowa",
     "description": "Home page section heading"
   },
   "homepage-how-it-works-paragraph": {
@@ -844,8 +844,12 @@
     "description": "Home page section heading"
   },
   "homepage-subtitle": {
-    "defaultMessage": "Utwórz AI na swoim BBC Calliope mini poprzez ruch i uczenie maszynowe.",
+    "defaultMessage": "Utwórz AI na swoim Calliope mini poprzez ruch i uczenie maszynowe.",
     "description": "Home page subtitle"
+  },
+  "homepage-title": {
+    "defaultMessage": "Calliope-ML",
+    "description": "Main heading on the home page"
   },
   "homepage-video-alt": {
     "defaultMessage": "Film wprowadzający",
@@ -880,7 +884,7 @@
     "description": "Incompatible device dialog heading"
   },
   "incompatible-device-subtitle": {
-    "defaultMessage": "Używasz Calliope mini V1, ale projekty nauczania maszynowego wymagają szybszego procesora w micro:bicie V3. <link>Dowiedz się więcej o wersjach Calliope minia.</link>",
+    "defaultMessage": "Używasz Calliope mini V1, ale projekty nauczania maszynowego wymagają szybszego procesora w Calliope mini V3. <link>Dowiedz się więcej o wersjach Calliope minia.</link>",
     "description": "Incompatible device dialog subtitle"
   },
   "insufficient-data-body": {
@@ -1360,7 +1364,7 @@
     "description": "Hint when you have named the first action but not recorded any data samples"
   },
   "record-hint-button-b": {
-    "defaultMessage": "Naciśnij, aby nagrać próbkę danych lub naciśnij przycisk B na micro:bicie do zbierana danych.",
+    "defaultMessage": "Naciśnij, aby nagrać próbkę danych lub naciśnij przycisk B na Calliope mini do zbierana danych.",
     "description": "Hint when you have named the first action but not recorded any data samples and have a Calliope mini connected"
   },
   "record-samples": {
@@ -1394,6 +1398,14 @@
   "recording-data-for-numbered": {
     "defaultMessage": "Nagrywaj {sample} z {numSamples} dla akcji \"{action}\"",
     "description": "Text in recording dialog"
+  },
+  "recording-duration-helper": {
+    "defaultMessage": "Długość każdego nagrania gestu. Zakres: {min} s – {max} s. Zmiany dotyczą wszystkich kolejnych nagrań.",
+    "description": "Helper text for the recording length setting in the settings dialog. {min} and {max} are numbers of seconds"
+  },
+  "recording-duration-label": {
+    "defaultMessage": "Długość nagrania",
+    "description": "Label for the recording length setting in the settings dialog"
   },
   "recording-fingerprint-label": {
     "defaultMessage": "mapa cieplna pokazująca cechy danych akcelerometru x, y, z Calliope minia dla jednego nagrania",
@@ -1616,7 +1628,7 @@
     "description": "Tour step content"
   },
   "tour-makecode-intro-content1": {
-    "defaultMessage": "Pobierz model i kod, aby przetestować swój projekt na micro:bicie. Możesz również dodać więcej bloków kodu, aby utworzyć własne programy stosujc swój model.",
+    "defaultMessage": "Pobierz model i kod, aby przetestować swój projekt na Calliope mini. Możesz również dodać więcej bloków kodu, aby utworzyć własne programy stosujc swój model.",
     "description": "Tour step description"
   },
   "tour-makecode-intro-content2": {

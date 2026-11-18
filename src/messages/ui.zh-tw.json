@@ -2453,18 +2453,6 @@
       "value": "sample"
     }
   ],
-  "recording-fingerprint-label": [
-    {
-      "type": 0,
-      "value": "顯示一次記錄的 Calliope mini x、y、z 加速度計數據功能的熱圖"
-    }
-  ],
-  "recording-graph-label": [
-    {
-      "type": 0,
-      "value": "顯示一次記錄的 Calliope mini x、y、z 加速度計數據的圖表"
-    }
-  ],
   "recording-duration-helper": [
     {
       "type": 0,
@@ -2491,6 +2479,18 @@
     {
       "type": 0,
       "value": "錄製時長"
+    }
+  ],
+  "recording-fingerprint-label": [
+    {
+      "type": 0,
+      "value": "顯示一次記錄的 Calliope mini x、y、z 加速度計數據功能的熱圖"
+    }
+  ],
+  "recording-graph-label": [
+    {
+      "type": 0,
+      "value": "顯示一次記錄的 Calliope mini x、y、z 加速度計數據的圖表"
     }
   ],
   "recording-options-aria": [
