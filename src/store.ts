@@ -97,7 +97,10 @@ export const buildDataWindowForDuration = (duration: number): DataWindow => {
     1,
     Math.round(duration / deviceSamplesPeriod)
   );
-  const minSamples = Math.max(1, Math.round(deviceSamplesLength * minSamplesRatio));
+  const minSamples = Math.max(
+    1,
+    Math.round(deviceSamplesLength * minSamplesRatio)
+  );
   return {
     duration,
     minSamples,
@@ -339,7 +342,9 @@ export interface Actions {
 type Store = State & Actions;
 
 const createMlStore = (logging: Logging) => {
-  console.log("[MAKECODE] createMlStore() - creating store and editor promises (editorReady/editorContentLoaded)");
+  console.log(
+    "[MAKECODE] createMlStore() - creating store and editor promises (editorReady/editorContentLoaded)"
+  );
   return create<Store>()(
     devtools(
       persist(
@@ -551,9 +556,7 @@ const createMlStore = (logging: Logging) => {
               const newActions = actions.filter((a) => a.ID !== id);
               const newDataWindow =
                 newActions.length === 0
-                  ? buildDataWindowForDuration(
-                      get().settings.recordingDuration
-                    )
+                  ? buildDataWindowForDuration(get().settings.recordingDuration)
                   : dataWindow;
               return {
                 actions:
@@ -660,9 +663,7 @@ const createMlStore = (logging: Logging) => {
               );
               const newDataWindow =
                 numRecordings === 0
-                  ? buildDataWindowForDuration(
-                      get().settings.recordingDuration
-                    )
+                  ? buildDataWindowForDuration(get().settings.recordingDuration)
                   : dataWindow;
               return {
                 actions: newActions,
