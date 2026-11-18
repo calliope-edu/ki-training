@@ -12,6 +12,9 @@
       "TEMPLATE.md"
     ]
   },
+  "prNoise": [
+    "cloudflare-workers-and-pages[bot]"
+  ],
   "language": "en",
   "demo": {
     "language": "en"
