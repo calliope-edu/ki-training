@@ -1,0 +1,23 @@
+{
+  "setup": "npm ci",
+  "checks": [
+    "npx tsc",
+    "npx vitest run --exclude \"**/ml4f-output.test.ts\"",
+    "npm run lint"
+  ],
+  "direct": true,
+  "planDocs": {
+    "dir": "docs/plan",
+    "exclude": [
+      "TEMPLATE.md"
+    ]
+  },
+  "language": "en",
+  "demo": {
+    "language": "en"
+  },
+  "app": {
+    "run": "calliope-ml (Calliope KI-Training, the Calliope mini ML trainer) is a single-page React app served by Vite; it needs no backend, no database and no login. Other workspaces run their own on the same machine, so do not use `npm run dev`/`npm start` (fixed port 5173, which the Playwright e2e tests also use). Start this workspace's own with `node .obeya/app.mjs start` (with run_in_background; it runs `npm ci` first if `node_modules` is missing, then returns within seconds once Vite answers). It takes the first free port from 5500, logs to `.obeya/run/vite.log`, prints the address and writes it to `.obeya/run/app.json` (field `url`, e.g. `http://localhost:5500/`); take it from there, never assume a port. `node .obeya/app.mjs status` tells whether it still runs. The first page load after a start takes several seconds (Vite prepares its dependencies).\n\nThe UI language follows the browser's; add `?l=en` (or `?l=de`) to the first URL to fix it, or switch it under the gear icon (top right) > Language. A state worth showing without hardware: `/new` > \"Continue a saved session\" opens a file chooser; load `src/test-data/dataset.json` (two actions, \"active\" and \"inactive\", six recordings each; in Playwright, `waitForEvent('filechooser')` and `setFiles`). That opens the data samples page (`/data-samples`); \"Train model\" > \"Start training\" trains in the browser (TensorFlow.js, a few seconds, works headless) and opens `/testing-model` with the MakeCode blocks per action. Recording, the live graph and live testing need a Calliope mini over Web Bluetooth or USB, which a headless browser does not have. Project state lives in the browser's storage, so a fresh browser profile starts empty. \"Edit in MakeCode\" loads an embedded editor from the internet and can take a minute.\n\nAfter a change: React/TS changes reload in the page by themselves; a change to `vite.config.ts`, `.env` or dependencies needs `node .obeya/app.mjs stop` and `start` again. After changing `src/deployment/default/theme.ts`, run `npm run theme`. UI strings live in `lang/ui.*.json`; after editing them run `npm run i18n:compile` (writes `src/messages/`).\n\nStop it with `node .obeya/app.mjs stop`: it ends the Vite process this workspace started, by PID with its process tree, and nothing else.",
+    "stop": "node .obeya/app.mjs stop"
+  }
+}
