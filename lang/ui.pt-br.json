@@ -87,6 +87,22 @@
     "defaultMessage": "Este navegador não é suportado",
     "description": "Heading for browser support dialog"
   },
+  "campus-connect-needs-bluetooth": {
+    "defaultMessage": "Movement data comes via Bluetooth. Connect sets up the Bluetooth connection.",
+    "description": "Live graph hint in Calliope Campus below campus-microbit-usb-connected"
+  },
+  "campus-connect-needs-program": {
+    "defaultMessage": "To record and test it needs the data collection program. Connect transfers it.",
+    "description": "Live graph hint in Calliope Campus below campus-microbit-ble-connected"
+  },
+  "campus-microbit-ble-connected": {
+    "defaultMessage": "Your Calliope mini is connected via Bluetooth",
+    "description": "Live graph status in Calliope Campus when the Calliope mini is connected via Bluetooth in the Campus connection widget but does not run the data collection program"
+  },
+  "campus-microbit-usb-connected": {
+    "defaultMessage": "Your Calliope mini is connected via USB",
+    "description": "Live graph status in Calliope Campus when the Calliope mini is connected via USB only in the Campus connection widget"
+  },
   "cancel-action": {
     "defaultMessage": "Cancelar",
     "description": "Cancel button text"
@@ -723,7 +739,10 @@
     "defaultMessage": "Começar",
     "description": "Get started action"
   },
-  "go-action": { "defaultMessage": "Ir", "description": "Go action" },
+  "go-action": {
+    "defaultMessage": "Ir",
+    "description": "Go action"
+  },
   "graph-color-scheme": {
     "defaultMessage": "Esquema de cores do gráfico",
     "description": "Graph colour scheme setting label"

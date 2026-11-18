@@ -16,8 +16,10 @@ import {
 } from "@chakra-ui/react";
 import { useCallback, useRef } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
+import { useCampusStatus } from "../campus-connection-hooks";
 import { ConnectionStatus } from "../connect-status-hooks";
 import { useConnectionStage } from "../connection-stage-hooks";
+import { isCampusMode } from "../device/campus-host";
 import microbitImage from "../images/stylised-microbit-black.svg";
 import { keyboardShortcuts, useShortcut } from "../keyboard-shortcut-hooks";
 import { useLogging } from "../logging/logging-hooks";
@@ -48,6 +50,18 @@ const LiveGraphPanel = ({
   const isDisconnected =
     !isConnected && !isReconnecting && status !== ConnectionStatus.Connecting;
 
+  // In Campus its connection widget holds the link (and ends it), so the
+  // trainer says how the mini is connected there instead of "not connected".
+  const campus = useCampusStatus();
+  const isCampus = isCampusMode();
+  const [disconnectedTitleId, disconnectedBodyId] = !isCampus
+    ? ["microbit-not-connected", disconnectedTextId]
+    : campus.ble === "connected"
+    ? ["campus-microbit-ble-connected", "campus-connect-needs-program"]
+    : campus.usb === "connected"
+    ? ["campus-microbit-usb-connected", "campus-connect-needs-bluetooth"]
+    : ["microbit-not-connected", disconnectedTextId];
+
   const handleConnectOrReconnect = useCallback(() => {
     if (
       status === ConnectionStatus.NotConnected ||
@@ -74,7 +88,7 @@ const LiveGraphPanel = ({
     void actions.disconnect();
   }, [actions, logging]);
   useShortcut(keyboardShortcuts.disconnect, handleDisconnect, {
-    enabled: isConnected,
+    enabled: isConnected && !isCampus,
   });
   const intl = useIntl();
   return (
@@ -101,10 +115,10 @@ const LiveGraphPanel = ({
           />
           <VStack gap={3} alignItems="self-start">
             <Text fontWeight="bold">
-              <FormattedMessage id="microbit-not-connected" />
+              <FormattedMessage id={disconnectedTitleId} />
             </Text>
             <Text>
-              <FormattedMessage id={disconnectedTextId} />
+              <FormattedMessage id={disconnectedBodyId} />
             </Text>
             <Button
               variant="primary"
@@ -144,7 +158,7 @@ const LiveGraphPanel = ({
                   isDisabled={isDisconnected}
                 />
               </HStack>
-              {isConnected && (
+              {isConnected && !isCampus && (
                 <Button
                   backgroundColor="white"
                   variant="secondary"

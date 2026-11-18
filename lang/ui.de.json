@@ -2,101 +2,117 @@
   "aarhus-university-alt": {
     "defaultMessage": "Aarhus University"
   },
-   "about": {
-  "defaultMessage": "Über",
-  "description": "Menu item link to view information about app"
+  "about": {
+    "defaultMessage": "Über",
+    "description": "Menu item link to view information about app"
   },
   "about-dialog-alt": {
-  "defaultMessage": "Calliope mini Platine mit einem Herz auf der LED-Matrix",
-  "description": "Alt text for image in about dialog"
+    "defaultMessage": "Calliope mini Platine mit einem Herz auf der LED-Matrix",
+    "description": "Alt text for image in about dialog"
   },
   "about-dialog-title": {
-  "defaultMessage": "Entwickelt in Partnerschaft mit <link>Center for Computational Thinking and Design, Aarhus University</link>",
-  "description": "Title of about dialog"
+    "defaultMessage": "Entwickelt in Partnerschaft mit <link>Center for Computational Thinking and Design, Aarhus University</link>",
+    "description": "Title of about dialog"
   },
   "accelerometer-image-alt": {
-  "defaultMessage": "Calliope mini mit X-Achse quer über die Vorderseite, Y-Achse nach unten und oben, Z-Achse von hinten nach vorne",
-  "description": "Alt text for image showing the board-relative directions of the X/Y/Z dimensions of the Calliope mini accelerometer"
+    "defaultMessage": "Calliope mini mit X-Achse quer über die Vorderseite, Y-Achse nach unten und oben, Z-Achse von hinten nach vorne",
+    "description": "Alt text for image showing the board-relative directions of the X/Y/Z dimensions of the Calliope mini accelerometer"
   },
   "accessibility": {
-  "defaultMessage": "Barrierefreiheit",
-  "description": "Menu item for link to accessibility site"
+    "defaultMessage": "Barrierefreiheit",
+    "description": "Menu item for link to accessibility site"
   },
   "action-label": {
-  "defaultMessage": "Aktion",
-  "description": "Label for a movement-related action, e.g. clapping"
+    "defaultMessage": "Aktion",
+    "description": "Label for a movement-related action, e.g. clapping"
   },
   "action-label-tooltip-aria": {
-  "defaultMessage": "Aktions-Tooltip",
-  "description": "Aria label for action tooltip icon"
+    "defaultMessage": "Aktions-Tooltip",
+    "description": "Aria label for action tooltip icon"
   },
   "action-length-error": {
-  "defaultMessage": "Aktionsnamen dürfen nicht länger als {maxLen} Zeichen sein.",
-  "description": "Error message shown when an action name is too long"
+    "defaultMessage": "Aktionsnamen dürfen nicht länger als {maxLen} Zeichen sein.",
+    "description": "Error message shown when an action name is too long"
   },
   "action-name-placeholder": {
-  "defaultMessage": "Name der Aktion",
-  "description": "Placeholder text for user supplied name of a movement-related action, e.g. clapping"
+    "defaultMessage": "Name der Aktion",
+    "description": "Placeholder text for user supplied name of a movement-related action, e.g. clapping"
   },
   "action-region": {
-  "defaultMessage": "Aktion \"{action}\"",
-  "description": "Region label for action row"
+    "defaultMessage": "Aktion \"{action}\"",
+    "description": "Region label for action row"
   },
   "action-tooltip": {
-  "defaultMessage": "Die Art der Bewegung, die {appNameFull} erkennen soll, z.B. 'Winken' oder 'Klatschen'.",
-  "description": "Tooltip explaining action"
+    "defaultMessage": "Die Art der Bewegung, die {appNameFull} erkennen soll, z.B. 'Winken' oder 'Klatschen'.",
+    "description": "Tooltip explaining action"
   },
   "actions-label": {
-  "defaultMessage": "Aktionen",
-  "description": "Label for Actions"
+    "defaultMessage": "Aktionen",
+    "description": "Label for Actions"
   },
   "add-action-action": {
-  "defaultMessage": "Aktion hinzufügen",
-  "description": "Button to add an action (movement related, e.g. clapping)"
+    "defaultMessage": "Aktion hinzufügen",
+    "description": "Button to add an action (movement related, e.g. clapping)"
   },
   "ai-activity-timer-resource-title": {
-  "defaultMessage": "KI-Aktivitäts-Timer",
-  "description": "Home page resource card title"
+    "defaultMessage": "KI-Aktivitäts-Timer",
+    "description": "Home page resource card title"
   },
   "ai-storytelling-friend-resource-title": {
-  "defaultMessage": "KI-Geschichten-Freund",
-  "description": "Home page resource card title"
+    "defaultMessage": "KI-Geschichten-Freund",
+    "description": "Home page resource card title"
   },
   "back-action": {
-  "defaultMessage": "Zurück",
-  "description": "Back button text"
+    "defaultMessage": "Zurück",
+    "description": "Back button text"
   },
   "back-to-data-samples-action": {
-  "defaultMessage": "Datenbeispiele bearbeiten",
-  "description": "Back button text"
+    "defaultMessage": "Datenbeispiele bearbeiten",
+    "description": "Back button text"
   },
   "blocks-preview-title": {
-  "defaultMessage": "Blockvorschau",
-  "description": "Blocks preview heading text"
+    "defaultMessage": "Blockvorschau",
+    "description": "Blocks preview heading text"
   },
   "bluetooth-unsupported-advice": {
-  "defaultMessage": "Wir empfehlen Google Chrome oder  Edge, damit du dich direkt mit deinem Calliope mini verbinden kannst.",
-  "description": "Note on supported browsers"
+    "defaultMessage": "Wir empfehlen Google Chrome oder  Edge, damit du dich direkt mit deinem Calliope mini verbinden kannst.",
+    "description": "Note on supported browsers"
   },
   "bluetooth-unsupported-explain": {
-  "defaultMessage": "Leider werden WebUSB und Web Bluetooth von diesem Browser nicht unterstützt. Das bedeutet, dass du dich nicht mit einem Calliope mini verbinden kannst, um die Datenbeispiele aufzuzeichnen, die zum Trainieren des maschinellen Lernmodells benötigt werden.",
-  "description": "Note on supported browsers"
+    "defaultMessage": "Leider werden WebUSB und Web Bluetooth von diesem Browser nicht unterstützt. Das bedeutet, dass du dich nicht mit einem Calliope mini verbinden kannst, um die Datenbeispiele aufzuzeichnen, die zum Trainieren des maschinellen Lernmodells benötigt werden.",
+    "description": "Note on supported browsers"
   },
   "bluetooth-unsupported-header": {
-  "defaultMessage": "Dieser Browser wird nicht unterstützt",
-  "description": "Heading for browser support dialog"
+    "defaultMessage": "Dieser Browser wird nicht unterstützt",
+    "description": "Heading for browser support dialog"
+  },
+  "campus-connect-needs-bluetooth": {
+    "defaultMessage": "Die Bewegungsdaten kommen über Bluetooth. „Verbinden“ stellt die Bluetooth-Verbindung her.",
+    "description": "Live graph hint in Calliope Campus below campus-microbit-usb-connected"
+  },
+  "campus-connect-needs-program": {
+    "defaultMessage": "Zum Aufzeichnen und Testen braucht er das Programm zur Datenerfassung. „Verbinden“ überträgt es.",
+    "description": "Live graph hint in Calliope Campus below campus-microbit-ble-connected"
+  },
+  "campus-microbit-ble-connected": {
+    "defaultMessage": "Dein Calliope mini ist über Bluetooth verbunden",
+    "description": "Live graph status in Calliope Campus when the Calliope mini is connected via Bluetooth in the Campus connection widget but does not run the data collection program"
+  },
+  "campus-microbit-usb-connected": {
+    "defaultMessage": "Dein Calliope mini ist über USB verbunden",
+    "description": "Live graph status in Calliope Campus when the Calliope mini is connected via USB only in the Campus connection widget"
   },
   "cancel-action": {
-  "defaultMessage": "Abbrechen",
-  "description": "Cancel button text"
+    "defaultMessage": "Abbrechen",
+    "description": "Cancel button text"
   },
   "cancel-recording-action": {
-  "defaultMessage": "Aufnahme abbrechen",
-  "description": "Button label to cancel a movement data recording"
+    "defaultMessage": "Aufnahme abbrechen",
+    "description": "Button label to cancel a movement data recording"
   },
   "certainty-label": {
-  "defaultMessage": "Sicherheit",
-  "description": "Heading for certainty column"
+    "defaultMessage": "Sicherheit",
+    "description": "Heading for certainty column"
   },
   "certainty-label-tooltip-aria": {
     "defaultMessage": "Sicherheits-Tooltip",
@@ -166,7 +182,6 @@
     "defaultMessage": "Trenne den Calliope mini vom Computer und schließe das Batteriepack an.",
     "description": "Battery connection dialog"
   },
-ud
   "connect-bluetooth-cancelled-connection": {
     "defaultMessage": "Du hast keinen Calliope mini ausgewählt. Möchtest du es erneut versuchen?",
     "description": "Error when the user cancelled the Web Bluetooth permission/device selection dialog"
@@ -723,9 +738,9 @@ ud
     "defaultMessage": "Erste Schritte",
     "description": "Get started action"
   },
-  "go-action": { 
-    "defaultMessage": "Los", 
-    "description": "Go action" 
+  "go-action": {
+    "defaultMessage": "Los",
+    "description": "Go action"
   },
   "graph-color-scheme": {
     "defaultMessage": "Grafik-Farbschema",
@@ -759,7 +774,7 @@ ud
     "defaultMessage": "Grafik-Liniendicke",
     "description": "Graph line weight setting label"
   },
-    "graph-line-weight-default": {
+  "graph-line-weight-default": {
     "defaultMessage": "Standard",
     "description": "Graph line weight option"
   },
@@ -1155,7 +1170,7 @@ ud
     "defaultMessage": "Verwende eine Hex-Datei oder Datenbeispieldatei, die du auf deinem Computer gespeichert hast, um eine Sitzung fortzusetzen.",
     "description": "Continue session subtitle"
   },
-    "newpage-continue-session-title": {
+  "newpage-continue-session-title": {
     "defaultMessage": "Gespeicherte Sitzung fortsetzen",
     "description": "Continue session title"
   },
@@ -1749,10 +1764,10 @@ ud
   },
   "webusb-retry-replug3": {
     "defaultMessage": "überprüfe, dass dieser Calliope mini kein angeschaltetes Betteriefach hat.",
-      "description": "WebUSB error dialog"
-    },
-    "webusb-retry-replug4": {
-      "defaultMessage": "ziehe das Kabel ab und stecke es erneut an den Calliope mini",
-      "description": "WebUSB error dialog"
-    }
+    "description": "WebUSB error dialog"
+  },
+  "webusb-retry-replug4": {
+    "defaultMessage": "ziehe das Kabel ab und stecke es erneut an den Calliope mini",
+    "description": "WebUSB error dialog"
+  }
 }
