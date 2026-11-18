@@ -301,7 +301,7 @@ const RecordingDialog = ({
                   }
                   textAlign="center"
                   fontWeight="bold"
-                  color="brand.500"
+                  color="gray.900"
                   role="timer"
                   aria-live="assertive"
                 >

@@ -26,13 +26,14 @@ export const filenames = {
 
 // Exported for testing.
 export const extensionName = "machine-learning";
-const extensionURL = "github:microbit-foundation/pxt-microbit-ml#v1.0.14";
+const extensionURL = "github:calliope-edu/pxt-ml#v1.0.14";
 
 export const pxt = {
   name: untitledProjectName,
   description: "",
   dependencies: {
     core: "*",
+    v3: "*",
     microphone: "*",
     radio: "*", // Needed to compile.
     [extensionName]: extensionURL,

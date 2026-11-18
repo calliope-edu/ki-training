@@ -1359,6 +1359,12 @@
       "value": "crwdns363040:0crwdne363040:0"
     }
   ],
+  "homepage-title": [
+    {
+      "type": 0,
+      "value": "Calliope-ML"
+    }
+  ],
   "homepage-video-alt": [
     {
       "type": 0,
@@ -2034,7 +2040,7 @@
   "open-shared-project-description": [
     {
       "type": 0,
-      "value": "This is a Microsoft MakeCode shared project compatible with CreateAI."
+      "value": "This is a Microsoft MakeCode shared project compatible with ML-Machine."
     }
   ],
   "open-shared-project-error-description": [
@@ -2046,7 +2052,7 @@
   "open-shared-project-title": [
     {
       "type": 0,
-      "value": "Open shared CreateAI project"
+      "value": "Open shared ML-Machine project"
     }
   ],
   "other-tabs-body1": [
@@ -2319,6 +2325,34 @@
       "value": "crwdns363294:0crwdne363294:0"
     }
   ],
+  "recording-duration-helper": [
+    {
+      "type": 0,
+      "value": "Length of each gesture recording. Range: "
+    },
+    {
+      "type": 1,
+      "value": "min"
+    },
+    {
+      "type": 0,
+      "value": " s – "
+    },
+    {
+      "type": 1,
+      "value": "max"
+    },
+    {
+      "type": 0,
+      "value": " s. Changes apply to all subsequent recordings."
+    }
+  ],
+  "recording-duration-label": [
+    {
+      "type": 0,
+      "value": "Recording length"
+    }
+  ],
   "recording-options-aria": [
     {
       "type": 0,
@@ -2576,7 +2610,7 @@
   "third-party-content-description": [
     {
       "type": 0,
-      "value": "The content above is provided by a third party, and is not endorsed by the Micro:bit Educational Foundation."
+      "value": "The content above is provided by a third party, and is not endorsed by Calliope."
     }
   ],
   "tour-action": [

@@ -1,0 +1,1758 @@
+{
+  "aarhus-university-alt": {
+    "defaultMessage": "Aarhus University"
+  },
+   "about": {
+  "defaultMessage": "Über",
+  "description": "Menu item link to view information about app"
+  },
+  "about-dialog-alt": {
+  "defaultMessage": "Calliope mini Platine mit einem Herz auf der LED-Matrix",
+  "description": "Alt text for image in about dialog"
+  },
+  "about-dialog-title": {
+  "defaultMessage": "Entwickelt in Partnerschaft mit <link>Center for Computational Thinking and Design, Aarhus University</link>",
+  "description": "Title of about dialog"
+  },
+  "accelerometer-image-alt": {
+  "defaultMessage": "Calliope mini mit X-Achse quer über die Vorderseite, Y-Achse nach unten und oben, Z-Achse von hinten nach vorne",
+  "description": "Alt text for image showing the board-relative directions of the X/Y/Z dimensions of the Calliope mini accelerometer"
+  },
+  "accessibility": {
+  "defaultMessage": "Barrierefreiheit",
+  "description": "Menu item for link to accessibility site"
+  },
+  "action-label": {
+  "defaultMessage": "Aktion",
+  "description": "Label for a movement-related action, e.g. clapping"
+  },
+  "action-label-tooltip-aria": {
+  "defaultMessage": "Aktions-Tooltip",
+  "description": "Aria label for action tooltip icon"
+  },
+  "action-length-error": {
+  "defaultMessage": "Aktionsnamen dürfen nicht länger als {maxLen} Zeichen sein.",
+  "description": "Error message shown when an action name is too long"
+  },
+  "action-name-placeholder": {
+  "defaultMessage": "Name der Aktion",
+  "description": "Placeholder text for user supplied name of a movement-related action, e.g. clapping"
+  },
+  "action-region": {
+  "defaultMessage": "Aktion \"{action}\"",
+  "description": "Region label for action row"
+  },
+  "action-tooltip": {
+  "defaultMessage": "Die Art der Bewegung, die {appNameFull} erkennen soll, z.B. 'Winken' oder 'Klatschen'.",
+  "description": "Tooltip explaining action"
+  },
+  "actions-label": {
+  "defaultMessage": "Aktionen",
+  "description": "Label for Actions"
+  },
+  "add-action-action": {
+  "defaultMessage": "Aktion hinzufügen",
+  "description": "Button to add an action (movement related, e.g. clapping)"
+  },
+  "ai-activity-timer-resource-title": {
+  "defaultMessage": "KI-Aktivitäts-Timer",
+  "description": "Home page resource card title"
+  },
+  "ai-storytelling-friend-resource-title": {
+  "defaultMessage": "KI-Geschichten-Freund",
+  "description": "Home page resource card title"
+  },
+  "back-action": {
+  "defaultMessage": "Zurück",
+  "description": "Back button text"
+  },
+  "back-to-data-samples-action": {
+  "defaultMessage": "Datenbeispiele bearbeiten",
+  "description": "Back button text"
+  },
+  "blocks-preview-title": {
+  "defaultMessage": "Blockvorschau",
+  "description": "Blocks preview heading text"
+  },
+  "bluetooth-unsupported-advice": {
+  "defaultMessage": "Wir empfehlen Google Chrome oder  Edge, damit du dich direkt mit deinem Calliope mini verbinden kannst.",
+  "description": "Note on supported browsers"
+  },
+  "bluetooth-unsupported-explain": {
+  "defaultMessage": "Leider werden WebUSB und Web Bluetooth von diesem Browser nicht unterstützt. Das bedeutet, dass du dich nicht mit einem Calliope mini verbinden kannst, um die Datenbeispiele aufzuzeichnen, die zum Trainieren des maschinellen Lernmodells benötigt werden.",
+  "description": "Note on supported browsers"
+  },
+  "bluetooth-unsupported-header": {
+  "defaultMessage": "Dieser Browser wird nicht unterstützt",
+  "description": "Heading for browser support dialog"
+  },
+  "cancel-action": {
+  "defaultMessage": "Abbrechen",
+  "description": "Cancel button text"
+  },
+  "cancel-recording-action": {
+  "defaultMessage": "Aufnahme abbrechen",
+  "description": "Button label to cancel a movement data recording"
+  },
+  "certainty-label": {
+  "defaultMessage": "Sicherheit",
+  "description": "Heading for certainty column"
+  },
+  "certainty-label-tooltip-aria": {
+    "defaultMessage": "Sicherheits-Tooltip",
+    "description": "Aria label for code certainty icon"
+  },
+  "certainty-percentage-label": {
+    "defaultMessage": "Sicherheit für {action}: {currentConfidence} Prozent",
+    "description": "Label for certainty of an action"
+  },
+  "certainty-tooltip": {
+    "defaultMessage": "Wie sicher sich das Modell ist, dass du gerade diese Aktion ausführst.",
+    "description": "Tooltip for certainty column"
+  },
+  "click-to-reload-page-action": {
+    "defaultMessage": "Klicken, um die Seite neu zu laden",
+    "description": "Reload page button text"
+  },
+  "close-action": {
+    "defaultMessage": "Schließen",
+    "description": "Close button text or label"
+  },
+  "code-download-error": {
+    "defaultMessage": "Fehler beim Herunterladen des Projektcodes",
+    "description": "Title for error message relating to project loading"
+  },
+  "code-label": {
+    "defaultMessage": "Code",
+    "description": "Code column heading"
+  },
+  "code-label-tooltip-aria": {
+    "defaultMessage": "Code-Tooltip",
+    "description": "Aria label for code tooltip icon"
+  },
+  "code-tooltip": {
+    "defaultMessage": "Dies sind die MakeCode-Blöcke für jede erkannte Aktion, wenn du dein Modell und den Code auf einen Calliope mini überträgst",
+    "description": "Code column heading tooltip"
+  },
+  "confirm-action": {
+    "defaultMessage": "Bestätigen",
+    "description": "Confirm button text"
+  },
+  "confirm-save-action": {
+    "defaultMessage": "Bestätigen und speichern",
+    "description": "Confirm and save action label"
+  },
+  "connect-action": {
+    "defaultMessage": "Verbinden",
+    "description": "Connect action to connect to data collection Calliope mini via Bluetooth or Calliope mini radio"
+  },
+  "connect-action-aria": {
+    "defaultMessage": "Mit Calliope mini verbinden",
+    "description": "Connect action to connect to data collection Calliope mini via Bluetooth or Calliope mini radio"
+  },
+  "connect-battery-heading": {
+    "defaultMessage": "USB trennen und Batteriepack anschließen",
+    "description": "Battery connection dialog "
+  },
+  "connect-battery-holder": {
+    "defaultMessage": "Batteriehalter",
+    "description": "Label for battery holder icon"
+  },
+  "connect-battery-link": {
+    "defaultMessage": " Du kannst den Calliope mini an deinem Handgelenk oder an einem Objekt befestigen",
+    "description": "Battery connection dialog"
+  },
+  "connect-battery-subtitle": {
+    "defaultMessage": "Trenne den Calliope mini vom Computer und schließe das Batteriepack an.",
+    "description": "Battery connection dialog"
+  },
+ud
+  "connect-bluetooth-cancelled-connection": {
+    "defaultMessage": "Du hast keinen Calliope mini ausgewählt. Möchtest du es erneut versuchen?",
+    "description": "Error when the user cancelled the Web Bluetooth permission/device selection dialog"
+  },
+  "connect-bluetooth-heading": {
+    "defaultMessage": "Verbindung über Web Bluetooth herstellen",
+    "description": "Connection dialogs"
+  },
+  "connect-bluetooth-invalid-pattern": {
+    "defaultMessage": "Das gezeichnete Muster ist ungültig.",
+    "description": "Error when the bluetooth pattern is incomplete "
+  },
+  "connect-bluetooth-start-heading": {
+    "defaultMessage": "Was du benötigst, um dich über Web Bluetooth zu verbinden",
+    "description": "Connection dialog heading"
+  },
+  "connect-bluetooth-start-requirements1": {
+    "defaultMessage": "1 Calliope mini",
+    "description": "Label for icon of single Calliope mini"
+  },
+  "connect-bluetooth-start-requirements2-subtitle": {
+    "defaultMessage": "mit Internet, einem USB-Anschluss und Web Bluetooth",
+    "description": "Under heading 'Computer' this lists the features the computer needs"
+  },
+  "connect-bluetooth-start-switch-radio": {
+    "defaultMessage": "Stattdessen über Calliope mini Funk verbinden",
+    "description": "Link to alternative connection method"
+  },
+  "connect-cable-alt": {
+    "defaultMessage": "Animation zeigt ein USB-Kabel, das oben an einen Calliope mini angeschlossen wird",
+    "description": "Alt text"
+  },
+  "connect-cable-download-project-subtitle": {
+    "defaultMessage": "Verbinde einen Calliope mini mit diesem Computer über ein USB-Kabel, um ein maschinelles Lern-MakeCode-Programm darauf herunterzuladen.",
+    "description": "Download project dialog"
+  },
+  "connect-cable-heading": {
+    "defaultMessage": "USB-Kabel mit Calliope mini verbinden",
+    "description": "Connect cable dialog heading"
+  },
+  "connect-cable-skip": {
+    "defaultMessage": "Überspringen: Programm schon runtergeladen?",
+    "description": "Link to skip"
+  },
+  "connect-cable-subtitle": {
+    "defaultMessage": "Verbinde den Calliope mini mit diesem Computer über ein USB-Kabel, damit das Datenerfassungsprogramm darauf heruntergeladen werden kann.",
+    "description": "Project download instructions"
+  },
+  "connect-computer": {
+    "defaultMessage": "Computer",
+    "description": "Label for computer icon in connection dialog"
+  },
+  "connect-data-collection-heading": {
+    "defaultMessage": "USB-Kabel mit Calliope mini A verbinden",
+    "description": "Connection dialog heading"
+  },
+  "connect-data-collection-subtitle": {
+    "defaultMessage": "Verbinde den ersten Calliope mini mit diesem Computer über ein USB-Kabel, damit das Datenerfassungsprogramm darauf heruntergeladen werden kann. Dies ist der Calliope mini, den du zum Sammeln von Datenbeispielen verwenden wirst.",
+    "description": "Connection dialog subtitle"
+  },
+  "connect-failed-bluetooth-heading": {
+    "defaultMessage": "Verbindung zu Calliope mini fehlgeschlagen",
+    "description": "Bluetooth connection error message"
+  },
+  "connect-failed-bluetooth1": {
+    "defaultMessage": "Die Verbindung zum Datenerfassungs-Calliope mini konnte nicht hergestellt werden.",
+    "description": "Bluetooth connection error message"
+  },
+  "connect-failed-bridge-heading": {
+    "defaultMessage": "Verbindung zu Funkverbindungs-Calliope mini fehlgeschlagen",
+    "description": "Calliope mini radio connection error message"
+  },
+  "connect-failed-bridge1": {
+    "defaultMessage": "Die Verbindung zu dem mit deinem Computer verbundenen Calliope mini konnte nicht hergestellt werden.",
+    "description": "Calliope mini radio connection error message"
+  },
+  "connect-failed-remote-heading": {
+    "defaultMessage": "Verbindung zu Datenerfassungs-Calliope mini fehlgeschlagen",
+    "description": "Calliope mini radio connection error message"
+  },
+  "connect-failed-remote1": {
+    "defaultMessage": "Die Verbindung zum Datenerfassungs-Calliope mini konnte nicht hergestellt werden.",
+    "description": "Calliope mini radio connection error message"
+  },
+  "connect-help-alt": {
+    "defaultMessage": "WebUSB-Verbindungsdialog mit Calliope mini-Eintrag mit Beschriftung 1 und Verbinden-Schaltfläche mit Beschriftung 2",
+    "description": "Alt text for image in connect help dialog"
+  },
+  "connect-micro-usb-cable": {
+    "defaultMessage": "USB-C-Kabel",
+    "description": "Label for cable icon in list of requirements"
+  },
+  "connect-or-import": {
+    "defaultMessage": "<link1>Einen Datenerfassungs-Calliope mini verbinden</link1> oder <link2>Datenbeispiele importieren</link2>",
+    "description": "Empty data samples page text"
+  },
+  "connect-pattern-heading": {
+    "defaultMessage": "Muster kopieren",
+    "description": "Heading for Bluetooth pattern connection dialog"
+  },
+  "connect-pattern-input-label": {
+    "defaultMessage": "Spalte {colNum} - Anzahl der leuchtenden LEDs auf dem Calliope mini Display",
+    "description": "Screen reader text for numeric pattern input"
+  },
+  "connect-pattern-subtitle": {
+    "defaultMessage": "Kopiere das auf dem Calliope mini angezeigte Muster.",
+    "description": "Instruction for bluetooth pattern dialog"
+  },
+  "connect-popup": {
+    "defaultMessage": "Calliope mini auswählen",
+    "description": "Instruction for dialog that previews the Bluetooth/WebUSB permission dialog"
+  },
+  "connect-popup-bluetooth-alt": {
+    "defaultMessage": "Web Bluetooth-Verbindungsdialog mit Calliope mini-Eintrag mit Beschriftung 1 und Koppeln-Schaltfläche mit Beschriftung 2",
+    "description": "Alt text"
+  },
+  "connect-popup-bluetooth-instruction2": {
+    "defaultMessage": "Wähle 'Koppeln'",
+    "description": "Instruction for dialog that previews the Bluetooth/WebUSB permission dialog"
+  },
+  "connect-popup-bluetooth-title": {
+    "defaultMessage": "Mit Calliope mini über Web Bluetooth verbinden",
+    "description": "Instruction for dialog that previews the Bluetooth permission dialog"
+  },
+  "connect-popup-instruction-heading": {
+    "defaultMessage": "Im nächsten Popup",
+    "description": "Instruction for dialog that previews the Bluetooth/WebUSB permission dialog"
+  },
+  "connect-popup-instruction1": {
+    "defaultMessage": "Wähle deinen Calliope mini",
+    "description": "Instruction for dialog that previews the Bluetooth/WebUSB permission dialog"
+  },
+  "connect-popup-usb-bluetooth-data-collection-title": {
+    "defaultMessage": "Datenerfassungsprogramm auf Calliope mini herunterladen",
+    "description": "Instruction for dialog that previews the WebUSB permission dialog"
+  },
+  "connect-popup-usb-radio-data-collection-title": {
+    "defaultMessage": "Datenerfassungsprogramm auf Calliope mini herunterladen",
+    "description": "Instruction for dialog that previews the WebUSB permission dialog"
+  },
+  "connect-popup-usb-radio-link-title": {
+    "defaultMessage": "Funkverbindungsprogramm auf Calliope mini herunterladen",
+    "description": "Instruction for dialog that previews the WebUSB permission dialog"
+  },
+  "connect-popup-webusb-instruction2": {
+    "defaultMessage": "Wähle 'Verbinden'",
+    "description": "Instruction for dialog that previews the Bluetooth/WebUSB permission dialog"
+  },
+  "connect-radio-data-collection-microbit-description": {
+    "defaultMessage": "Verbinde den Datenerfassungs-Calliope mini mit diesem Computer, um dein maschinelles Lern-MakeCode-Programm darauf herunterzuladen. Wenn du den Datenerfassungs-Calliope mini trägst, musst du ihn möglicherweise abnehmen.",
+    "description": "Connect radio data collection Calliope mini dialog description"
+  },
+  "connect-radio-data-collection-microbit-title": {
+    "defaultMessage": "Verbinde das USB-Kabel mit dem Datenerfassungs-Calliope mini",
+    "description": "Connect radio data collection Calliope mini dialog title"
+  },
+  "connect-radio-heading": {
+    "defaultMessage": "Calliope minis werden verbunden",
+    "description": "Text shown while radio link and data connection Calliope mini are being connected"
+  },
+  "connect-radio-link-heading": {
+    "defaultMessage": "Verbinde das USB-Kabel mit Calliope mini B",
+    "description": "Heading for connecting radio link Calliope mini cable"
+  },
+  "connect-radio-link-subtitle": {
+    "defaultMessage": "Verbinde einen zweiten Calliope mini mit diesem Computer über ein USB-Kabel, damit das Funkverbindungsprogramm darauf heruntergeladen werden kann. Dieser Funkverbindungs-Calliope mini wird mit dem Datenerfassungs-Calliope mini kommunizieren.",
+    "description": "Instruction for connecting radio link Calliope mini cable"
+  },
+  "connect-radio-start-heading": {
+    "defaultMessage": "Was du benötigst, um über Calliope mini Funk zu verbinden",
+    "description": "Connection dialog heading"
+  },
+  "connect-radio-start-requirements1": {
+    "defaultMessage": "2 Calliope minis",
+    "description": "Label for icon of two Calliope minis"
+  },
+  "connect-radio-start-requirements1-subtitle": {
+    "defaultMessage": "Nur V3",
+    "description": "Shown below 2 Calliope mini label for Calliope mini radio approach"
+  },
+  "connect-radio-start-requirements2-subtitle": {
+    "defaultMessage": "mit Internet und einem USB-Anschluss",
+    "description": "Shown below 'Computer' heading listing additional requirements"
+  },
+  "connect-radio-start-switch-bluetooth": {
+    "defaultMessage": "Stattdessen über Web Bluetooth verbinden",
+    "description": "Link to alternative connection method"
+  },
+  "connect-to-record": {
+    "defaultMessage": "Verbinde, um Datenbeispiele aufzuzeichnen",
+    "description": "Live graph disconnected Calliope mini status message for data samples page"
+  },
+  "connect-to-record-body": {
+    "defaultMessage": "Verbinde einen Calliope mini, um ein Datenbeispiel aufzuzeichnen.",
+    "description": "Insufficient data modal content"
+  },
+  "connect-to-test-model": {
+    "defaultMessage": "Verbinden, um dein Modell zu testen",
+    "description": "Live graph disconnected Calliope mini status message for test model page"
+  },
+  "connect-to-tour-body": {
+    "defaultMessage": "Du musst einen Datenerfassungs-Calliope mini verbinden, um die Tour anzusehen.",
+    "description": "Prompt to connect the app to a Calliope mini"
+  },
+  "connect-troubleshoot": {
+    "defaultMessage": "Probleme beim Verbinden des Calliope mini beheben",
+    "description": "Link to support article for troubleshooting"
+  },
+  "connect-troubleshooting": {
+    "defaultMessage": "Fehlerbehebung",
+    "description": "Troubleshooting heading"
+  },
+  "connect-with-batteries": {
+    "defaultMessage": "mit Batterien",
+    "description": "Under header 'Battery holder' this notes that batteries are required"
+  },
+  "connect-with-web-bluetooth": {
+    "defaultMessage": "Mit Web Bluetooth verbinden",
+    "description": "Connection dialog title"
+  },
+  "connecting": {
+    "defaultMessage": "Verbinde…",
+    "description": "Text shown while waiting for bluetooth/radio connection"
+  },
+  "continue-makecode-action": {
+    "defaultMessage": "Weiter zu MakeCode",
+    "description": "Continue to MakeCode editor button text"
+  },
+  "cookies-action": {
+    "defaultMessage": "Cookies",
+    "description": "Action to show dialog to choose website cookie preferences"
+  },
+  "copied": {
+    "defaultMessage": "Kopiert",
+    "description": "Displayed as copy button text briefly after successful copy action"
+  },
+  "copy-action": {
+    "defaultMessage": "Kopieren",
+    "description": "Copy button text"
+  },
+  "data-actions-menu": {
+    "defaultMessage": "Datenaktionen",
+    "description": "Aria label for menu"
+  },
+  "data-collection-microbit": {
+    "defaultMessage": "Datenerfassungs-Calliope mini",
+    "description": "Data collection Calliope mini image caption"
+  },
+  "data-collection-microbit-label": {
+    "defaultMessage": "Diagramm zeigt Datenerfassungs-Calliope mini am Handgelenk einer Person",
+    "description": "Aria label for data collection image"
+  },
+  "data-connection-region": {
+    "defaultMessage": "Calliope mini Datenverbindung",
+    "description": "Region label for data connection area"
+  },
+  "data-features-hide-action": {
+    "defaultMessage": "Datenmerkmale ausblenden",
+    "description": "Hide data features button text"
+  },
+  "data-features-show-action": {
+    "defaultMessage": "Datenmerkmale anzeigen",
+    "description": "Show data features button text"
+  },
+  "data-preview-title": {
+    "defaultMessage": "Datenvorschau",
+    "description": "Data preview heading text"
+  },
+  "data-samples-actions-region": {
+    "defaultMessage": "Datenbeispiele-Symbolleiste",
+    "description": "Region label for data samples actions"
+  },
+  "data-samples-label": {
+    "defaultMessage": "Datenbeispiele",
+    "description": "Heading for data samples column"
+  },
+  "data-samples-label-tooltip-aria": {
+    "defaultMessage": "Datenbeispiele-Tooltip",
+    "description": "Aria label for data samples tooltip icon"
+  },
+  "data-samples-status-count": {
+    "defaultMessage": "{numSamples} Beispiele aufgezeichnet",
+    "description": "Data samples status text"
+  },
+  "data-samples-status-not-enough": {
+    "defaultMessage": "Mindestens 3 erforderlich",
+    "description": "Data samples status text"
+  },
+  "data-samples-title": {
+    "defaultMessage": "Datenbeispiele",
+    "description": "Data samples page title"
+  },
+  "data-samples-tooltip": {
+    "defaultMessage": "Kurze Sammlungen von Bewegungsdaten mit einer Dauer von 1 Sekunde. Deine Datenbeispiele werden nur auf deinem Computer gespeichert, sie werden nicht an andere gesendet.",
+    "description": "Tooltip for data samples heading"
+  },
+  "default-project-name": {
+    "defaultMessage": "Unbenannt",
+    "description": "Default project name"
+  },
+  "delete-action-aria": {
+    "defaultMessage": "Aktion \"{action}\" löschen",
+    "description": "Aria label for action delete icon"
+  },
+  "delete-action-confirm-heading": {
+    "defaultMessage": "Löschen der Aktion bestätigen",
+    "description": "Confirmation dialog heading"
+  },
+  "delete-action-confirm-text": {
+    "defaultMessage": "Bist du sicher, dass du die Aktion \"{action}\" löschen möchtest?",
+    "description": "Confirmation dialog text"
+  },
+  "delete-data-samples-action": {
+    "defaultMessage": "Alle Datenbeispiele löschen",
+    "description": "Menu item to delete data samples"
+  },
+  "delete-data-samples-confirm-heading": {
+    "defaultMessage": "Löschen aller Datenbeispiele bestätigen",
+    "description": "Confirmation dialog heading"
+  },
+  "delete-data-samples-confirm-text": {
+    "defaultMessage": "Bist du sicher, dass du alle Datenbeispiele löschen möchtest?",
+    "description": "Confirmation dialog text"
+  },
+  "delete-recording-aria": {
+    "defaultMessage": "Aufzeichnung {sample} von {numSamples} für Aktion \"{action}\" löschen",
+    "description": "Aria label for data sample delete action"
+  },
+  "disconnect-action": {
+    "defaultMessage": "Trennen",
+    "description": "Disconnect (from bluetooth/radio) action"
+  },
+  "disconnected-during-recording": {
+    "defaultMessage": "Calliope mini während der Aufzeichnung getrennt",
+    "description": "Error when the Calliope mini is disconnected during recording"
+  },
+  "disconnected-warning-bluetooth-heading": {
+    "defaultMessage": "Verbindung zum Datenerfassungs-Calliope mini verloren",
+    "description": "Dialog heading"
+  },
+  "disconnected-warning-bluetooth1": {
+    "defaultMessage": "Die Verbindung zum Datenerfassungs-Calliope mini wurde unterbrochen.",
+    "description": "Dialog text"
+  },
+  "disconnected-warning-bluetooth2": {
+    "defaultMessage": "Bitte überprüfe, ob der Calliope mini:",
+    "description": "Heading for list of things to check"
+  },
+  "disconnected-warning-bluetooth3": {
+    "defaultMessage": "eingeschaltet ist (das rote Licht auf der Rückseite des Calliope mini sollte leuchten)",
+    "description": "List item, one of several things to check about the Calliope mini"
+  },
+  "disconnected-warning-bluetooth4": {
+    "defaultMessage": "sich in der Nähe des Computers befindet",
+    "description": "List item, one of several things to check about the Calliope mini"
+  },
+  "disconnected-warning-bridge-heading": {
+    "defaultMessage": "Verbindung zum Funkverbindungs-Calliope mini verloren",
+    "description": "Connection error dialog"
+  },
+  "disconnected-warning-bridge1": {
+    "defaultMessage": "Die Verbindung zum mit deinem Computer verbundenen Calliope mini wurde unterbrochen.",
+    "description": "Connection error dialog"
+  },
+  "disconnected-warning-remote-heading": {
+    "defaultMessage": "Verbindung zum Datenerfassungs-Calliope mini verloren",
+    "description": "Connection error dialog"
+  },
+  "disconnected-warning-remote1": {
+    "defaultMessage": "Die Verbindung zum Datenerfassungs-Calliope mini wurde unterbrochen.",
+    "description": "Connection error dialog"
+  },
+  "dont-show-again": {
+    "defaultMessage": "Nicht mehr anzeigen",
+    "description": "Text to never show a dialog again"
+  },
+  "download-data-samples-action": {
+    "defaultMessage": "Alle Datenbeispiele herunterladen",
+    "description": "Download action"
+  },
+  "download-project-choose-microbit-subtitle": {
+    "defaultMessage": "Wenn du dein Projekt auf denselben Calliope mini herunterlädst, wird der Calliope mini vom Tool getrennt. Du musst den Calliope mini erneut verbinden, wenn du weitere Datenbeispiele aufzeichnen möchtest.",
+    "description": "Download project choose Calliope mini dialog subtitle"
+  },
+  "download-project-choose-microbit-title": {
+    "defaultMessage": "Welchen Calliope mini möchtest du verwenden?",
+    "description": "Download project choose Calliope mini dialog title"
+  },
+  "download-project-different-microbit-option": {
+    "defaultMessage": "Anderer Calliope mini",
+    "description": "Download project different Calliope mini option"
+  },
+  "download-project-intro-description": {
+    "defaultMessage": "Dein Programm enthält das maschinelle Lernmodell, das du erstellt hast. Das Modell läuft auf dem Calliope mini, sodass du es ohne Verbindung zu {appNameFull} verwenden kannst.",
+    "description": "Download project intro dialog description"
+  },
+  "download-project-intro-title": {
+    "defaultMessage": "Lade dein maschinelles Lern-MakeCode-Projekt herunter",
+    "description": "Download project intro dialog title"
+  },
+  "download-project-same-microbit-option": {
+    "defaultMessage": "Derselbe Calliope mini",
+    "description": "Download project same Calliope mini option"
+  },
+  "downloading-data-collection-header": {
+    "defaultMessage": "Datenerfassungsprogramm wird heruntergeladen",
+    "description": "Progress text"
+  },
+  "downloading-header": {
+    "defaultMessage": "Programm wird auf Calliope mini heruntergeladen",
+    "description": "Progress text"
+  },
+  "downloading-radio-link-header": {
+    "defaultMessage": "Funkverbindungsprogramm wird heruntergeladen",
+    "description": "Progress text"
+  },
+  "downloading-subtitle": {
+    "defaultMessage": "Bitte warte. Programm wird auf Calliope mini heruntergeladen.",
+    "description": "Progress text"
+  },
+  "edit-in-makecode-action": {
+    "defaultMessage": "In MakeCode bearbeiten",
+    "description": "Edit in MakeCode button text"
+  },
+  "estimated-action-aria": {
+    "defaultMessage": "Geschätzte Aktion: \"{action}\"",
+    "description": "Aria live text for the current estimated action"
+  },
+  "estimated-action-label": {
+    "defaultMessage": "Geschätzte Aktion",
+    "description": "Heading for estimated action area next to the live graph"
+  },
+  "estimated-action-label-tooltip-aria": {
+    "defaultMessage": "Geschätzte Aktion-Tooltip",
+    "description": "Aria label for estimated action tooltip icon"
+  },
+  "estimated-action-tooltip": {
+    "defaultMessage": "Dies ist die Aktion, von der das Modell denkt, dass du sie gerade ausführst.",
+    "description": "Tooltip for the estimated action heading"
+  },
+  "feedback": {
+    "defaultMessage": "Feedback",
+    "description": "Action to open a feedback dialog"
+  },
+  "fingerprint-acc-x-tooltip": {
+    "defaultMessage": "Summe der x-Richtungsdaten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-acc-y-tooltip": {
+    "defaultMessage": "Summe der y-Richtungsdaten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-acc-z-tooltip": {
+    "defaultMessage": "Summe der z-Richtungsdaten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-max-x-tooltip": {
+    "defaultMessage": "Maximaler Punkt unter allen x-Richtungsdatenpunkten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-max-y-tooltip": {
+    "defaultMessage": "Maximaler Punkt unter allen y-Richtungsdatenpunkten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-max-z-tooltip": {
+    "defaultMessage": "Maximaler Punkt unter allen z-Richtungsdatenpunkten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-mean-x-tooltip": {
+    "defaultMessage": "Durchschnittswert für x-Richtungsdaten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-mean-y-tooltip": {
+    "defaultMessage": "Durchschnittswert für y-Richtungsdaten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-mean-z-tooltip": {
+    "defaultMessage": "Durchschnittswert für z-Richtungsdaten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-min-x-tooltip": {
+    "defaultMessage": "Minimaler Punkt unter allen x-Richtungsdatenpunkten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-min-y-tooltip": {
+    "defaultMessage": "Minimaler Punkt unter allen y-Richtungsdatenpunkten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-min-z-tooltip": {
+    "defaultMessage": "Minimaler Punkt unter allen z-Richtungsdatenpunkten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-peaks-x-tooltip": {
+    "defaultMessage": "Anzahl der Extremwerte unter allen x-Richtungsdatenpunkten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-peaks-y-tooltip": {
+    "defaultMessage": "Anzahl der Extremwerte unter allen y-Richtungsdatenpunkten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-peaks-z-tooltip": {
+    "defaultMessage": "Anzahl der Extremwerte unter allen z-Richtungsdatenpunkten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-rms-x-tooltip": {
+    "defaultMessage": "Effektivwert für alle x-Richtungsdatenpunkte",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-rms-y-tooltip": {
+    "defaultMessage": "Effektivwert für alle y-Richtungsdatenpunkte",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-rms-z-tooltip": {
+    "defaultMessage": "Effektivwert für alle z-Richtungsdatenpunkte",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-std-x-tooltip": {
+    "defaultMessage": "Durchschnittliche Abweichung von 0 unter allen x-Richtungsdatenpunkten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-std-y-tooltip": {
+    "defaultMessage": "Durchschnittliche Abweichung von 0 unter allen y-Richtungsdatenpunkten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-std-z-tooltip": {
+    "defaultMessage": "Durchschnittliche Abweichung von 0 unter allen z-Richtungsdatenpunkten",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-zcr-x-tooltip": {
+    "defaultMessage": "Rate, mit der die Beschleunigung zwischen positiv und negativ für x-Richtungsdatenpunkte wechselt",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-zcr-y-tooltip": {
+    "defaultMessage": "Rate, mit der die Beschleunigung zwischen positiv und negativ für y-Richtungsdatenpunkte wechselt",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "fingerprint-zcr-z-tooltip": {
+    "defaultMessage": "Rate, mit der die Beschleunigung zwischen positiv und negativ für z-Richtungsdatenpunkte wechselt",
+    "description": "Tooltip for data feature of a recording"
+  },
+  "firmware-outdated-content1": {
+    "defaultMessage": "Die Verbindung zum Calliope mini ist fehlgeschlagen, da die Firmware auf deinem Calliope mini zu alt ist.",
+    "description": "Connection error dialog"
+  },
+  "firmware-outdated-content2": {
+    "defaultMessage": "Du musst <link>deine Firmware aktualisieren</link>, bevor du dich mit diesem Calliope mini verbinden kannst.",
+    "description": "Connection error dialog"
+  },
+  "firmware-outdated-heading": {
+    "defaultMessage": "Firmware-Update erforderlich",
+    "description": "Connection error dialog"
+  },
+  "get-started-action": {
+    "defaultMessage": "Erste Schritte",
+    "description": "Get started action"
+  },
+  "go-action": { 
+    "defaultMessage": "Los", 
+    "description": "Go action" 
+  },
+  "graph-color-scheme": {
+    "defaultMessage": "Grafik-Farbschema",
+    "description": "Graph colour scheme setting label"
+  },
+  "graph-color-scheme-color-blind-1": {
+    "defaultMessage": "Farbenblind-Alternative 1",
+    "description": "Graph colour scheme option"
+  },
+  "graph-color-scheme-color-blind-2": {
+    "defaultMessage": "Farbenblind-Alternative 2",
+    "description": "Graph colour scheme option"
+  },
+  "graph-color-scheme-default": {
+    "defaultMessage": "Standard (rot, blau, grün)",
+    "description": "Graph colour scheme option"
+  },
+  "graph-line-scheme": {
+    "defaultMessage": "Grafik-Linienstil",
+    "description": "Graph line scheme setting label"
+  },
+  "graph-line-scheme-accessible": {
+    "defaultMessage": "Barrierefreie Linien (durchgezogen, gestrichelt, gepunktet)",
+    "description": "Graph line scheme option"
+  },
+  "graph-line-scheme-solid": {
+    "defaultMessage": "Durchgezogene Linien",
+    "description": "Graph line scheme option"
+  },
+  "graph-line-weight": {
+    "defaultMessage": "Grafik-Liniendicke",
+    "description": "Graph line weight setting label"
+  },
+    "graph-line-weight-default": {
+    "defaultMessage": "Standard",
+    "description": "Graph line weight option"
+  },
+  "graph-line-weight-thick": {
+    "defaultMessage": "Dick",
+    "description": "Graph line weight option"
+  },
+  "graph-preview": {
+    "defaultMessage": "Grafikvorschau",
+    "description": "Label for preview of the graph shown in the settings dialog"
+  },
+  "help-label": {
+    "defaultMessage": "Hilfe",
+    "description": "Help icon aria label"
+  },
+  "help-support": {
+    "defaultMessage": "Hilfe & Support",
+    "description": "Link or menu item link to support site"
+  },
+  "help-translate": {
+    "defaultMessage": "Beim Übersetzen helfen",
+    "description": "Help translate  menu option text"
+  },
+  "home-action": {
+    "defaultMessage": "Start",
+    "description": "Home button text"
+  },
+  "homepage": {
+    "defaultMessage": "Startseite",
+    "description": "Link to home page"
+  },
+  "homepage-alt": {
+    "defaultMessage": "Grafik mit x-, y-, z-Grafiklinien, die Calliope mini Beschleunigungssensordaten darstellen, mit darüber liegenden klatschenden Händen",
+    "description": "Alt text for image in homepage"
+  },
+  "homepage-alt-graph": {
+    "defaultMessage": "Grafik mit x-, y-, z-Grafiklinien, die Calliope mini Beschleunigungssensordaten darstellen",
+    "description": "Alt text for image in homepage"
+  },
+  "homepage-alt-hands": {
+    "defaultMessage": "klatschende Hände",
+    "description": "Alt text for image in homepage"
+  },
+  "homepage-description": {
+    "defaultMessage": "Trainiere ein maschinelles Lernmodell mit deinen eigenen Bewegungsdaten und führe es auf deinem Calliope mini aus.",
+    "description": "Home page description"
+  },
+  "homepage-how-it-works": {
+    "defaultMessage": "So funktioniert's",
+    "description": "Home page section heading"
+  },
+  "homepage-how-it-works-paragraph": {
+    "defaultMessage": "Schaue dir das Video an, um loszulegen. Erfahre mehr im <link>Benutzerhandbuch</link>.",
+    "description": "Home page content under the video"
+  },
+  "homepage-projects": {
+    "defaultMessage": "Projekte",
+    "description": "Home page section heading"
+  },
+  "homepage-projects-more": {
+    "defaultMessage": "Entdecke weitere <link>Inhalte und Ressourcen über Calliope mini und KI</link>.",
+    "description": "Link back to AI landing page"
+  },
+  "homepage-step-by-step": {
+    "defaultMessage": "Schritt für Schritt",
+    "description": "Home page section heading"
+  },
+  "homepage-subtitle": {
+    "defaultMessage": "Erstelle KI auf deinem Calliope mini mit Bewegung und maschinellem Lernen.",
+    "description": "Home page subtitle"
+  },
+  "homepage-video-alt": {
+    "defaultMessage": "Einführungsvideo",
+    "description": "Home page video alt text"
+  },
+  "import-data-samples-action": {
+    "defaultMessage": "Datenbeispiele importieren",
+    "description": "Data samples action"
+  },
+  "import-error-dialog-content": {
+    "defaultMessage": "Nur MakeCode-Hex-Dateien oder Datenbeispieldateien (.json) können von {appNameFull} geöffnet werden.",
+    "description": "Content of import error dialog"
+  },
+  "import-error-dialog-title": {
+    "defaultMessage": "Nicht unterstützter Dateityp",
+    "description": "Title of import error dialog"
+  },
+  "incompatible-device-body-alt": {
+    "defaultMessage": "Gehe zurück, um einen anderen Calliope mini auszuwählen, oder <link>speichere die Projekt-Hex-Datei</link>, die später auf einen Calliope mini V3 heruntergeladen werden kann.",
+    "description": "Incompatible device dialog body text"
+  },
+  "incompatible-device-body1": {
+    "defaultMessage": "Fahre mit MakeCode fort, um das Programm zu bearbeiten. Du kannst dann die Projekt-Hex-Datei speichern, die auf einen Calliope mini V3 heruntergeladen werden kann.",
+    "description": "Incompatible device dialog body text"
+  },
+  "incompatible-device-body2": {
+    "defaultMessage": "Alternativ kannst du <link>die Projekt-Hex-Datei speichern</link>, ohne MakeCode zu verwenden.",
+    "description": "Incompatible device dialog body text"
+  },
+  "incompatible-device-heading": {
+    "defaultMessage": "Inkompatibles Gerät",
+    "description": "Incompatible device dialog heading"
+  },
+  "incompatible-device-subtitle": {
+    "defaultMessage": "Du verwendest einen Calliope mini V1/V2/V3, aber maschinelle Lernprojekte benötigen den schnelleren Prozessor eines Calliope mini V3. <link>Erfahre mehr über Calliope mini Versionen.</link>",
+    "description": "Incompatible device dialog subtitle"
+  },
+  "insufficient-data-body": {
+    "defaultMessage": "Du benötigst mindestens 3 Datenbeispiele für 2 Aktionen, um das Modell zu trainieren.",
+    "description": "Insufficient data modal content"
+  },
+  "insufficient-data-title": {
+    "defaultMessage": "Du hast nicht genug Daten",
+    "description": "Insufficient data modal title"
+  },
+  "language": {
+    "defaultMessage": "Sprache",
+    "description": "Language option text"
+  },
+  "language-fully-supported-heading": {
+    "defaultMessage": "Vollständig unterstützt",
+    "description": "Fully supported languages heading text"
+  },
+  "language-partially-supported-heading": {
+    "defaultMessage": "Teilweise unterstützt",
+    "description": "Partially supported languages heading text"
+  },
+  "language-support-checked": {
+    "defaultMessage": "Unterstützt",
+    "description": "Aria label for ticked checkbox for language support"
+  },
+  "language-support-unchecked": {
+    "defaultMessage": "Nicht unterstützt",
+    "description": "Aria label for unticked checkbox for language support"
+  },
+  "language-supported-for": {
+    "defaultMessage": "Übersetzungen unterstützt für:",
+    "description": "Text introducing list of translated areas for a given language (areas:  MakeCode, Calliope mini ML-Machine UI itself)"
+  },
+  "language-toast-title": {
+    "defaultMessage": "Sprache nicht vollständig unterstützt",
+    "description": "Language support toast notification title"
+  },
+  "learn-about-firewall-requirements-action": {
+    "defaultMessage": "Über die Firewall-Anforderungen",
+    "description": "Link to support article for firewall requirements"
+  },
+  "led-icon-option-angry": {
+    "defaultMessage": "Wütend",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-asleep": {
+    "defaultMessage": "Schlafend",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-butterfly": {
+    "defaultMessage": "Schmetterling",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-chessboard": {
+    "defaultMessage": "Schachbrett",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-confused": {
+    "defaultMessage": "Verwirrt",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-cow": {
+    "defaultMessage": "Kuh",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-diamond": {
+    "defaultMessage": "Diamant",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-duck": {
+    "defaultMessage": "Ente",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-eighthnote": {
+    "defaultMessage": "Achtelnote",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-fabulous": {
+    "defaultMessage": "Fabelhaft",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-ghost": {
+    "defaultMessage": "Geist",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-giraffe": {
+    "defaultMessage": "Giraffe",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-happy": {
+    "defaultMessage": "Glücklich",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-heart": {
+    "defaultMessage": "Herz",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-house": {
+    "defaultMessage": "Haus",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-lefttriangle": {
+    "defaultMessage": "Linkes Dreieck",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-meh": {
+    "defaultMessage": "Na ja",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-no": {
+    "defaultMessage": "Nein",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-off": {
+    "defaultMessage": "Aus",
+    "description": "Icon option."
+  },
+  "led-icon-option-pitchfork": {
+    "defaultMessage": "Heugabel",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-quarternote": {
+    "defaultMessage": "Viertelnote",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-rabbit": {
+    "defaultMessage": "Hase",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-rollerskate": {
+    "defaultMessage": "Rollschuh",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-sad": {
+    "defaultMessage": "Traurig",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-scissors": {
+    "defaultMessage": "Schere",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-silly": {
+    "defaultMessage": "Albern",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-skull": {
+    "defaultMessage": "Totenkopf",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-smalldiamond": {
+    "defaultMessage": "Kleiner Diamant",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-smallheart": {
+    "defaultMessage": "Kleines Herz",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-smallsquare": {
+    "defaultMessage": "Kleines Quadrat",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-snake": {
+    "defaultMessage": "Schlange",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-square": {
+    "defaultMessage": "Quadrat",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-stickfigure": {
+    "defaultMessage": "Strichmännchen",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-surprised": {
+    "defaultMessage": "Überrascht",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-sword": {
+    "defaultMessage": "Schwert",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-target": {
+    "defaultMessage": "Zielscheibe",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-tortoise": {
+    "defaultMessage": "Schildkröte",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-triangle": {
+    "defaultMessage": "Dreieck",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-tshirt": {
+    "defaultMessage": "T-Shirt",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-umbrella": {
+    "defaultMessage": "Regenschirm",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "led-icon-option-yes": {
+    "defaultMessage": "Ja",
+    "description": "Makecode icon option. The translation should match MakeCode translations."
+  },
+  "live-data-graph": {
+    "defaultMessage": "Live-Datengrafik",
+    "description": "Title for live data graph"
+  },
+  "live-graph": {
+    "defaultMessage": "Live-Grafik",
+    "description": "Heading for live graph"
+  },
+  "live-graph-tooltip": {
+    "defaultMessage": "Diese Grafik zeigt Bewegungsdaten vom Beschleunigungssensor des Calliope mini in Echtzeit. Versuche, deinen Datenerfassungs-Calliope mini zu bewegen, um zu sehen, wie sich die X-, Y- und Z-Achsen ändern. Jede farbige Linie repräsentiert eine andere Richtung (Dimension), in die du den Calliope mini bewegst.",
+    "description": "Tooltip for live graph heading"
+  },
+  "live-graph-tooltip-aria": {
+    "defaultMessage": "Live-Grafik-Tooltip",
+    "description": "Aria label for live graph tooltip icon"
+  },
+  "loading": {
+    "defaultMessage": "Lädt",
+    "description": "Aria label for loading spinner"
+  },
+  "main-menu": {
+    "defaultMessage": "Hauptmenü",
+    "description": "Main menu label"
+  },
+  "makecode-back-alt": {
+    "defaultMessage": "Linkes Pfeilsymbol für MakeCode Zurück",
+    "description": "Testing model page title"
+  },
+  "makecode-block-alt-prefix": {
+    "defaultMessage": "MakeCode-Block:",
+    "description": "Makecode block alt text prefix"
+  },
+  "makecode-block-show-icon": {
+    "defaultMessage": "zeige Symbol",
+    "description": "Makecode block text. The translation should match MakeCode translations."
+  },
+  "makecode-load-error-dialog-body": {
+    "defaultMessage": "{appNameFull} konnte MakeCode nicht laden. Bitte überprüfe deine Internetverbindung, lade die Seite neu und versuche es erneut.",
+    "description": "Content of MakeCode load error dialog"
+  },
+  "makecode-load-error-dialog-title": {
+    "defaultMessage": " MakeCode konnte nicht geladen werden",
+    "description": "Title of MakeCode load error dialog"
+  },
+  "microbit-not-connected": {
+    "defaultMessage": "Dein Calliope mini ist nicht verbunden",
+    "description": "Live graph disconnected Calliope mini status message"
+  },
+  "ml.onStart|block": {
+    "defaultMessage": "wenn ML $event startet",
+    "description": "This string should be a Crowdin duplicate of the MakeCode extension block with the same text and use the same translation."
+  },
+  "more-edit-in-makecode-options": {
+    "defaultMessage": "Weitere Optionen für In MakeCode bearbeiten",
+    "description": "Aria label for the additional actions menu to the right of the Edit in MakeCode button"
+  },
+  "name-action-hint": {
+    "defaultMessage": "Benenne eine Aktion, die der Calliope mini erkennen soll",
+    "description": "Hint shown when you have an unnamed action"
+  },
+  "name-project": {
+    "defaultMessage": "Benenne dein Projekt",
+    "description": "Name your project header"
+  },
+  "name-text": {
+    "defaultMessage": "Name",
+    "description": "Header for name field"
+  },
+  "name-used-when": {
+    "defaultMessage": "Der Name wird verwendet, wenn du eine Datei speicherst.",
+    "description": "Text under project name field"
+  },
+  "new-session-setup-description": {
+    "defaultMessage": "Das Starten einer neuen Sitzung überschreibt deine bestehende Sitzung. Du möchtest vielleicht zuerst <link>deine bestehende Sitzung speichern</link>.",
+    "description": "New session setup description"
+  },
+  "new-session-setup-title": {
+    "defaultMessage": "Neue Sitzung einrichten",
+    "description": "New session setup title"
+  },
+  "newpage-continue-session-subtitle": {
+    "defaultMessage": "Verwende eine Hex-Datei oder Datenbeispieldatei, die du auf deinem Computer gespeichert hast, um eine Sitzung fortzusetzen.",
+    "description": "Continue session subtitle"
+  },
+    "newpage-continue-session-title": {
+    "defaultMessage": "Gespeicherte Sitzung fortsetzen",
+    "description": "Continue session title"
+  },
+  "newpage-last-session-date": {
+    "defaultMessage": "<strong>Datum:</strong> {date}",
+    "description": "Last session date label"
+  },
+  "newpage-last-session-name": {
+    "defaultMessage": "<strong>Name:</strong> {name}",
+    "description": "Last session name label"
+  },
+  "newpage-last-session-none": {
+    "defaultMessage": "Keine Sitzung gefunden",
+    "description": "Last session not found text"
+  },
+  "newpage-last-session-title": {
+    "defaultMessage": "Letzte Sitzung öffnen",
+    "description": "Open last session title"
+  },
+  "newpage-new-session-subtitle": {
+    "defaultMessage": "Verbinde deinen Calliope mini und sammle Bewegungsdaten, um ein maschinelles Lernmodell zu erstellen.",
+    "description": "Start new session subtitle"
+  },
+  "newpage-new-session-title": {
+    "defaultMessage": "Neue Sitzung",
+    "description": "Start new session title"
+  },
+  "newpage-section-one-title": {
+    "defaultMessage": "Mach da weiter, wo du aufgehört hast",
+    "description": "Homepage section one title"
+  },
+  "newpage-section-two-title": {
+    "defaultMessage": "Starte etwas Neues",
+    "description": "Homepage section two title"
+  },
+  "newpage-title": {
+    "defaultMessage": "Neue Sitzung",
+    "description": "New page title"
+  },
+  "next-action": {
+    "defaultMessage": "Weiter",
+    "description": "Next button text for dialogs and similar"
+  },
+  "no-data-samples": {
+    "defaultMessage": "Keine Datenbeispiele",
+    "description": "Empty data samples page status text"
+  },
+  "not-create-ai-hex-import-dialog-content": {
+    "defaultMessage": "Dieses Projekt enthielt keine Datenbeispiele, daher wurde nur der Code geöffnet. Du musst ein Modell trainieren, bevor du den Code verwenden kannst.",
+    "description": "Content of import non-ML-Machine hex dialog"
+  },
+  "not-create-ai-hex-import-dialog-title": {
+    "defaultMessage": "Dein MakeCode-Projekt wurde importiert",
+    "description": "Title of import non-ML-Machine hex dialog"
+  },
+  "not-found": {
+    "defaultMessage": "{appNameFull} Startseite",
+    "description": "Page not found link text"
+  },
+  "not-found-title": {
+    "defaultMessage": "Seite nicht gefunden",
+    "description": "Page not found page title"
+  },
+  "open-file-action": {
+    "defaultMessage": "Öffnen…",
+    "description": "Open file button text"
+  },
+  "open-file-dropped": {
+    "defaultMessage": "Datei beim Ablegen öffnen",
+    "description": "Aria label for file drop target"
+  },
+  "open-project-action": {
+    "defaultMessage": "Projekt öffnen",
+    "description": "Open project button text"
+  },
+  "open-project-setup-description": {
+    "defaultMessage": "Das Öffnen dieses Projekts überschreibt jede bestehende Sitzung. Du möchtest vielleicht zuerst <link>deine bestehende Sitzung speichern</link>.",
+    "description": "Open project setup description"
+  },
+  "open-shared-project-blocks-preview-description": {
+    "defaultMessage": "Vorschau des MakeCode-Codes, der in diesem Projekt enthalten ist.",
+    "description": "Blocks preview description text"
+  },
+  "open-shared-project-data-preview-description": {
+    "defaultMessage": "Vorschau der Aktionen und Daten, die in diesem Projekt enthalten sind.",
+    "description": "Data preview description text"
+  },
+  "open-shared-project-description": {
+    "defaultMessage": "Dies ist ein mit ML-Machine kompatibles MakeCode-Gemeinschaftsprojekt.",
+    "description": "Import shared ML-Machine project description"
+  },
+  "open-shared-project-error-description": {
+    "defaultMessage": "Überprüfe, ob der Link, dem du gefolgt bist, korrekt ist, und stelle sicher, dass du mit dem Internet verbunden bist, bevor du es erneut versuchst.",
+    "description": "Import shared ML-Machine error description"
+  },
+  "open-shared-project-title": {
+    "defaultMessage": "Geteiltes ML-Machine-Projekt öffnen",
+    "description": "Import shared ML-Machine project title"
+  },
+  "other-tabs-body1": {
+    "defaultMessage": "Ein anderer Prozess ist mit diesem Gerät verbunden.",
+    "description": "Connection error dialog"
+  },
+  "other-tabs-body2": {
+    "defaultMessage": "Schließe alle anderen Tabs, die möglicherweise WebUSB verwenden (z.B. MakeCode, Python Editor, {appNameShort}), oder ziehe den Calliope mini ab und stecke ihn wieder ein, bevor du es erneut versuchst.",
+    "description": "Connection error dialog"
+  },
+  "other-tabs-heading": {
+    "defaultMessage": "Verbindung über WebUSB herstellen",
+    "description": "Connection error dialog"
+  },
+  "privacy": {
+    "defaultMessage": "Datenschutzerklärung",
+    "description": "Link to view privacy policy"
+  },
+  "project-loaded": {
+    "defaultMessage": "Projekt geladen",
+    "description": "Toast when a new project is loaded"
+  },
+  "project-name-not-empty": {
+    "defaultMessage": "Der Projektname darf nicht leer sein",
+    "description": "Validation message for project name"
+  },
+  "radio-link-microbit": {
+    "defaultMessage": "Funkverbindungs-Calliope mini",
+    "description": "Radio link Calliope mini image caption"
+  },
+  "radio-link-microbit-label": {
+    "defaultMessage": "Diagramm zeigt Funkverbindungs-Calliope mini, der mit einem Computer verbunden wird",
+    "description": "Aria label for radio link image"
+  },
+  "recognition-point-label": {
+    "defaultMessage": "Erkennungspunkt:",
+    "description": "Label for the slider for the recognition point"
+  },
+  "reconnect-action": {
+    "defaultMessage": "Erneut verbinden",
+    "description": "Button text to reconnect a Calliope mini over Bluetooth/radio"
+  },
+  "reconnect-failed-bluetooth-heading": {
+    "defaultMessage": "Erneute Verbindung zu Datenerfassungs-Calliope mini fehlgeschlagen",
+    "description": "Connection error dialog"
+  },
+  "reconnect-failed-bluetooth1": {
+    "defaultMessage": "Die Verbindung zum Datenerfassungs-Calliope mini konnte nicht wiederhergestellt werden.",
+    "description": "Connection error dialog"
+  },
+  "reconnect-failed-bridge-heading": {
+    "defaultMessage": "Erneute Verbindung zu Funkverbindungs-Calliope mini fehlgeschlagen",
+    "description": "Connection error dialog"
+  },
+  "reconnect-failed-bridge1": {
+    "defaultMessage": "Die Verbindung zum mit deinem Computer verbundenen Calliope mini konnte nicht wiederhergestellt werden.",
+    "description": "Connection error dialog"
+  },
+  "reconnect-failed-radio-heading": {
+    "defaultMessage": "Erneute Verbindung zu Calliope minis fehlgeschlagen",
+    "description": "Connection error dialog"
+  },
+  "reconnect-failed-remote-heading": {
+    "defaultMessage": "Erneute Verbindung zu Datenerfassungs-Calliope mini fehlgeschlagen",
+    "description": "Connection error dialog"
+  },
+  "reconnect-failed-remote1": {
+    "defaultMessage": "Die Verbindung zum Datenerfassungs-Calliope mini konnte nicht wiederhergestellt werden.",
+    "description": "Connection error dialog"
+  },
+  "reconnect-failed-subtitle": {
+    "defaultMessage": "Folge diesen Anweisungen, um den Verbindungsprozess neu zu starten.",
+    "description": "Connection error dialog"
+  },
+  "reconnecting": {
+    "defaultMessage": "Verbinde erneut…",
+    "description": "Shown while reconnecting"
+  },
+  "record-action": {
+    "defaultMessage": "Aufnehmen",
+    "description": "Record button text"
+  },
+  "record-action-aria": {
+    "defaultMessage": "Daten für Aktion \"{action}\" aufnehmen",
+    "description": "Aria label for record button"
+  },
+  "record-hint": {
+    "defaultMessage": "Drücke, um ein Datenbeispiel aufzunehmen.",
+    "description": "Hint when you have named the first action but not recorded any data samples"
+  },
+  "record-hint-button-b": {
+    "defaultMessage": "Drücke, um ein Datenbeispiel aufzunehmen, oder drücke Taste B auf deinem Datenerfassungs-Calliope mini.",
+    "description": "Hint when you have named the first action but not recorded any data samples and have a Calliope mini connected"
+  },
+  "record-samples": {
+    "defaultMessage": "{numSamples} Beispiele aufnehmen",
+    "description": "Additional recording action text"
+  },
+  "record-samples-help": {
+    "defaultMessage": "Jedes Beispiel hat seinen eigenen Countdown",
+    "description": "Help text for additional recording action"
+  },
+  "record-seconds": {
+    "defaultMessage": "{numSeconds} Sekunden lang aufnehmen",
+    "description": "Additional recording action text"
+  },
+  "record-seconds-help": {
+    "defaultMessage": "Bewege dich, um {numSamples} Proben zu erhalten",
+    "description": "Help text for additional recording action"
+  },
+  "recording": {
+    "defaultMessage": "Aufnahme läuft",
+    "description": "Shown during recording"
+  },
+  "recording-complete": {
+    "defaultMessage": "Fertig",
+    "description": "Text shown when data recording complete"
+  },
+  "recording-data-for": {
+    "defaultMessage": "Daten für Aktion \"{action}\" aufnehmen",
+    "description": "Text in recording dialog"
+  },
+  "recording-data-for-numbered": {
+    "defaultMessage": "Nehme {sample} von {numSamples} für Aktion \"{action}\" auf",
+    "description": "Text in recording dialog"
+  },
+  "recording-fingerprint-label": {
+    "defaultMessage": "Heatmap zeigt Calliope mini x-, y-, z-Beschleunigungssensordatenmerkmale für eine Aufzeichnung",
+    "description": "Label for recording fingerprint heatmap"
+  },
+  "recording-graph-label": {
+    "defaultMessage": "Grafik zeigt Calliope mini x-, y-, z-Beschleunigungssensordaten für eine Aufzeichnung",
+    "description": "Label for recording graph"
+  },
+  "recording-options-aria": {
+    "defaultMessage": "Weitere Aufnahmeoptionen für Aktion \"{action}\"",
+    "description": "Aria label for more recording options button"
+  },
+  "reload-action": {
+    "defaultMessage": "Neu laden",
+    "description": "Reload button text"
+  },
+  "reset-to-default-action": {
+    "defaultMessage": "Auf Standardblöcke zurücksetzen",
+    "description": "Reset to default blocks button text"
+  },
+  "restore-defaults-action": {
+    "defaultMessage": "Standardwerte für alle Einstellungen wiederherstellen",
+    "description": "Restore default button text"
+  },
+  "restore-defaults-confirm-action": {
+    "defaultMessage": "Standardwerte wiederherstellen",
+    "description": "Restore default settings confirm button text"
+  },
+  "restore-defaults-confirm-body": {
+    "defaultMessage": "Bist du sicher, dass du die Standardwerte für alle Einstellungen wiederherstellen möchtest?",
+    "description": "Restore default settings confirmation dialog body text"
+  },
+  "restore-defaults-confirm-heading": {
+    "defaultMessage": "Standardeinstellungen",
+    "description": "Restore default settings confirmation dialog title"
+  },
+  "restore-defaults-helper": {
+    "defaultMessage": "Zuvor ausgeblendete Hilfeinhalte werden möglicherweise wieder angezeigt.",
+    "description": "Restore default settings helper text"
+  },
+  "save-action": {
+    "defaultMessage": "Speichern",
+    "description": "Label for action that saves the project as a file the user downloads"
+  },
+  "save-hex-dialog-heading": {
+    "defaultMessage": "Projekt als Hex-Datei speichern",
+    "description": "Heading for the dialog shown when saving a hex file"
+  },
+  "save-hex-dialog-message1": {
+    "defaultMessage": "Der Download enthält deine Aktionen, Datenbeispiele und dein MakeCode-Projekt. Öffne es in {appNameFull}, um weiterzuarbeiten.",
+    "description": "Text in the dialog shown when saving a hex file"
+  },
+  "save-hex-dialog-message2": {
+    "defaultMessage": "Du kannst es auch mit MakeCode öffnen, wenn du die Aktionen und Datenbeispiele nicht ändern musst.",
+    "description": "Text in the dialog shown when saving a hex file"
+  },
+  "saving-description": {
+    "defaultMessage": "Dein Download wird bald bereit sein.",
+    "description": "Saving progress dialog text"
+  },
+  "saving-title": {
+    "defaultMessage": "Speichere…",
+    "description": "Saving progress title"
+  },
+  "saving-toast-title": {
+    "defaultMessage": "Deine Hex-Datei wurde heruntergeladen",
+    "description": "Notification after a hex file has been downloaded"
+  },
+  "select-icon-action-aria": {
+    "defaultMessage": "Symbol für Aktion \"{action}\" auswählen",
+    "description": "Aria label for pick icon button"
+  },
+  "select-icon-action-untitled-aria": {
+    "defaultMessage": "Symbol für unbenannte Aktion auswählen",
+    "description": "Aria label for pick icon button"
+  },
+  "select-icon-option-action-aria": {
+    "defaultMessage": "Symbol \"{iconName}\" auswählen",
+    "description": "Aria label for icon option"
+  },
+  "settings": {
+    "defaultMessage": "Einstellungen",
+    "description": "Text for settings dialog header and menu item"
+  },
+  "settings-menu-action": {
+    "defaultMessage": "Einstellungsaktionsmenü",
+    "description": "Label for settings actions menu button"
+  },
+  "show-graphs-checkbox-label-text": {
+    "defaultMessage": "Grafiken anzeigen",
+    "description": "Show graphs checkbox label text"
+  },
+  "simple-ai-exercise-timer-resource-title": {
+    "defaultMessage": "Einfacher KI-Übungstimer",
+    "description": "Home page resource card title"
+  },
+  "skip-tour-action": {
+    "defaultMessage": "Tour überspringen",
+    "description": "Skip tour button text"
+  },
+  "software-versions": {
+    "defaultMessage": "Softwareversionen",
+    "description": "Software versions text"
+  },
+  "start-session-action": {
+    "defaultMessage": "Sitzung starten",
+    "description": "Start session button text"
+  },
+  "start-training-action": {
+    "defaultMessage": "Training starten",
+    "description": "Start training button text"
+  },
+  "steps-alt": {
+    "defaultMessage": "Diagramm zeigt den iterativen Prozess des Sammelns von Daten, Trainierens eines Modells, Testens des Modells und Verbesserns des Modells durch Verbesserung der gesammelten Daten, bevor schließlich mit dem Modell codiert wird.",
+    "description": "Alt text for the step-by-step home page diagram"
+  },
+  "steps-code": {
+    "defaultMessage": "Codieren",
+    "description": "Step in home page diagram"
+  },
+  "steps-collect-data": {
+    "defaultMessage": "Daten sammeln",
+    "description": "Step in home page diagram"
+  },
+  "steps-improve": {
+    "defaultMessage": "Verbessern",
+    "description": "Step in home page diagram"
+  },
+  "steps-test-model": {
+    "defaultMessage": "Modell testen",
+    "description": "Step in home page diagram"
+  },
+  "steps-train": {
+    "defaultMessage": "Trainieren",
+    "description": "Step in home page diagram"
+  },
+  "stop-recording-action": {
+    "defaultMessage": "Aufnahme stoppen",
+    "description": "Button label to stop recording movement data while recording multiple samples"
+  },
+  "support-request": {
+    "defaultMessage": "Bitte erwäge, <link>eine Supportanfrage zu stellen</link>.",
+    "description": "Support request link text"
+  },
+  "terms": {
+    "defaultMessage": "Nutzungsbedingungen",
+    "description": "Link or menu item link to view terms of use"
+  },
+  "testing-model-actions-region": {
+    "defaultMessage": "Modelltest-Symbolleiste",
+    "description": "Region label for testing model actions"
+  },
+  "testing-model-title": {
+    "defaultMessage": "Modell testen",
+    "description": "Testing model page title"
+  },
+  "third-party-content-description": {
+    "defaultMessage": "Dieses Projekt wurde von einem Benutzer bereitgestellt und ist nicht von oder der Calliope mini Educational Foundation unterstützt. Besuche das <link>MakeCode-Gemeinschaftsprojekt</link>, um Missbrauch an MakeCode zu melden, wenn du denkst, dass es nicht angemessen ist.",
+    "description": "Notify user of third party content"
+  },
+  "tour-action": {
+    "defaultMessage": "Tour",
+    "description": "Button label that starts a tour of the app's features"
+  },
+  "tour-collect-addActions-content": {
+    "defaultMessage": "Entscheide, was deine anderen Aktionen sein werden und wie du sie benennen wirst. Du benötigst mindestens 2 Aktionen mit 3 Datenbeispielen, um das Modell zu trainieren. Deine Datenbeispiele werden nur auf deinem Computer gespeichert, sie werden nicht an andere gesendet.",
+    "description": "Tour step description"
+  },
+  "tour-collect-addActions-title": {
+    "defaultMessage": "Weitere Aktionen hinzufügen",
+    "description": "Tour step title"
+  },
+  "tour-collect-afterFirst-content": {
+    "defaultMessage": "Um das maschinelle Lernmodell zu trainieren, benötigst du mindestens 3 Datenbeispiele für 2 verschiedene Aktionen.",
+    "description": "Tour step description"
+  },
+  "tour-collect-afterFirst-title": {
+    "defaultMessage": "Du hast dein erstes {recordingCount, plural, one {Beispiel} other {Beispiele}} aufgenommen!",
+    "description": "Tour step title. Uses ICU syntax for pluralisation: https://formatjs.io/docs/core-concepts/icu-syntax/#plural-format."
+  },
+  "tour-collect-collectMore-explanation-content": {
+    "defaultMessage": "Das Sammeln weiterer Beispiele sollte zu einem besseren maschinellen Lernmodell führen.",
+    "description": "Tour step description"
+  },
+  "tour-collect-collectMore-hasRecordings-content": {
+    "defaultMessage": "Nehme Datenbeispiele für deine Aktionen auf.",
+    "description": "Tour step description"
+  },
+  "tour-collect-collectMore-noRecordings-content": {
+    "defaultMessage": "Nehme weitere Beispiele für diese Aktion auf.",
+    "description": "Tour step description"
+  },
+  "tour-collect-collectMore-title": {
+    "defaultMessage": "Weitere Datenbeispiele sammeln",
+    "description": "Tour step title"
+  },
+  "tour-collect-trainModel-content": {
+    "defaultMessage": "Wenn du genug Datenbeispiele gesammelt hast, kannst du das maschinelle Lernmodell trainieren. Du kannst später zurückkommen, um mehr Daten zu entfernen oder hinzuzufügen und erneut zu trainieren, um das Modell zuverlässiger zu machen.",
+    "description": "Tour step description"
+  },
+  "tour-dataSamples-actions-common-content": {
+    "defaultMessage": "Eine Aktion ist die Art der Bewegung, die das maschinelle Lernmodell erkennen soll, z.B. 'Winken' oder 'Klatschen'.",
+    "description": "Tour step content"
+  },
+  "tour-dataSamples-actions-noRecordings-content": {
+    "defaultMessage": "Entscheide, was deine erste Aktion sein wird, benenne sie und beginne dann mit der Aufzeichnung von Datenbeispielen.",
+    "description": "Tour step content"
+  },
+  "tour-dataSamples-connected-content": {
+    "defaultMessage": "Jetzt kannst du mit dem Sammeln von Datenbeispielen beginnen, um ein maschinelles Lern-Modell (ML) zu trainieren, das verschiedene Bewegungen oder Aktionen erkennt.",
+    "description": "Tour step content"
+  },
+  "tour-dataSamples-connected-title": {
+    "defaultMessage": "Dein Datenerfassungs-Calliope mini ist verbunden!",
+    "description": "Tour step title"
+  },
+  "tour-dataSamples-liveGraph-content": {
+    "defaultMessage": "Die Grafik zeigt Bewegungsdaten vom Beschleunigungssensor des Calliope mini. Bewege deinen Datenerfassungs-Calliope mini und siehe, wie sich die Grafik verändert.",
+    "description": "Tour step content"
+  },
+  "tour-makecode-intro-content1": {
+    "defaultMessage": "Lade das Modell und den Code herunter, um dein Projekt auf einem Calliope mini zu testen. Du kannst auch weitere Codeblöcke hinzufügen, um deine eigenen Programme mit deinem Modell zu erstellen.",
+    "description": "Tour step description"
+  },
+  "tour-makecode-intro-content2": {
+    "defaultMessage": "Musst du das ML-Modell verbessern? ",
+    "description": "Tour step description"
+  },
+  "tour-makecode-intro-content3": {
+    "defaultMessage": "Verwende diese Zurück-Schaltfläche oben links.",
+    "description": "Tour step description"
+  },
+  "tour-makecode-intro-title": {
+    "defaultMessage": " MakeCode",
+    "description": "Tour step title"
+  },
+  "tour-trainModel-afterTrain-alreadyConnected-title": {
+    "defaultMessage": "Du hast ein ML-Modell trainiert!",
+    "description": "Tour step title"
+  },
+  "tour-trainModel-afterTrain-content": {
+    "defaultMessage": "Teste jetzt dein maschinelles Lernmodell. Probiere jede Aktion aus, indem du deinen Datenerfassungs-Calliope mini bewegst. Schätzt das Modell jede Aktion richtig ein?",
+    "description": "Tour step description"
+  },
+  "tour-trainModel-afterTrain-delayedUntilConnected-title": {
+    "defaultMessage": "Teste dein ML-Modell",
+    "description": "Tour step title"
+  },
+  "tour-trainModel-certaintyRecognition-content": {
+    "defaultMessage": "Das Balkendiagramm zeigt, wie sicher sich das Modell ist, dass du jede Aktion ausführst. Bewege den Schieberegler, um den Erkennungspunkt oder Schwellenwert anzupassen.",
+    "description": "Tour step description"
+  },
+  "tour-trainModel-certaintyRecognition-title": {
+    "defaultMessage": "Sicherheit und Erkennungspunkt",
+    "description": "Tour step title"
+  },
+  "tour-trainModel-editInMakeCode-content": {
+    "defaultMessage": "Öffne dein Projekt in MakeCode, um das Programm und dein maschinelles Lernmodell auf einen Calliope mini herunterzuladen. Du kannst weitere Blöcke hinzufügen, um deine eigenen Programme mit deinem Modell zu erstellen.",
+    "description": "Tour step description"
+  },
+  "tour-trainModel-estimatedAction-content": {
+    "defaultMessage": "Die Aktion, die das Modell schätzt, dass du sie gerade ausführst, wird unter dem Calliope mini-Symbol für diese Aktion angezeigt.",
+    "description": "Tour step description"
+  },
+  "tour-trainModel-makeCodeBlocks-content": {
+    "defaultMessage": "Diese MakeCode-Blöcke zeigen Symbole für jede erkannte Aktion an, wenn du deinen Code und dein Modell auf einen Calliope mini überträgst.",
+    "description": "Tour step description"
+  },
+  "tour-trainModel-makeCodeBlocks-title": {
+    "defaultMessage": " MakeCode-Blöcke",
+    "description": "Tour step title"
+  },
+  "train-description": {
+    "defaultMessage": "Das Computerprogramm erkennt Muster oder Unterschiede in deinen Datenbeispielen und verwendet diese, um ein mathematisches Modell zu erstellen, das {appNameFull} ermöglicht, verschiedene Aktionen zu erkennen, wenn du deinen Calliope mini bewegst.",
+    "description": "Explanation on training dialog"
+  },
+  "train-error-body": {
+    "defaultMessage": "Das Training hat nicht zu einem verwendbaren Modell geführt. Der Grund dafür sind höchstwahrscheinlich die zum Training verwendeten Daten. Wenn die Datenbeispiele für verschiedene Aktionen zu ähnlich sind, kann dies zu Problemen im Trainingsprozess führen.",
+    "description": "Training error dialog"
+  },
+  "train-error-header": {
+    "defaultMessage": "Training fehlgeschlagen",
+    "description": "Training error dialog"
+  },
+  "train-error-todo": {
+    "defaultMessage": "Kehre zur Seite Daten hinzufügen zurück und ändere deine Daten.",
+    "description": "Training error dialog"
+  },
+  "train-header": {
+    "defaultMessage": "Ein Modell trainieren",
+    "description": "Training dialog"
+  },
+  "train-model": {
+    "defaultMessage": "Modell trainieren",
+    "description": "Action to train a model"
+  },
+  "training-model": {
+    "defaultMessage": "Modell wird trainiert…",
+    "description": "Progress title"
+  },
+  "transfer-hex-alt": {
+    "defaultMessage": "Animation des Ziehens einer Hex-Datei aus dem Download-Ordner auf das Calliope mini-Laufwerk oder -Gerät, das im Datei-Explorer aufgeführt ist",
+    "description": "Alt text"
+  },
+  "transfer-hex-heading": {
+    "defaultMessage": "Gespeicherte Hex-Datei auf Calliope mini übertragen",
+    "description": "Dialog shown when WebUSB fails"
+  },
+  "transfer-hex-manual-download": {
+    "defaultMessage": "Wenn die Datei nicht automatisch heruntergeladen wurde, <link>lade bitte die Datei hier herunter</link>.",
+    "description": "Dialog shown when WebUSB fails"
+  },
+  "transfer-hex-message": {
+    "defaultMessage": "Ziehe die Hex-Datei aus deinem Download-Ordner auf das MINI-Laufwerk.",
+    "description": "Dialog shown when WebUSB fails"
+  },
+  "try-again-action": {
+    "defaultMessage": "Erneut versuchen",
+    "description": "Button label"
+  },
+  "unknown": {
+    "defaultMessage": "unbekannt",
+    "description": "Label for unknown ML event"
+  },
+  "unplug-radio-link-microbit-description": {
+    "defaultMessage": "Trenne den Funkverbindungs-Calliope mini vom Computer. Du musst den Calliope mini erneut verbinden, wenn du weitere Datenbeispiele aufzeichnen möchtest.",
+    "description": "Unplug radio link Calliope mini dialog description"
+  },
+  "unplug-radio-link-microbit-label": {
+    "defaultMessage": "Animation zeigt ein USB-Kabel, das oben von einem Calliope mini getrennt wird",
+    "description": "Unplug radio link Calliope mini dialog aria label"
+  },
+  "unplug-radio-link-microbit-title": {
+    "defaultMessage": "Trenne den Funkverbindungs-Calliope mini",
+    "description": "Unplug radio link Calliope mini dialog title"
+  },
+  "unsupported-device-explain": {
+    "defaultMessage": "Leider unterstützen wir nur die Verwendung von Calliope mini V3 beim Verbinden über Calliope mini Funk. Du hast einen <link>Calliope mini V1/V2/V3/V3</link> verbunden.",
+    "description": "Unsupported device dialog"
+  },
+  "unsupported-device-header": {
+    "defaultMessage": "Calliope mini Funkverbindungen unterstützen Calliope mini V1/V2/V3/V3 nicht",
+    "description": "Unsupported device dialog"
+  },
+  "unsupported-device-with-bluetooth": {
+    "defaultMessage": "Bitte verwende stattdessen Web Bluetooth, um dich mit deinem Calliope mini zu verbinden.",
+    "description": "Unsupported device dialog"
+  },
+  "unsupported-device-without-bluetooth": {
+    "defaultMessage": "Du kannst dich mit dem Calliope mini über Web Bluetooth verbinden, allerdings hat dieser Browser oder dieses Gerät kein Bluetooth aktiviert. <link>Wie man Bluetooth aktiviert</link>.",
+    "description": "Unsupported device dialog"
+  },
+  "user-guide": {
+    "defaultMessage": "Benutzerhandbuch",
+    "description": "Used for link to user guide page on calliope.cc"
+  },
+  "webusb-retry-no-select": {
+    "defaultMessage": "Du hast keinen Calliope mini ausgewählt. Möchtest du es erneut versuchen?",
+    "description": "Shown if the user fails to choose a Calliope mini"
+  },
+  "webusb-retry-replug1": {
+    "defaultMessage": "Ein WebUSB-Fehler ist aufgetreten.",
+    "description": "WebUSB error dialog"
+  },
+  "webusb-retry-replug2": {
+    "defaultMessage": "Bitte:",
+    "description": "WebUSB error dialog"
+  },
+  "webusb-retry-replug3": {
+    "defaultMessage": "überprüfe, dass dieser Calliope mini kein angeschaltetes Betteriefach hat.",
+      "description": "WebUSB error dialog"
+    },
+    "webusb-retry-replug4": {
+      "defaultMessage": "ziehe das Kabel ab und stecke es erneut an den Calliope mini",
+      "description": "WebUSB error dialog"
+    }
+}

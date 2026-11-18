@@ -3,11 +3,12 @@
  *
  * SPDX-License-Identifier: MIT
  */
-import { BoxProps, Text, VStack } from "@chakra-ui/react";
+import { BoxProps, Image, VStack } from "@chakra-ui/react";
 import { ReactNode, createContext } from "react";
 import { CookieConsent, DeploymentConfigFactory } from "..";
 import { NullLogging } from "./logging";
 import theme from "./theme";
+import calliopeLogo from "../../images/Logo_KI-Training_2.png";
 
 const stubConsentValue: CookieConsent = {
   analytics: false,
@@ -19,21 +20,27 @@ const stubConsentContext = createContext<CookieConsent | undefined>(
 
 const defaultDeploymentFactory: DeploymentConfigFactory = () => ({
   chakraTheme: theme,
-  appNameFull: "ml-trainer",
-  appNameShort: "ml-trainer",
-  AppLogo: (props: BoxProps) => {
-    return (
-      <VStack
-        color="white"
-        fontWeight="bold"
-        justifyContent="center"
-        alignItems="center"
-        {...props}
-      >
-        <Text>ml-trainer</Text>
-      </VStack>
-    );
-  },
+  appNameFull: "Calliope-ML",
+  appNameShort: "calliope-ml",
+AppLogo: (props: BoxProps) => {
+  return (
+    <VStack
+      color="white"
+      fontWeight="bold"
+      justifyContent="center"
+      alignItems="center"
+      {...props}
+    >
+      <Image
+        src={calliopeLogo}
+        alt="Calliope Logo"
+        maxH="30px"
+        mb={2}
+      />
+      {/* <Text>Calliope Machine Learning</Text> */}
+    </VStack>
+  );
+},
   OrgLogo: undefined,
   logging: new NullLogging(),
   compliance: {
@@ -47,10 +54,10 @@ const defaultDeploymentFactory: DeploymentConfigFactory = () => ({
   },
   supportLinks: {
     // Just placeholders, these need replacing in a real deployment with branded help content.
-    bluetooth: "https://support.microbit.org",
-    main: "https://support.microbit.org",
-    troubleshooting: "https://support.microbit.org",
-    wearable: "https://support.microbit.org",
+    bluetooth: "https://calliope.cc",
+    main: "https://calliope.cc",
+    troubleshooting: "https://calliope.cc",
+    wearable: "https://calliope.cc",
   },
 });
 

@@ -36,7 +36,11 @@ import {
   TourTriggerName,
   tourSequence,
 } from "./model";
-import { defaultSettings, Settings } from "./settings";
+import {
+  defaultSettings,
+  recordingDurationDefault,
+  Settings,
+} from "./settings";
 import { getTotalNumSamples } from "./utils/actions";
 import { defaultIcons, MakeCodeIcon } from "./utils/icons";
 import { untitledProjectName } from "./project-name";
@@ -77,6 +81,31 @@ export const currentDataWindow: DataWindow = {
   deviceSamplesLength: 50, // Number of samples required at 20 ms intervals for 1 second of data.
 };
 
+// Ratio of the original currentDataWindow used to scale derived values
+// (minSamples / deviceSamplesLength) when the user changes the recording length.
+const minSamplesRatio =
+  currentDataWindow.minSamples / currentDataWindow.deviceSamplesLength;
+
+/**
+ * Builds a DataWindow for an arbitrary user-chosen recording duration (ms).
+ * deviceSamplesPeriod is kept at the current default (20ms) and the other
+ * fields are scaled proportionally so detection thresholds stay consistent.
+ */
+export const buildDataWindowForDuration = (duration: number): DataWindow => {
+  const deviceSamplesPeriod = currentDataWindow.deviceSamplesPeriod;
+  const deviceSamplesLength = Math.max(
+    1,
+    Math.round(duration / deviceSamplesPeriod)
+  );
+  const minSamples = Math.max(1, Math.round(deviceSamplesLength * minSamplesRatio));
+  return {
+    duration,
+    minSamples,
+    deviceSamplesPeriod,
+    deviceSamplesLength,
+  };
+};
+
 interface PredictionResult {
   confidences: Confidences;
   detected: Action | undefined;
@@ -85,15 +114,15 @@ interface PredictionResult {
 const createUntitledProject = (): MakeCodeProject => ({
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   header: {
-    target: "microbit",
-    targetVersion: "7.1.2",
+    target: "calliopemini",
+    targetVersion: "8.1.5",
     name: untitledProjectName,
     meta: {},
     editor: "blocksprj",
     pubId: "",
     pubCurrent: false,
     _rev: null,
-    id: "45a3216b-e997-456c-bd4b-6550ddb81c4e",
+    id: "45a3216b-e997-456c-bd4b-6550ddb81c4f",
     recentUse: 1726493314,
     modificationTime: 1726493314,
     cloudUserId: null,
@@ -159,10 +188,26 @@ export interface State {
   projectLoadTimestamp: number;
   // false if we're sure the user hasn't changed the project, otherwise true
   projectEdited: boolean;
-  changedHeaderExpected: boolean;
+  /**
+   * Set to true when we need to update MakeCode before we open it.
+   */
   appEditNeedsFlushToEditor: boolean;
   isEditorOpen: boolean;
   isEditorReady: boolean;
+  /**
+   * Whether we're expecting an editorChange call with a new header id
+   * because we've
+   *
+   * In this case we need to update app state from the project.
+   */
+  isEditorLoadingFile: boolean;
+  /**
+   * Whether we're expecting a editorChange call with a new header id
+   * because we've imported an updated copy of the project.
+   *
+   * In this case app state (e.g. dataset) will already be in sync.
+   */
+  isEditorImportingState: boolean;
   editorStartUp: EditorStartUp;
   editorStartUpTimestamp: number;
   editorPromises: {
@@ -253,7 +298,8 @@ export interface Actions {
   editorTimedOut(): void;
   getEditorStartUp(): EditorStartUp;
   setIsEditorTimedOutDialogOpen(isOpen: boolean): void;
-  setChangedHeaderExpected(): void;
+  setEditorLoadingFile(): void;
+  setEditorImportingState(): void;
   projectFlushedToEditor(): void;
 
   setDownload(state: DownloadState): void;
@@ -293,6 +339,7 @@ export interface Actions {
 type Store = State & Actions;
 
 const createMlStore = (logging: Logging) => {
+  console.log("[MAKECODE] createMlStore() - creating store and editor promises (editorReady/editorContentLoaded)");
   return create<Store>()(
     devtools(
       persist(
@@ -316,6 +363,8 @@ const createMlStore = (logging: Logging) => {
           model: undefined,
           isEditorOpen: false,
           isEditorReady: false,
+          isEditorLoadingFile: false,
+          isEditorImportingState: false,
           editorStartUp: "in-progress",
           editorStartUpTimestamp: Date.now(),
           editorPromises: {
@@ -325,7 +374,6 @@ const createMlStore = (logging: Logging) => {
           isEditorTimedOutDialogOpen: false,
           langChanged: false,
           appEditNeedsFlushToEditor: true,
-          changedHeaderExpected: false,
           // This dialog flow spans two pages
           trainModelDialogStage: TrainModelDialogStage.Closed,
           trainModelProgress: 0,
@@ -347,12 +395,28 @@ const createMlStore = (logging: Logging) => {
 
           setSettings(update: Partial<Settings>) {
             set(
-              ({ settings }) => ({
-                settings: {
+              ({ settings, dataWindow }) => {
+                const newSettings = {
                   ...settings,
                   ...update,
-                },
-              }),
+                };
+                // If the user-configurable recording duration changed,
+                // rebuild the active dataWindow so subsequent recordings
+                // immediately use the new length.
+                const durationChanged =
+                  update.recordingDuration !== undefined &&
+                  update.recordingDuration !== dataWindow.duration;
+                return {
+                  settings: newSettings,
+                  ...(durationChanged
+                    ? {
+                        dataWindow: buildDataWindowForDuration(
+                          update.recordingDuration as number
+                        ),
+                      }
+                    : {}),
+                };
+              },
               false,
               "setSettings"
             );
@@ -365,6 +429,9 @@ const createMlStore = (logging: Logging) => {
               // MakeCode does not reload.
               return;
             }
+            console.log(
+              "[MAKECODE] setLanguage() - resetting editor promises due to language change"
+            );
             set(
               ({ settings }) => ({
                 settings: {
@@ -387,10 +454,18 @@ const createMlStore = (logging: Logging) => {
 
           newSession(projectName?: string) {
             const untitledProject = createUntitledProject();
+            // Starting a new session resets the recording length back to the
+            // default (0.99 s) so the user begins from a known baseline.
             set(
-              {
+              ({ settings }) => ({
                 actions: [],
-                dataWindow: currentDataWindow,
+                dataWindow: buildDataWindowForDuration(
+                  recordingDurationDefault
+                ),
+                settings: {
+                  ...settings,
+                  recordingDuration: recordingDurationDefault,
+                },
                 model: undefined,
                 project: projectName
                   ? renameProject(untitledProject, projectName)
@@ -398,7 +473,7 @@ const createMlStore = (logging: Logging) => {
                 projectEdited: false,
                 appEditNeedsFlushToEditor: true,
                 timestamp: Date.now(),
-              },
+              }),
               false,
               "newSession"
             );
@@ -475,7 +550,11 @@ const createMlStore = (logging: Logging) => {
             return set(({ project, projectEdited, actions, dataWindow }) => {
               const newActions = actions.filter((a) => a.ID !== id);
               const newDataWindow =
-                newActions.length === 0 ? currentDataWindow : dataWindow;
+                newActions.length === 0
+                  ? buildDataWindowForDuration(
+                      get().settings.recordingDuration
+                    )
+                  : dataWindow;
               return {
                 actions:
                   newActions.length === 0 ? [createFirstAction()] : newActions,
@@ -580,7 +659,11 @@ const createMlStore = (logging: Logging) => {
                 0
               );
               const newDataWindow =
-                numRecordings === 0 ? currentDataWindow : dataWindow;
+                numRecordings === 0
+                  ? buildDataWindowForDuration(
+                      get().settings.recordingDuration
+                    )
+                  : dataWindow;
               return {
                 actions: newActions,
                 dataWindow: newDataWindow,
@@ -597,18 +680,23 @@ const createMlStore = (logging: Logging) => {
           },
 
           deleteAllActions() {
-            return set(({ project, projectEdited }) => ({
-              actions: [createFirstAction()],
-              dataWindow: currentDataWindow,
-              model: undefined,
-              ...updateProject(
-                project,
-                projectEdited,
-                [],
-                undefined,
-                currentDataWindow
-              ),
-            }));
+            return set(({ project, projectEdited }) => {
+              const newDataWindow = buildDataWindowForDuration(
+                get().settings.recordingDuration
+              );
+              return {
+                actions: [createFirstAction()],
+                dataWindow: newDataWindow,
+                model: undefined,
+                ...updateProject(
+                  project,
+                  projectEdited,
+                  [],
+                  undefined,
+                  newDataWindow
+                ),
+              };
+            });
           },
 
           downloadDataset() {
@@ -669,7 +757,16 @@ const createMlStore = (logging: Logging) => {
            */
           loadProject(project: MakeCodeProject, name: string) {
             const newActions = getActionsFromProject(project);
-            set(({ settings }) => {
+            set(({ settings, project: prevProject }) => {
+              project = renameProject(project, name);
+              project = {
+                ...project,
+                header: {
+                  ...project.header!,
+                  // .org projects have a partial header with no id which causes MakeCode sadness
+                  id: project.header?.id ?? prevProject.header!.id,
+                },
+              };
               const timestamp = Date.now();
               return {
                 settings: {
@@ -681,7 +778,7 @@ const createMlStore = (logging: Logging) => {
                 actions: newActions,
                 dataWindow: getDataWindowFromActions(newActions),
                 model: undefined,
-                project: renameProject(project, name),
+                project,
                 projectEdited: true,
                 appEditNeedsFlushToEditor: true,
                 timestamp,
@@ -842,35 +939,60 @@ const createMlStore = (logging: Logging) => {
           },
 
           editorChange(newProject: MakeCodeProject) {
+            // Notes on past issues with the MakeCode integration:
+            //
+            // We update MakeCode only as needed. However, it loads in the
+            // background because we need it to be ready. This means it will
+            // have the initial project from the state open. So we must be sure
+            // to update MakeCode before "Edit in MakeCode" and "Save" actions.
+            //
+            // MakeCode has a visibility listener that will cause it to re-run
+            // its initialization when its tab becomes hidden/visible. We aim to
+            // ignore this when MakeCode is closed. When MakeCode is open we'll
+            // have up-to-date state to reinit MakeCode with. In the past this
+            // has caused us to update app state with old data from MakeCode.
+            //
+            // It's too slow/async from a UI perspective to rely on only
+            // understanding project contents via editorChange as they're
+            // delayed by MakeCode load and then the async nature of loading a
+            // project.
+            //
+            // We have no choice but to write to MakeCode and wait for the
+            // project data in editorChange when loading a hex file.
+
             const actionName = "editorChange";
             set(
               (state) => {
                 const {
                   project: prevProject,
                   isEditorOpen,
-                  isEditorReady,
-                  changedHeaderExpected,
+                  isEditorImportingState,
+                  isEditorLoadingFile,
                   settings,
                 } = state;
                 const newProjectHeader = newProject.header!.id;
                 const previousProjectHeader = prevProject.header!.id;
-                if (newProjectHeader !== previousProjectHeader) {
-                  if (changedHeaderExpected) {
+                if (
+                  (isEditorLoadingFile ||
+                    isEditorOpen ||
+                    isEditorImportingState) &&
+                  newProjectHeader !== previousProjectHeader
+                ) {
+                  if (isEditorImportingState) {
+                    // It's a change but we originated it so state is in sync.
                     logging.log(
-                      `[MakeCode] Detected new project, ignoring as expected due to import. ID change: ${prevProject.header?.id} -> ${newProject.header?.id}`
+                      `[MakeCode] Ignored header change due to us syncing state. ID change: ${prevProject.header?.id} -> ${newProject.header?.id}`
                     );
                     return {
-                      changedHeaderExpected: false,
+                      isEditorImportingState: false,
+                      // Still need to update this for the new header id.
                       project: newProject,
                     };
-                  }
-                  if (isEditorReady) {
+                  } else {
+                    // It's a change that originated in MakeCode, e.g. a hex load, so update our state.
                     logging.log(
-                      `[MakeCode] Detected new project, loading actions. ID change: ${prevProject.header?.id} -> ${newProject.header?.id}`
+                      `[MakeCode] Updating state from MakeCode header change. ID change: ${prevProject.header?.id} -> ${newProject.header?.id}`
                     );
-                    // It's a new project. Thanks user. We'll update our state.
-                    // This will cause another write to MakeCode but that's OK as it gives us
-                    // a chance to validate/update the project
                     const timestamp = Date.now();
                     const newActions = getActionsFromProject(newProject);
                     return {
@@ -892,12 +1014,8 @@ const createMlStore = (logging: Logging) => {
                       dataWindow: getDataWindowFromActions(newActions),
                       model: undefined,
                       isEditorOpen: false,
+                      isEditorLoadingFile: false,
                     };
-                  } else {
-                    // In particular, this happens if the MakeCode init completes after we've updated our project state from an import from .org
-                    logging.log(
-                      `[MakeCode] Ignoring changed ID before editor ready. ID change: ${prevProject.header?.id} -> ${newProject.header?.id}`
-                    );
                   }
                 } else if (isEditorOpen) {
                   logging.log(
@@ -909,6 +1027,7 @@ const createMlStore = (logging: Logging) => {
                     projectEdited: true,
                   };
                 } else {
+                  // This lets us skip more pointless init-time edits.
                   logging.log(
                     `[MakeCode] Edit ignored when closed. ID ${newProject.header?.id}`
                   );
@@ -932,11 +1051,14 @@ const createMlStore = (logging: Logging) => {
           setSave(save: SaveState) {
             set({ save }, false, "setSave");
           },
-          setChangedHeaderExpected() {
+          setEditorLoadingFile() {
+            set({ isEditorLoadingFile: true }, false, "setEditorLoadingFile");
+          },
+          setEditorImportingState() {
             set(
-              { changedHeaderExpected: true },
+              { isEditorImportingState: true },
               false,
-              "setChangedHeaderExpected"
+              "setEditorImportingState"
             );
           },
           langChangeFlushedToEditor() {
@@ -1249,15 +1371,26 @@ const createMlStore = (logging: Logging) => {
           merge(persistedStateUnknown, currentState) {
             // The zustand default merge does no validation either.
             const persistedState = persistedStateUnknown as State;
+            const mergedSettings = {
+              // Make sure we have any new settings defaulted
+              ...defaultSettings,
+              ...currentState.settings,
+              ...persistedState.settings,
+            };
+            // Restore the active recording length from the user's persisted
+            // settings so it survives reloads. If no actions are present we
+            // can fully derive the dataWindow from the duration; otherwise
+            // we let the existing actions-derived dataWindow stand.
+            const persistedActions = persistedState.actions ?? [];
+            const dataWindow =
+              persistedActions.length === 0
+                ? buildDataWindowForDuration(mergedSettings.recordingDuration)
+                : currentState.dataWindow;
             return {
               ...currentState,
               ...persistedState,
-              settings: {
-                // Make sure we have any new settings defaulted
-                ...defaultSettings,
-                ...currentState.settings,
-                ...persistedState.settings,
-              },
+              dataWindow,
+              settings: mergedSettings,
             };
           },
         }

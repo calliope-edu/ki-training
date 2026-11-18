@@ -9,8 +9,8 @@ import { stage } from "../environment";
 // They'll also need to become language aware
 const microbitOrgBaseUrl =
   stage === "production"
-    ? "https://microbit.org/"
-    : "https://stage.microbit.org/";
+    ? "https://calliope.cc"
+    : "https://stage.calliope.cc";
 
 const langPath = (languageId: string) =>
   languageId === "en" ? "" : `${languageId.toLowerCase()}/`;
@@ -21,7 +21,7 @@ export const projectUrl = (slug: string, language: string) =>
   )}projects/make-it-code-it/${encodeURIComponent(slug)}/`;
 
 export const userGuideUrl = () =>
-  `${microbitOrgBaseUrl}get-started/user-guide/microbit-createai/`;
+  `${microbitOrgBaseUrl}schulen/ki`;
 
 export const landingPageUrl = (language: string) =>
-  `${microbitOrgBaseUrl}${langPath(language)}ai/`;
+  `${microbitOrgBaseUrl}${langPath(language)}schulen/ki`;
