@@ -46,8 +46,9 @@ export class ConnectionStageActions {
     this.dataCollectionMicrobitStartConnect(options);
     this.setStatus(ConnectionStatus.NotConnected);
     if (isCampusMode()) {
-      // Campus picks the mini and flashes the data collection program itself,
-      // so the steps of the connection flow are not needed.
+      // Campus picks the mini in its connection widget and the data collection
+      // program is flashed through it, so the trainer's connection dialogs are
+      // not needed.
       void this.connectBluetooth(false);
       return;
     }
@@ -195,6 +196,24 @@ export class ConnectionStageActions {
     );
   };
 
+  /**
+   * Campus mode: a link made in Campus' connection widget is about to be
+   * followed (see campus-connection-hooks.ts). The status listener only
+   * listens to the current connection type.
+   */
+  followCampusConnection = () => {
+    if (
+      this.stage.connType !== "bluetooth" ||
+      this.stage.flowStep !== ConnectionFlowStep.None
+    ) {
+      this.setStage({
+        ...this.stage,
+        connType: "bluetooth",
+        flowStep: ConnectionFlowStep.None,
+      });
+    }
+  };
+
   connectMicrobits = async (partialStage?: Partial<ConnectionStage>) => {
     const newStage = {
       ...this.getConnectingStage("radio"),
@@ -214,10 +233,12 @@ export class ConnectionStageActions {
     return {
       ...this.stage,
       connType,
-      flowStep:
-        connType === "bluetooth"
-          ? ConnectionFlowStep.ConnectingBluetooth
-          : ConnectionFlowStep.ConnectingMicrobits,
+      // In Campus its connection widget shows the progress.
+      flowStep: isCampusMode()
+        ? ConnectionFlowStep.None
+        : connType === "bluetooth"
+        ? ConnectionFlowStep.ConnectingBluetooth
+        : ConnectionFlowStep.ConnectingMicrobits,
     };
   };
 
@@ -235,6 +256,17 @@ export class ConnectionStageActions {
     status: ConnectionStatus,
     flowType: ConnectionFlowType
   ) => {
+    if (isCampusMode()) {
+      // Campus' connection widget reports failures itself; the live graph
+      // shows whether the mini is connected and offers to connect.
+      if (status === ConnectionStatus.Connected) {
+        return this.onConnected();
+      }
+      if (this.stage.flowStep !== ConnectionFlowStep.None) {
+        this.setFlowStep(ConnectionFlowStep.None);
+      }
+      return;
+    }
     switch (status) {
       case ConnectionStatus.Connected: {
         return this.onConnected();

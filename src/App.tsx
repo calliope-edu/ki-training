@@ -34,7 +34,8 @@ import { ConnectProvider } from "./connect-actions-hooks";
 import { ConnectStatusProvider } from "./connect-status-hooks";
 import { ConnectionStageProvider } from "./connection-stage-hooks";
 import { deployment, useDeployment } from "./deployment";
-import { CampusBluetoothConnection } from "./device/campusBluetooth";
+import { useCampusConnectionSync } from "./campus-connection-hooks";
+import { getCampusBluetooth } from "./device/campusBluetooth";
 import {
   getCampusHost,
   isCampusMode,
@@ -86,7 +87,7 @@ const usb = isMockDeviceMode()
 const bluetooth = isMockDeviceMode()
   ? new MockWebBluetoothConnection()
   : isCampusMode()
-  ? new CampusBluetoothConnection(getCampusHost())
+  ? getCampusBluetooth()
   : createWebBluetoothConnection({ logging });
 // In a Campus room, Campus keeps the project (see campus-room.ts).
 if (isCampusRoomMode()) {
@@ -120,6 +121,12 @@ const Providers = ({ children }: ProviderLayoutProps) => {
       </ChakraProvider>
     </React.StrictMode>
   );
+};
+
+// In Campus the trainer's connection follows Campus' connection widget.
+const CampusConnectionSync = () => {
+  useCampusConnectionSync();
+  return null;
 };
 
 const Layout = () => {
@@ -168,6 +175,7 @@ const Layout = () => {
     <ErrorBoundary>
       <ScrollRestoration />
       <ProjectProvider driverRef={driverRef}>
+        {isCampusMode() && <CampusConnectionSync />}
         <EditCodeDialog ref={driverRef} />
         <CampusRoomGate>
           <Outlet />

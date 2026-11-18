@@ -159,6 +159,30 @@
       "value": "Ce navigateur n'est pas pris en charge."
     }
   ],
+  "campus-connect-needs-bluetooth": [
+    {
+      "type": 0,
+      "value": "Movement data comes via Bluetooth. Connect sets up the Bluetooth connection."
+    }
+  ],
+  "campus-connect-needs-program": [
+    {
+      "type": 0,
+      "value": "To record and test it needs the data collection program. Connect transfers it."
+    }
+  ],
+  "campus-microbit-ble-connected": [
+    {
+      "type": 0,
+      "value": "Your Calliope mini is connected via Bluetooth"
+    }
+  ],
+  "campus-microbit-usb-connected": [
+    {
+      "type": 0,
+      "value": "Your Calliope mini is connected via USB"
+    }
+  ],
   "cancel-action": [
     {
       "type": 0,

@@ -24,7 +24,7 @@ import {
   ServiceConnectionEventMap,
   TypedEventTarget,
 } from "@microbit/microbit-connection";
-import { CampusHost, CampusStatus } from "./campus-host";
+import { CampusHost, CampusStatus, getCampusHost } from "./campus-host";
 import { getHexFileUrl, HexType } from "./get-hex-file";
 
 // micro:bit Bluetooth profile, as the data collection program exposes it.
@@ -104,6 +104,33 @@ export class CampusBluetoothConnection
         if (!flashed || !(await this.runsDataCollectionProgram())) {
           return this.fail();
         }
+      }
+      this.startStreaming();
+      this.setStatus(ConnectionStatus.CONNECTED);
+      return this.status;
+    } catch {
+      return this.fail();
+    }
+  }
+
+  /**
+   * Follows a Bluetooth link Campus already holds (made in its connection
+   * widget): streams when the mini runs the data collection program. Unlike
+   * connect() it never asks Campus for a link and never flashes, so the
+   * program the user put onto the mini stays.
+   */
+  async follow(): Promise<ConnectionStatus> {
+    if (
+      this.streaming ||
+      this.host.status.ble !== "connected" ||
+      this.host.status.flashing
+    ) {
+      return this.status;
+    }
+    this.setStatus(ConnectionStatus.CONNECTING);
+    try {
+      if (!(await this.runsDataCollectionProgram())) {
+        return this.fail();
       }
       this.startStreaming();
       this.setStatus(ConnectionStatus.CONNECTED);
@@ -240,3 +267,13 @@ export class CampusBluetoothConnection
   async triggerMagnetometerCalibration(): Promise<void> {}
   async uartWrite(_data: Uint8Array): Promise<void> {}
 }
+
+let campusBluetooth: CampusBluetoothConnection | undefined;
+
+/** The one Campus Bluetooth connection of this page (only in Campus mode). */
+export const getCampusBluetooth = (): CampusBluetoothConnection => {
+  if (!campusBluetooth) {
+    campusBluetooth = new CampusBluetoothConnection(getCampusHost());
+  }
+  return campusBluetooth;
+};
