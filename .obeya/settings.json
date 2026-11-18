@@ -3,7 +3,8 @@
   "checks": [
     "npx tsc",
     "npx vitest run --exclude \"**/ml4f-output.test.ts\"",
-    "npm run lint"
+    "npm run lint",
+    "npx prettier --check --end-of-line auto src"
   ],
   "direct": true,
   "planDocs": {
