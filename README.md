@@ -18,6 +18,12 @@ Micro:bit Educational Foundation applications, add and remove features, and
 revise the user experience for some features also in ML-Machine. We encourage
 you to review both projects and see which best fits your needs.
 
+## Plans
+
+Plan docs for larger changes live in [`docs/plan/`](docs/plan/):
+
+- [Campus KI-Training gets motion data over USB too](docs/plan/01-campus-motion-data-over-usb.md)
+
 ## Building and running the app
 
 Getting up and running:
