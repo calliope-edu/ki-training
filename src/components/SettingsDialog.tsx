@@ -61,8 +61,9 @@ export const SettingsDialog = ({
   const storedRecordingDuration =
     settings.recordingDuration ?? recordingDurationDefault;
   // Local mirror for smooth slider drag; the store is updated on change-end.
-  const [recordingDurationDraft, setRecordingDurationDraft] =
-    useState<number>(storedRecordingDuration);
+  const [recordingDurationDraft, setRecordingDurationDraft] = useState<number>(
+    storedRecordingDuration
+  );
   // Re-sync the slider when the store value changes externally (e.g. reset).
   useEffect(() => {
     setRecordingDurationDraft(storedRecordingDuration);

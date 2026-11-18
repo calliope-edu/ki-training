@@ -22,25 +22,20 @@ const defaultDeploymentFactory: DeploymentConfigFactory = () => ({
   chakraTheme: theme,
   appNameFull: "Calliope-ML",
   appNameShort: "calliope-ml",
-AppLogo: (props: BoxProps) => {
-  return (
-    <VStack
-      color="white"
-      fontWeight="bold"
-      justifyContent="center"
-      alignItems="center"
-      {...props}
-    >
-      <Image
-        src={calliopeLogo}
-        alt="Calliope Logo"
-        maxH="30px"
-        mb={2}
-      />
-      {/* <Text>Calliope Machine Learning</Text> */}
-    </VStack>
-  );
-},
+  AppLogo: (props: BoxProps) => {
+    return (
+      <VStack
+        color="white"
+        fontWeight="bold"
+        justifyContent="center"
+        alignItems="center"
+        {...props}
+      >
+        <Image src={calliopeLogo} alt="Calliope Logo" maxH="30px" mb={2} />
+        {/* <Text>Calliope Machine Learning</Text> */}
+      </VStack>
+    );
+  },
   OrgLogo: undefined,
   logging: new NullLogging(),
   compliance: {

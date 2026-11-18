@@ -27,7 +27,9 @@ interface HelpMenuProps extends BoxProps {
  * A help button that triggers a drop-down menu with actions.
  */
 const HelpMenu = ({
-  tourTrigger,
+  // Kept out of `rest` so it is not passed to the DOM; the menu items using it
+  // are currently disabled.
+  tourTrigger: _tourTrigger,
   ...rest
 }: HelpMenuProps) => {
   const intl = useIntl();
@@ -53,8 +55,7 @@ const HelpMenu = ({
           }}
         />
         <Portal containerRef={containerRef}>
-          <MenuList>
-          </MenuList>
+          <MenuList></MenuList>
         </Portal>
       </Menu>
     </Box>

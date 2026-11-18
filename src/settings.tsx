@@ -286,9 +286,7 @@ const findSupportedLanguage = (tag: string | null | undefined) => {
   const exact = supported.find((l) => l.id.toLowerCase() === lower);
   if (exact) return exact;
   const primary = lower.split("-")[0];
-  return supported.find(
-    (l) => l.id.toLowerCase().split("-")[0] === primary
-  );
+  return supported.find((l) => l.id.toLowerCase().split("-")[0] === primary);
 };
 
 /**
