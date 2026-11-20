@@ -20,6 +20,8 @@
  *                           [3] firmware build
  *                           [4] sample period in ms
  *                           [5] accelerometer range in g
+ *                           [6] motion resyncs since boot (wraps at 256)
+ *                           [7] worst motion lateness (ms) since the last ML_INFO
  *   0x0203 MOTION     NOTIFY (0x21) every sample period (20 ms):
  *                     data: X, Y, Z as int16 little-endian in milli-g,
  *                           micro:bit orientation (the same values the BLE

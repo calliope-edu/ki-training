@@ -36,7 +36,7 @@ the Blocks runtime (which uses `0x01xx`):
 
 | channel | type | when | data |
 | --- | --- | --- | --- |
-| `0x0200` ML_INFO | `0x01` RES_READ | reply to the host's `FF 01 02 00` (REQ_READ 0x0200), and once per second unprompted | `[hardware (1 = mini 1/2, 2 = mini 3), 0x4D ('M'), protocol version (1), firmware build (1), sample period ms (20), range g (2)]` |
+| `0x0200` ML_INFO | `0x01` RES_READ | reply to the host's `FF 01 02 00` (REQ_READ 0x0200), and once per second unprompted | `[hardware (1 = mini 1/2, 2 = mini 3), 0x4D ('M'), protocol version (1), firmware build (1), sample period ms (20), range g (2), motion resyncs since boot (wraps), worst motion lateness in ms since the last ML_INFO]` |
 | `0x0203` MOTION | `0x21` NOTIFY | every 20 ms | X, Y, Z as int16 little-endian in milli-g (the values the BLE accelerometer service sends, not negated), then a uint8 sequence number wrapping at 256 |
 | `0x0210` BUTTON | `0x21` NOTIFY | on each change | `[button (1 = A, 2 = B), state (0 = released, 1 = pressed, 2 = long press, as the BLE button service)]` |
 
@@ -61,9 +61,20 @@ the serial port; BLE: notifications of the accelerometer data characteristic).
 | board | transport | rate | lost | at rest x / y / z (milli-g) |
 | --- | --- | --- | --- | --- |
 | mini 3 | old data collection program, BLE | 50.3/s | – | -144 / -138 / -959 |
-| mini 3 | USB alone (20 s) | 50.1/s | 0 | -146 / -146 / -958 |
+| mini 3 | USB alone (60 s) | 50.0/s | 0 | -275 / -103 / -934 (board moved since the row above) |
 | mini 3 | BLE alone | 50.6/s | – | -145 / -140 / -959 |
-| mini 3 | USB and BLE at once (USB 27 s, BLE 15 s) | USB 50.1/s, BLE 50.3/s | 0 | same on both |
+| mini 3 | USB and BLE at once (BLE 60 s, USB 35 s) | USB 50.0/s, BLE 50.2/s | 0 | -275 / -103 / -934 on both |
+| mini 2 | – | not measured yet | | |
+
+At the same position the USB stream and BLE agree to within the sensor noise
+(sd 4–5 milli-g), and both match the old data collection program; range is
+2 g on all of them.
+
+Two early mini 3 runs read only 36–43 samples/s over USB with no gap in the
+sequence numbers, so the device itself produced fewer; neither could be
+reproduced in later runs (clean builds, 40–60 s, with and without BLE: 50.0/s,
+no resync). ML_INFO bytes 6–7 (resync count, worst lateness per second) let a
+host see this happen in the field.
 
 ## Build
 

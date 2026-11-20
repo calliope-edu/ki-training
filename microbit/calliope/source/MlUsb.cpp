@@ -21,12 +21,17 @@ extern MicroBit uBit;
 #define ML_TX_BUFFER 128
 #define ML_RX_BUFFER 32
 
-#define ML_INFO_LEN 6
+#define ML_INFO_LEN 8
 #define ML_MOTION_LEN 7
 #define ML_BUTTON_LEN 2
 #define ML_MAX_FRAME (6 + ML_INFO_LEN)
 
 static uint8_t motionSeq = 0;
+// Pacing health, reported in ML_INFO: how often the motion loop fell more
+// than a period behind and resynchronised, and the worst lateness (ms) since
+// the last report.
+static uint8_t motionResyncs = 0;
+static uint8_t motionMaxLate = 0;
 
 static uint8_t chksum(const uint8_t *buf, int len) {
   unsigned int sum = 0;
@@ -75,6 +80,9 @@ static void sendInfo() {
   data[3] = ML_FIRMWARE_BUILD;
   data[4] = ML_SAMPLE_PERIOD_MS;
   data[5] = (uint8_t)uBit.accelerometer.getRange();
+  data[6] = motionResyncs;
+  data[7] = motionMaxLate;
+  motionMaxLate = 0;
   sendFrame(ML_RES_READ, ML_CH_INFO, data, ML_INFO_LEN, 20);
 }
 
@@ -109,7 +117,11 @@ static void motionFiber() {
 
     next += ML_SAMPLE_PERIOD_MS;
     long wait = (long)(next - system_timer_current_time());
+    if (wait < 0 && -wait > motionMaxLate) {
+      motionMaxLate = (uint8_t)(-wait > 255 ? 255 : -wait);
+    }
     if (wait < -ML_SAMPLE_PERIOD_MS) {
+      motionResyncs++;
       // Fell more than a period behind (e.g. a long display print or flash
       // write): resynchronise rather than bursting to catch up.
       next = system_timer_current_time();

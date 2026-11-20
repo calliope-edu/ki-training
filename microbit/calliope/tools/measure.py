@@ -89,7 +89,10 @@ def usb(port, seconds):
     s.close()
     lost = sum(((b - a) % 256) - 1 for a, b in zip(seqs, seqs[1:]))
     summary("USB motion", stamps, xyz, f"lost {lost} by seq, bad checksums {bad}, other frames {other}")
-    print(f"USB info frames: {len(infos)} first {infos[:2]}")
+    print(f"USB info frames: {len(infos)} first {infos[:1]} last {infos[-1:]}")
+    late = [d[7] for _, d in infos if len(d) >= 8]
+    if late:
+        print(f"USB pacing: resyncs {infos[-1][1][6]}, worst lateness per second (ms) {late}")
     print(f"USB button frames: {buttons[:20]}")
 
 
@@ -135,8 +138,8 @@ if __name__ == "__main__":
         # USB and BLE at once: measure.py both COM9 "Calliope mini" 20
         import threading
         name = sys.argv[3]
-        secs = float(sys.argv[4]) if len(sys.argv) > 4 else 20
-        t = threading.Thread(target=usb, args=(target, secs + 12))
+        secs = float(sys.argv[4]) if len(sys.argv) > 4 else 20.0
+        t = threading.Thread(target=usb, args=(target, secs + 20))
         t.start()
         asyncio.run(ble(name, secs))
         t.join()
