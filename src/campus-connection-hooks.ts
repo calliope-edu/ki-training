@@ -13,17 +13,30 @@ import { ConnectionStatus } from "./connect-status-hooks";
 import { useConnectionStage } from "./connection-stage-hooks";
 import {
   CampusStatus,
+  disconnectedCampusStatus,
   getCampusHost,
   isCampusMode,
+  isCampusSimulation,
 } from "./device/campus-host";
 import { getCampusBluetooth } from "./device/campusBluetooth";
+import {
+  campusDataTransport,
+  getCampusConnection,
+} from "./device/campusConnection";
 
-const disconnectedStatus: CampusStatus = {
-  ble: "disconnected",
-  usb: "disconnected",
-  boardVersion: null,
-  flashing: false,
-};
+// Campus mode still reads motion data over Bluetooth only
+// (CampusBluetoothConnection). Only the simulated Campus (`?simulate=campus`)
+// uses CampusConnection, which reads it over USB as well.
+
+/** The trainer's device connection in Campus mode. */
+export const getCampusDevice = () =>
+  isCampusSimulation() ? getCampusConnection() : getCampusBluetooth();
+
+/** Whether Campus holds a link the trainer can read motion data over. */
+const hasDataLink = (status: CampusStatus) =>
+  isCampusSimulation()
+    ? campusDataTransport(status) !== null
+    : status.ble === "connected";
 
 /** Campus' connection status as it last reported it (disconnected outside Campus). */
 export const useCampusStatus = (): CampusStatus => {
@@ -33,7 +46,7 @@ export const useCampusStatus = (): CampusStatus => {
     []
   );
   const getSnapshot = useCallback(
-    () => (isCampusMode() ? getCampusHost().status : disconnectedStatus),
+    () => (isCampusMode() ? getCampusHost().status : disconnectedCampusStatus),
     []
   );
   return useSyncExternalStore(subscribe, getSnapshot);
@@ -63,7 +76,7 @@ export const useCampusConnectionSync = () => {
       lookedRef.current = false;
       return;
     }
-    if (campus.ble !== "connected") {
+    if (!hasDataLink(campus)) {
       lookedRef.current = false;
       if (status === ConnectionStatus.Connected) {
         // The widget lost or ended the link: no "connection lost" dialog,
@@ -75,7 +88,7 @@ export const useCampusConnectionSync = () => {
     if (!lookedRef.current && followable.has(status)) {
       lookedRef.current = true;
       actions.followCampusConnection();
-      void getCampusBluetooth().follow();
+      void getCampusDevice().follow();
     }
   }, [actions, campus, status]);
 };

@@ -19,7 +19,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { useCampusStatus } from "../campus-connection-hooks";
 import { ConnectionStatus } from "../connect-status-hooks";
 import { useConnectionStage } from "../connection-stage-hooks";
-import { isCampusMode } from "../device/campus-host";
+import { isCampusMode, isCampusSimulation } from "../device/campus-host";
 import microbitImage from "../images/stylised-microbit-black.svg";
 import { keyboardShortcuts, useShortcut } from "../keyboard-shortcut-hooks";
 import { useLogging } from "../logging/logging-hooks";
@@ -59,7 +59,13 @@ const LiveGraphPanel = ({
     : campus.ble === "connected"
     ? ["campus-microbit-ble-connected", "campus-connect-needs-program"]
     : campus.usb === "connected"
-    ? ["campus-microbit-usb-connected", "campus-connect-needs-bluetooth"]
+    ? [
+        "campus-microbit-usb-connected",
+        // The simulated Campus reads motion data over USB too (campusConnection.ts).
+        isCampusSimulation()
+          ? "campus-connect-needs-program"
+          : "campus-connect-needs-bluetooth",
+      ]
     : ["microbit-not-connected", disconnectedTextId];
 
   const handleConnectOrReconnect = useCallback(() => {
