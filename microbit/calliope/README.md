@@ -55,7 +55,7 @@ What a host has to do (connection widget / Campus):
   program is reported as the Blocks runtime.
 - Relay `0x0203` and `0x0210` unthrottled.
 
-## Measured (2026-11-19)
+## Measured (2026-11-19/20)
 
 Measured with `tools/measure.py` (USB: frames per second and sequence gaps on
 the serial port; BLE: notifications of the accelerometer data characteristic).
@@ -66,6 +66,7 @@ the serial port; BLE: notifications of the accelerometer data characteristic).
 | mini 3 | USB alone (60 s) | 50.0/s | 0 | -275 / -103 / -934 (board moved since the row above) |
 | mini 3 | BLE alone | 50.6/s | – | -145 / -140 / -959 |
 | mini 3 | USB and BLE at once (BLE 60 s, USB 35 s) | USB 50.0/s, BLE 50.2/s | 0 | -275 / -103 / -934 on both |
+| mini 3 | shipped build, USB and BLE at once (BLE 60 s, USB 80 s) | USB 50.0/s, BLE 50.2/s | 0 | -84 / 38 / -981 on both |
 | mini 2 | old data collection program, BLE | 231.8 notifications/s (bursts, see below) | – | -690 / 348 / -691 |
 | mini 2 | USB alone (12 s) | 49.5/s | 0 | -688 / 349 / -692 |
 | mini 2 | USB alone, untouched (300 s) | 49.3/s | 0 | – |
