@@ -118,7 +118,12 @@ see the decision above. The full description is in `microbit/calliope/README.md`
       `data[1] == 0x4D`) and does not count `0x02xx` frames towards the Blocks runtime's
       valid-frame fallback (`probeUsb`, `probeJlinkSerial`), or it reports the program as the
       Blocks runtime. In `src/lib/kiTraining/kiTraining.ts`, the `status` message to the
-      trainer says whether the ML data program runs over USB, and Campus relays 0x0203 MOTION
+      trainer gains `program`: the program the widget detected on the mini, `"ml-data"` for
+      the ML data program (recognised over USB by ML_INFO), `"blocks"`, `"unknown"` for any
+      other, `null` while it has not looked (as fixed by W3 in the protocol comment of the
+      trainer's `src/device/campus-host.ts`). The trainer subscribes to the channels through
+      the existing GATT proxy as `0b500203-607f-4151-9091-7d008d6ffc5c` and
+      `0b500210-607f-…` (Campus already maps `0b50XXXX` to channel 0xXXXX), and Campus relays 0x0203 MOTION
       and 0x0210 BUTTON frames to the trainer unthrottled at 50 Hz (nothing in
       `calliopeRemoteHost.ts` or the widget's codec may batch or drop them). When no frame
       arrived over USB for about 3 s, the port is closed and reopened (mini 2 J-Link stalls,
@@ -126,21 +131,27 @@ see the decision above. The full description is in `microbit/calliope/README.md`
       protocol comment in the trainer's `campus-host.ts` is updated in W3. Tests in
       `kiTraining.test.ts`. Lands on its own: without a trainer asking for it, nothing
       changes for users.
-- [ ] **W3:** Trainer: `CampusConnection` against a simulated ML data program. Repository
-      ml-trainer, on top of `feat-calliope`. New `src/device/campusConnection.ts` that
-      implements what `CampusBluetoothConnection` implements, but bound to no transport:
-      connected when Campus reports the ML data program over USB (then it reads 0x0203 MOTION
-      and 0x0210 BUTTON) or the data collection services over BLE (as `campusBluetooth.ts`
-      does today). `connect()` asks Campus to flash the ML data program when it does not run,
-      choosing `calliope-ml-data-dal.hex` or `calliope-ml-data-codal.hex` by board version (or
-      a universal hex built from both); `follow()` never flashes. Extend
-      `CampusHost`/`CampusStatus` with what W2 reports and update the protocol comment. A
-      simulated program (like `mockBluetooth.ts`) emits 0x0203 every 20 ms and button frames,
-      for unit tests and for running the trainer without hardware. Not wired into Campus mode
-      yet, so it lands without changing behaviour.
+- [x] **W3:** Trainer: `CampusConnection` against a simulated ML data program. Repository
+      ml-trainer. `src/device/campusConnection.ts` (`CampusConnection`) reads motion data
+      over whichever link Campus holds: Bluetooth when Campus has it (the micro:bit
+      accelerometer and button services, as `campusBluetooth.ts`), otherwise USB once Campus
+      reports `program: "ml-data"` (0x0203 MOTION and 0x0210 BUTTON through the GATT proxy).
+      It moves between the two when Campus switches links. `connect()` asks Campus for a
+      Bluetooth link only when it holds none, and flashes the ML data program
+      (`calliope-ml-data-dal.hex` for V1, `calliope-ml-data-codal.hex` for V2, a universal
+      hex of both built at runtime when the board is not known) when it does not run;
+      `follow()` never flashes. `CampusStatus` gained `program`; the protocol comment in
+      `campus-host.ts` describes it and the USB channels. `src/device/campusSimulation.ts`
+      simulates Campus and the ML data program (MOTION every 20 ms, BUTTON frames, ML_INFO)
+      for the unit tests (`campusConnection.test.ts`) and for running the trainer without
+      hardware: `?simulate=campus` (options `simLink`, `simProgram`, `simBoard`) runs Campus
+      mode against it with a small control panel. Campus mode itself still uses
+      `CampusBluetoothConnection`; only the simulation uses `CampusConnection`
+      (`getCampusDevice()` and `hasDataLink()` in `src/campus-connection-hooks.ts`).
 - [ ] **W4:** Trainer: switch Campus mode to the ML data program. Repository ml-trainer.
       Needs W2 landed and W3. `campus-connection-hooks.ts` and everything that calls
-      `getCampusBluetooth()` use `CampusConnection`. It follows the widget over USB or BLE,
+      `getCampusBluetooth()` use `CampusConnection` (drop the `isCampusSimulation()`
+      branches in `getCampusDevice()`, `hasDataLink()` and `LiveGraphPanel.tsx`). It follows the widget over USB or BLE,
       offers "Connect" (which flashes the ML data program through Campus) only when it does
       not run, and as since #4 never flashes unprompted. In Campus mode the ML data program
       replaces `universal-hex.hex`; `campusBluetooth.ts` folds into `CampusConnection`. The

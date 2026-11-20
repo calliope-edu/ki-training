@@ -34,12 +34,17 @@ import { ConnectProvider } from "./connect-actions-hooks";
 import { ConnectStatusProvider } from "./connect-status-hooks";
 import { ConnectionStageProvider } from "./connection-stage-hooks";
 import { deployment, useDeployment } from "./deployment";
-import { useCampusConnectionSync } from "./campus-connection-hooks";
-import { getCampusBluetooth } from "./device/campusBluetooth";
+import {
+  getCampusDevice,
+  useCampusConnectionSync,
+} from "./campus-connection-hooks";
+import CampusSimulationPanel from "./components/CampusSimulationPanel";
+import { startCampusSimulation } from "./device/campusSimulation";
 import {
   getCampusHost,
   isCampusMode,
   isCampusRoomMode,
+  isCampusSimulation,
 } from "./device/campus-host";
 import { MockWebBluetoothConnection } from "./device/mockBluetooth";
 import { MockRadioBridgeConnection } from "./device/mockRadioBridge";
@@ -83,11 +88,15 @@ const logging = deployment.logging;
 const usb = isMockDeviceMode()
   ? new MockWebUSBConnection()
   : createWebUSBConnection({ logging });
+// `?simulate=campus`: Campus mode against a simulated Campus and mini.
+if (isCampusSimulation()) {
+  startCampusSimulation();
+}
 // In Campus, Campus holds the Bluetooth link (see device/campus-host.ts).
 const bluetooth = isMockDeviceMode()
   ? new MockWebBluetoothConnection()
   : isCampusMode()
-  ? getCampusBluetooth()
+  ? getCampusDevice()
   : createWebBluetoothConnection({ logging });
 // In a Campus room, Campus keeps the project (see campus-room.ts).
 if (isCampusRoomMode()) {
@@ -176,6 +185,7 @@ const Layout = () => {
       <ScrollRestoration />
       <ProjectProvider driverRef={driverRef}>
         {isCampusMode() && <CampusConnectionSync />}
+        {isCampusSimulation() && <CampusSimulationPanel />}
         <EditCodeDialog ref={driverRef} />
         <CampusRoomGate>
           <Outlet />

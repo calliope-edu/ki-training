@@ -17,12 +17,34 @@
  *                       {type: "mltrainer", action: "makecode", project, model}   (room mode)
  *                       {type: "calliope.read", serviceId, characteristicId, reqId}
  *                       {type: "calliope.subscribe" | "calliope.unsubscribe", serviceId, characteristicId}
- *   campus -> trainer:  {type: "mltrainer", action: "status", ble, usb, boardVersion, flashing}
+ *   campus -> trainer:  {type: "mltrainer", action: "status", ble, usb, boardVersion, flashing, program}
  *                       {type: "mltrainer", action: "result", reqId, ok, error?}
  *                       {type: "mltrainer", action: "load", project, model, name, readonly}   (room mode)
  *                       {source: "calliope-host", type: "calliope.readResult", reqId, message}
  *                       {source: "calliope-host", type: "calliope.notify", serviceId, characteristicId, message}
  * GATT messages carry their bytes base64-encoded.
+ *
+ * `program` is the program Campus' connection widget detected on the mini:
+ * "ml-data" for the trainer's ML data program (microbit/calliope), which the
+ * widget recognises over USB by its ML_INFO frame (channel 0x0200,
+ * data[1] == 0x4D); "blocks" for the Blocks runtime; "unknown" for any other
+ * program; null while it has not looked (no link, flashing) and from a Campus
+ * that does not report it yet.
+ *
+ * Motion data reaches the trainer in one of two ways, through the same GATT
+ * proxy (see campusConnection.ts):
+ *   Bluetooth: the micro:bit accelerometer (e95d0753…) and button (e95d9882…)
+ *              services of the data collection program, which the ML data
+ *              program keeps.
+ *   USB:       the ML data program's serial channels, addressed as
+ *              `0b50XXXX-607f-4151-9091-7d008d6ffc5c` for channel 0xXXXX, as
+ *              Campus maps Blocks UUIDs to channels. Campus relays every
+ *              NOTIFY frame on a subscribed channel unthrottled:
+ *                0x0203 MOTION  every 20 ms: X, Y, Z int16 LE in milli-g, seq (uint8)
+ *                0x0210 BUTTON  on change: [button (1 = A, 2 = B), state (0/1/2)]
+ *              A read of 0x0200 answers ML_INFO. Campus prefers Bluetooth when
+ *              it holds both links, so the trainer reads USB channels only
+ *              while Bluetooth is down. See microbit/calliope/README.md.
  *
  * Room mode (`&project=campus`): the trainer is a program of a Campus room.
  * Campus keeps its project and hands it over with `load` (null for a new
@@ -48,24 +70,45 @@ const parentOrigin = (() => {
   }
 })();
 
+/**
+ * True with `?simulate=campus`: the trainer runs as if embedded in Campus,
+ * against a simulated Campus and ML data program (campusSimulation.ts), so
+ * Campus mode can be tried without Campus or a mini.
+ */
+export const isCampusSimulation = (): boolean =>
+  params.get("simulate") === "campus";
+
 /** True when the trainer runs embedded in Campus, which owns the mini. */
 export const isCampusMode = (): boolean =>
-  params.get("controller") === "2" &&
-  parentOrigin !== null &&
-  window.parent !== window;
+  isCampusSimulation() ||
+  (params.get("controller") === "2" &&
+    parentOrigin !== null &&
+    window.parent !== window);
 
 /** True in a Campus room, where Campus keeps the project (see src/campus-room.ts). */
 export const isCampusRoomMode = (): boolean =>
-  isCampusMode() && params.get("project") === "campus";
+  !isCampusSimulation() && isCampusMode() && params.get("project") === "campus";
 
 export type CampusLinkStatus = "connected" | "connecting" | "disconnected";
+
+/** The program Campus detected on the mini (see the protocol above). */
+export type CampusProgram = "ml-data" | "blocks" | "unknown";
 
 export interface CampusStatus {
   ble: CampusLinkStatus;
   usb: CampusLinkStatus;
   boardVersion: BoardVersion | null;
   flashing: boolean;
+  program: CampusProgram | null;
 }
+
+export const disconnectedCampusStatus: CampusStatus = {
+  ble: "disconnected",
+  usb: "disconnected",
+  boardVersion: null,
+  flashing: false,
+  program: null,
+};
 
 interface IncomingMessage {
   type?: unknown;
@@ -78,6 +121,7 @@ interface IncomingMessage {
   usb?: unknown;
   boardVersion?: unknown;
   flashing?: unknown;
+  program?: unknown;
   serviceId?: unknown;
   characteristicId?: unknown;
   message?: unknown;
@@ -130,6 +174,13 @@ const isProject = (value: unknown): value is MakeCodeProject => {
 const linkStatus = (value: unknown): CampusLinkStatus =>
   value === "connected" || value === "connecting" ? value : "disconnected";
 
+const program = (value: unknown): CampusProgram | null =>
+  value === "ml-data" || value === "blocks"
+    ? value
+    : typeof value === "string" && value
+    ? "unknown"
+    : null;
+
 const base64ToBytes = (b64: string): Uint8Array => {
   const raw = atob(b64);
   const out = new Uint8Array(raw.length);
@@ -147,16 +198,27 @@ type NotifyListener = (data: DataView) => void;
 type LoadListener = (load: CampusLoad) => void;
 
 /**
+ * What a device connection needs of Campus: its status, the requests to
+ * connect and flash, and the GATT proxy. CampusHost is the real one;
+ * SimulatedCampusHost (campusSimulation.ts) plays Campus without hardware.
+ */
+export type CampusLink = Pick<
+  CampusHost,
+  | "status"
+  | "addStatusListener"
+  | "connect"
+  | "flash"
+  | "read"
+  | "subscribe"
+  | "unsubscribe"
+>;
+
+/**
  * The trainer's side of the Campus link: requests to Campus, its answers,
  * the connection status it reports and the GATT proxy.
  */
 export class CampusHost {
-  status: CampusStatus = {
-    ble: "disconnected",
-    usb: "disconnected",
-    boardVersion: null,
-    flashing: false,
-  };
+  status: CampusStatus = disconnectedCampusStatus;
   private nextReqId = 1;
   private pendingResults = new Map<
     number,
@@ -191,7 +253,7 @@ export class CampusHost {
     }
     if (data.type === "mltrainer") {
       if (data.action === "status") {
-        this.status = {
+        this.setStatus({
           ble: linkStatus(data.ble),
           usb: linkStatus(data.usb),
           boardVersion:
@@ -199,8 +261,8 @@ export class CampusHost {
               ? data.boardVersion
               : null,
           flashing: data.flashing === true,
-        };
-        this.statusListeners.forEach((listener) => listener(this.status));
+          program: program(data.program),
+        });
       } else if (data.action === "load") {
         const load: CampusLoad = {
           project: isProject(data.project) ? data.project : null,
@@ -242,6 +304,11 @@ export class CampusHost {
       )?.(view);
     }
   };
+
+  protected setStatus(status: CampusStatus) {
+    this.status = status;
+    this.statusListeners.forEach((listener) => listener(this.status));
+  }
 
   private request(
     message: Record<string, unknown>
@@ -336,4 +403,9 @@ export const getCampusHost = (): CampusHost => {
     host = new CampusHost();
   }
   return host;
+};
+
+/** Makes `simulated` the page's Campus link (see campusSimulation.ts). */
+export const installCampusHost = (simulated: CampusHost) => {
+  host = simulated;
 };
