@@ -6,9 +6,9 @@
  * The data collection mini in Campus mode (see campus-host.ts), over
  * whichever link Campus holds:
  *
- * - Bluetooth: the micro:bit accelerometer and button services, as
- *   campusBluetooth.ts reads them from the data collection program. The ML
- *   data program keeps them.
+ * - Bluetooth: the micro:bit accelerometer and button services of the ML
+ *   data program, the same the trainer's data collection program offers, so
+ *   a mini running either is picked up.
  * - USB: the ML data program (microbit/calliope) streams motion every 20 ms
  *   and button changes on the serial port; Campus recognises it (status
  *   `program: "ml-data"`) and relays its frames through the GATT proxy.
@@ -17,9 +17,9 @@
  * does not run; follow() only picks up a link Campus already holds and never
  * flashes, so a program the user put onto the mini stays.
  *
- * Not wired into Campus mode yet: Campus mode still uses
- * CampusBluetoothConnection; only the simulated Campus (`?simulate=campus`,
- * campusSimulation.ts) uses this one.
+ * In Campus mode the ML data program takes the place of the data collection
+ * program (universal-hex.hex) the standalone trainer flashes. The simulated
+ * Campus (`?simulate=campus`, campusSimulation.ts) runs this same class.
  */
 import {
   AccelerometerData,

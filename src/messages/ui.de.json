@@ -165,12 +165,6 @@
       "value": "Dieser Browser wird nicht unterstützt"
     }
   ],
-  "campus-connect-needs-bluetooth": [
-    {
-      "type": 0,
-      "value": "Die Bewegungsdaten kommen über Bluetooth. „Verbinden“ stellt die Bluetooth-Verbindung her."
-    }
-  ],
   "campus-connect-needs-program": [
     {
       "type": 0,

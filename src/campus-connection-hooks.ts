@@ -5,8 +5,9 @@
  *
  * Campus mode: the trainer's connection follows Campus' connection widget
  * (see device/campus-host.ts). A mini connected in the widget is picked up
- * without a click, a link the widget loses ends the trainer's connection
- * quietly, and the trainer shows how the mini is connected (USB, Bluetooth).
+ * without a click when it runs the ML data program (over USB or Bluetooth), a
+ * link the widget loses ends the trainer's connection quietly, and the
+ * trainer shows how the mini is connected (USB, Bluetooth).
  */
 import { useCallback, useEffect, useRef, useSyncExternalStore } from "react";
 import { ConnectionStatus } from "./connect-status-hooks";
@@ -16,27 +17,21 @@ import {
   disconnectedCampusStatus,
   getCampusHost,
   isCampusMode,
-  isCampusSimulation,
 } from "./device/campus-host";
-import { getCampusBluetooth } from "./device/campusBluetooth";
 import {
   campusDataTransport,
   getCampusConnection,
 } from "./device/campusConnection";
 
-// Campus mode still reads motion data over Bluetooth only
-// (CampusBluetoothConnection). Only the simulated Campus (`?simulate=campus`)
-// uses CampusConnection, which reads it over USB as well.
-
-/** The trainer's device connection in Campus mode. */
-export const getCampusDevice = () =>
-  isCampusSimulation() ? getCampusConnection() : getCampusBluetooth();
+/**
+ * The trainer's device connection in Campus mode: the ML data program over
+ * USB or Bluetooth, whichever link Campus holds (device/campusConnection.ts).
+ */
+export const getCampusDevice = getCampusConnection;
 
 /** Whether Campus holds a link the trainer can read motion data over. */
 const hasDataLink = (status: CampusStatus) =>
-  isCampusSimulation()
-    ? campusDataTransport(status) !== null
-    : status.ble === "connected";
+  campusDataTransport(status) !== null;
 
 /** Campus' connection status as it last reported it (disconnected outside Campus). */
 export const useCampusStatus = (): CampusStatus => {
@@ -67,7 +62,7 @@ const followable = new Set<ConnectionStatus>([
 export const useCampusConnectionSync = () => {
   const { status, actions } = useConnectionStage();
   const campus = useCampusStatus();
-  // One look per link: whether the mini runs the data collection program.
+  // One look per link: whether the mini runs the ML data program.
   // Looked at again after the link comes back or a program was transferred.
   const lookedRef = useRef(false);
 

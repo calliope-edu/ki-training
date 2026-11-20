@@ -161,12 +161,6 @@
       "value": "お使いのブラウザーはサポートされていません。"
     }
   ],
-  "campus-connect-needs-bluetooth": [
-    {
-      "type": 0,
-      "value": "Movement data comes via Bluetooth. Connect sets up the Bluetooth connection."
-    }
-  ],
   "campus-connect-needs-program": [
     {
       "type": 0,

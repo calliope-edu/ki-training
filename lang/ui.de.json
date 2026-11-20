@@ -86,13 +86,9 @@
     "defaultMessage": "Dieser Browser wird nicht unterstützt",
     "description": "Heading for browser support dialog"
   },
-  "campus-connect-needs-bluetooth": {
-    "defaultMessage": "Die Bewegungsdaten kommen über Bluetooth. „Verbinden“ stellt die Bluetooth-Verbindung her.",
-    "description": "Live graph hint in Calliope Campus below campus-microbit-usb-connected"
-  },
   "campus-connect-needs-program": {
     "defaultMessage": "Zum Aufzeichnen und Testen braucht er das Programm zur Datenerfassung. „Verbinden“ überträgt es.",
-    "description": "Live graph hint in Calliope Campus below campus-microbit-ble-connected"
+    "description": "Live graph hint in Calliope Campus below campus-microbit-ble-connected and campus-microbit-usb-connected"
   },
   "campus-microbit-ble-connected": {
     "defaultMessage": "Dein Calliope mini ist über Bluetooth verbunden",
@@ -100,7 +96,7 @@
   },
   "campus-microbit-usb-connected": {
     "defaultMessage": "Dein Calliope mini ist über USB verbunden",
-    "description": "Live graph status in Calliope Campus when the Calliope mini is connected via USB only in the Campus connection widget"
+    "description": "Live graph status in Calliope Campus when the Calliope mini is connected via USB only in the Campus connection widget but does not run the ML data program"
   },
   "cancel-action": {
     "defaultMessage": "Abbrechen",
