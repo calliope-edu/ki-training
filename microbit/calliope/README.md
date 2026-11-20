@@ -71,6 +71,7 @@ the serial port; BLE: notifications of the accelerometer data characteristic).
 | mini 2 | USB alone, untouched (300 s) | 49.3/s | 0 | – |
 | mini 2 | USB and BLE at once (BLE 120 s, USB 140 s) | USB 49.4/s, BLE 163 notifications/s | 0 | -28 / 878 / -577 on both |
 | mini 2 | USB with button presses (174 s) | 49.4/s | 0 | A, B, A held: all 7 button frames arrived |
+| mini 2 | USB alone, untouched, reopening a silent port (25 min) | 49.2/s | 301 (two port stalls) | -30 / 858 / -606 |
 
 At the same position the USB stream and BLE agree to within the sensor noise
 (sd 4–13 milli-g), and both match the old data collection program; range is
@@ -90,10 +91,15 @@ within seconds once stalled samples were caught up in a burst. The DAL build
 therefore writes frames byte by byte with `putc` (about 1.1 ms busy wait per
 frame); the CODAL build keeps the interrupt-driven send.
 
-**J-Link CDC.** Twice the mini 2's stream stopped arriving on an open port on
-the PC while the program kept running; closing and reopening the port brought
-it back at once. A host should reopen the port when no frame (not even the
-1 Hz ML_INFO) arrived for a few seconds.
+**J-Link CDC.** On the mini 2 the USB serial link (J-Link OB or the PC driver) stops
+delivering now and then while the program keeps sending: in a 25-minute
+untouched run it happened twice (after 6 and 21 minutes). The uptime in
+ML_INFO ran on without a break (61 s to 1543 s), so the mini did not reset;
+closing and reopening the port brought the stream back at once. With a
+3-second silence check before reopening, the run lost 301 of about 74,000
+samples and averaged 49.2/s. A host must therefore reopen the port when no
+frame (not even the 1 Hz ML_INFO) arrived for a few seconds; `measure.py`
+does exactly that.
 
 Two early mini 3 runs read only 36–43 samples/s over USB with no gap in the
 sequence numbers, so the device itself produced fewer; neither could be
