@@ -5,6 +5,9 @@ This folder contains the micro:bit software, that enables the micro:bit to inter
 Both v1 and v2. micro:bits have separated folders for source code.
 Inside each folder is an instruction on the build process, as the build tools needed are not the same.
 
+### Calliope mini
+`calliope/` holds the ML data program for the Calliope mini 1/2 (DAL) and mini 3 (CODAL): the data collection program over Bluetooth plus a motion and button stream over USB. See `calliope/README.md`.
+
 ### What if i want to alter the micro:bit software?
 Navigate into the version you wish to change and follow the instructions. 
 There will be a comprehensive guide on how to install the build tools. All the code has accompanying documentation

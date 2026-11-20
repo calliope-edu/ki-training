@@ -47,9 +47,28 @@ def usb(port, seconds):
     buf = bytearray()
     stamps, xyz, seqs = [], [], []
     infos, buttons, bad, other = [], [], 0, 0
-    end = time.time() + seconds
+    t0 = time.time()
+    end = t0 + seconds
+    last_report = t0
+    last_data = t0
+    reopens = []
     while time.time() < end:
-        buf += s.read(256)
+        chunk = s.read(256)
+        buf += chunk
+        if chunk:
+            last_data = time.time()
+        elif time.time() - last_data > 3:
+            # Nothing at all for 3 s (not even the 1 Hz ML_INFO): reopen the
+            # port, as a host should, and log it with the device's uptime.
+            s.close()
+            s = serial.Serial(port, 115200, timeout=0.05)
+            last_data = time.time()
+            reopens.append(round(last_data - t0, 1))
+            up = infos[-1][1] if infos else None
+            print(f"reopened port at {last_data - t0:.1f}s (last info before: {up})", flush=True)
+        if time.time() - last_report >= 10:
+            last_report = time.time()
+            print(f"{last_report - t0:.0f}s: {len(stamps)} motion frames so far", flush=True)
         while True:
             i = buf.find(bytes([SFD]))
             if i < 0:
@@ -81,7 +100,8 @@ def usb(port, seconds):
             elif ch == 0x0200:
                 infos.append((round(now, 2), list(data)))
             elif ch == 0x0210:
-                buttons.append(list(data))
+                buttons.append((round(now - t0, 1), list(data)))
+                print(f"button at {now - t0:.1f}s: {list(data)}", flush=True)
             elif ch == 0x02F0:
                 print("timing n/avgBody/maxBody/avgSleep/lastWait:", list(data[:5]))
             else:
@@ -93,7 +113,11 @@ def usb(port, seconds):
     late = [d[7] for _, d in infos if len(d) >= 8]
     if late:
         print(f"USB pacing: resyncs {infos[-1][1][6]}, worst lateness per second (ms) {late}")
+    if infos and len(infos[0][1]) >= 10:
+        up = lambda d: d[8] | (d[9] << 8)
+        print(f"USB uptime: {up(infos[0][1])} s .. {up(infos[-1][1])} s")
     print(f"USB button frames: {buttons[:20]}")
+    print(f"USB port reopened after a silent stall at: {reopens}")
 
 
 ACC_SERVICE = "e95d0753-251d-470a-a062-fa1922dfa9a8"

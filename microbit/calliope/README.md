@@ -36,14 +36,16 @@ the Blocks runtime (which uses `0x01xx`):
 
 | channel | type | when | data |
 | --- | --- | --- | --- |
-| `0x0200` ML_INFO | `0x01` RES_READ | reply to the host's `FF 01 02 00` (REQ_READ 0x0200), and once per second unprompted | `[hardware (1 = mini 1/2, 2 = mini 3), 0x4D ('M'), protocol version (1), firmware build (1), sample period ms (20), range g (2), motion resyncs since boot (wraps), worst motion lateness in ms since the last ML_INFO]` |
+| `0x0200` ML_INFO | `0x01` RES_READ | reply to the host's `FF 01 02 00` (REQ_READ 0x0200), and once per second unprompted | `[hardware (1 = mini 1/2, 2 = mini 3), 0x4D ('M'), protocol version (1), firmware build (1), sample period ms (20), range g (2), motion resyncs since boot (wraps), worst motion lateness in ms since the last ML_INFO, uptime in s as uint16 LE]` |
 | `0x0203` MOTION | `0x21` NOTIFY | every 20 ms | X, Y, Z as int16 little-endian in milli-g (the values the BLE accelerometer service sends, not negated), then a uint8 sequence number wrapping at 256 |
 | `0x0210` BUTTON | `0x21` NOTIFY | on each change | `[button (1 = A, 2 = B), state (0 = released, 1 = pressed, 2 = long press, as the BLE button service)]` |
 
 Samples are paced against an absolute 20 ms deadline (no drift from the
-scheduler tick). If the TX buffer has no room, that sample is dropped and the
-sequence number shows the gap. The host stamps samples on arrival, as with
-Bluetooth.
+scheduler tick). After a short stall (up to 120 ms; the mini 2 stalls about
+50 ms now and then next to BLE) the missed samples are sent at once to catch
+up; after a longer one the loop resynchronises and counts a resync. On the
+mini 3, a sample is dropped if the TX buffer has no room, and the sequence
+number shows the gap. The host stamps samples on arrival, as with Bluetooth.
 
 What a host has to do (connection widget / Campus):
 
@@ -64,17 +66,48 @@ the serial port; BLE: notifications of the accelerometer data characteristic).
 | mini 3 | USB alone (60 s) | 50.0/s | 0 | -275 / -103 / -934 (board moved since the row above) |
 | mini 3 | BLE alone | 50.6/s | – | -145 / -140 / -959 |
 | mini 3 | USB and BLE at once (BLE 60 s, USB 35 s) | USB 50.0/s, BLE 50.2/s | 0 | -275 / -103 / -934 on both |
-| mini 2 | – | not measured yet | | |
+| mini 2 | old data collection program, BLE | 231.8 notifications/s (bursts, see below) | – | -690 / 348 / -691 |
+| mini 2 | USB alone (12 s) | 49.5/s | 0 | -688 / 349 / -692 |
+| mini 2 | USB alone, untouched (300 s) | 49.3/s | 0 | – |
+| mini 2 | USB and BLE at once (BLE 120 s, USB 140 s) | USB 49.4/s, BLE 163 notifications/s | 0 | -28 / 878 / -577 on both |
+| mini 2 | USB with button presses (174 s) | 49.4/s | 0 | A, B, A held: all 7 button frames arrived |
 
 At the same position the USB stream and BLE agree to within the sensor noise
-(sd 4–5 milli-g), and both match the old data collection program; range is
+(sd 4–13 milli-g), and both match the old data collection program; range is
 2 g on all of them.
+
+The mini 2's USB rate is 49.3–49.5/s rather than 50.0: no sequence gaps and no
+resyncs, so the DAL's millisecond clock (6 ms ticks) runs about 1 % slow
+against the PC. Over BLE the DAL accelerometer service notifies on every
+sensor update, in bursts (median spacing under 1 ms); the old data collection
+program does the same, so that is unchanged behaviour, not part of this
+program.
+
+**mini 2 serial TX.** With microbit-dal's interrupt-driven `serial.send`, the
+mini 2's USB stream died for good (BLE still advertising) as soon as a send
+came while the previous frame was still going out: after button presses, and
+within seconds once stalled samples were caught up in a burst. The DAL build
+therefore writes frames byte by byte with `putc` (about 1.1 ms busy wait per
+frame); the CODAL build keeps the interrupt-driven send.
+
+**J-Link CDC.** Twice the mini 2's stream stopped arriving on an open port on
+the PC while the program kept running; closing and reopening the port brought
+it back at once. A host should reopen the port when no frame (not even the
+1 Hz ML_INFO) arrived for a few seconds.
 
 Two early mini 3 runs read only 36–43 samples/s over USB with no gap in the
 sequence numbers, so the device itself produced fewer; neither could be
 reproduced in later runs (clean builds, 40–60 s, with and without BLE: 50.0/s,
 no resync). ML_INFO bytes 6–7 (resync count, worst lateness per second) let a
 host see this happen in the field.
+
+## Shipped hexes
+
+`src/device/firmware/calliope-ml-data-dal.hex` (mini 1/2) and
+`src/device/firmware/calliope-ml-data-codal.hex` (mini 3) are the builds measured
+below. Nothing in the trainer loads them yet; the standalone trainer still
+flashes `universal-hex.hex`. Switching the trainer (and Campus) to them is a
+separate step.
 
 ## Build
 

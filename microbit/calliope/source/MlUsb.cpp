@@ -21,10 +21,11 @@ extern MicroBit uBit;
 #define ML_TX_BUFFER 128
 #define ML_RX_BUFFER 32
 
-#define ML_INFO_LEN 8
+#define ML_INFO_LEN 10
 #define ML_MOTION_LEN 7
 #define ML_BUTTON_LEN 2
 #define ML_MAX_FRAME (6 + ML_INFO_LEN)
+#define ML_MAX_CATCH_UP_MS 120
 
 static uint8_t motionSeq = 0;
 // Pacing health, reported in ML_INFO: how often the motion loop fell more
@@ -57,6 +58,21 @@ static bool sendFrame(uint8_t type, uint16_t ch, const uint8_t *data, int len, i
   memcpy(&frame[5], data, len);
   frame[size - 1] = chksum(frame, size - 1);
 
+#if !MICROBIT_CODAL
+  // microbit-dal's interrupt-driven TX re-attaches the UART TX interrupt
+  // handler on every send and raises a message-bus event from the interrupt.
+  // Whenever a send came while the previous frame was still going out (a
+  // button frame next to a motion frame, or two motion frames after a stall)
+  // the mini 2's serial output died for good while BLE carried on. Write the
+  // frame byte by byte instead, waiting on the UART's ready flag: about
+  // 1.1 ms of busy wait per frame at 115200 baud, no interrupt, no ring
+  // buffer, no event. Fibers are cooperative, so frames never interleave.
+  (void)maxWaitMs;
+  for (int i = 0; i < size; i++) {
+    uBit.serial.putc(frame[i]);
+  }
+  return true;
+#else
   for (int waited = 0; (ML_TX_BUFFER - uBit.serial.txBufferedSize()) < size; waited++) {
     if (waited >= maxWaitMs) {
       return false;
@@ -70,6 +86,7 @@ static bool sendFrame(uint8_t type, uint16_t ch, const uint8_t *data, int len, i
     fiber_sleep(1);
   }
   return false;
+#endif
 }
 
 static void sendInfo() {
@@ -83,6 +100,9 @@ static void sendInfo() {
   data[6] = motionResyncs;
   data[7] = motionMaxLate;
   motionMaxLate = 0;
+  uint16_t uptime = (uint16_t)(system_timer_current_time() / 1000);
+  data[8] = (uint8_t)(uptime & 0xFF);
+  data[9] = (uint8_t)(uptime >> 8);
   sendFrame(ML_RES_READ, ML_CH_INFO, data, ML_INFO_LEN, 20);
 }
 
@@ -120,10 +140,11 @@ static void motionFiber() {
     if (wait < 0 && -wait > motionMaxLate) {
       motionMaxLate = (uint8_t)(-wait > 255 ? 255 : -wait);
     }
-    if (wait < -ML_SAMPLE_PERIOD_MS) {
+    if (wait < -ML_MAX_CATCH_UP_MS) {
       motionResyncs++;
-      // Fell more than a period behind (e.g. a long display print or flash
-      // write): resynchronise rather than bursting to catch up.
+      // Fell far behind (e.g. a long flash write): resynchronise rather than
+      // bursting. Shorter hiccups (the mini 2 stalls ~50 ms now and then next
+      // to BLE) are caught up, so the rate stays at 50 samples/s.
       next = system_timer_current_time();
       wait = 0;
     }
