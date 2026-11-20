@@ -112,7 +112,7 @@ see the decision above. The full description is in `microbit/calliope/README.md`
   overlapped; and in a 25-minute soak the mini 2's USB link went silent on the PC side
   twice (the mini kept running), and reopening the port brought it back at once.
 
-- [ ] **W2:** Connection widget and Campus: recognise the ML data program over USB and
+- [x] **W2:** Connection widget and Campus: recognise the ML data program over USB and
       relay its stream. Repositories mini-connection-widget and calliope-campus. The widget's
       `program-type.ts` recognises the program by an ML_INFO frame (`0x0200`,
       `data[1] == 0x4D`) and does not count `0x02xx` frames towards the Blocks runtime's
@@ -148,20 +148,27 @@ see the decision above. The full description is in `microbit/calliope/README.md`
       mode against it with a small control panel. Campus mode itself still uses
       `CampusBluetoothConnection`; only the simulation uses `CampusConnection`
       (`getCampusDevice()` and `hasDataLink()` in `src/campus-connection-hooks.ts`).
-- [ ] **W4:** Trainer: switch Campus mode to the ML data program. Repository ml-trainer.
-      Needs W2 landed and W3. `campus-connection-hooks.ts` and everything that calls
-      `getCampusBluetooth()` use `CampusConnection` (drop the `isCampusSimulation()`
-      branches in `getCampusDevice()`, `hasDataLink()` and `LiveGraphPanel.tsx`). It follows the widget over USB or BLE,
-      offers "Connect" (which flashes the ML data program through Campus) only when it does
-      not run, and as since #4 never flashes unprompted. In Campus mode the ML data program
-      replaces `universal-hex.hex`; `campusBluetooth.ts` folds into `CampusConnection`. The
-      `campus-microbit-usb-connected` / `campus-connect-needs-bluetooth` hint in
-      `LiveGraphPanel.tsx` goes, with its strings in `lang/ui.*.json` (then
-      `npm run i18n:compile`). `DataWindow` stays at 20 ms, so existing projects keep
-      working. The standalone trainer is untouched. Done when the owner has recorded, trained
-      and tested live on mini 2 and mini 3, each over USB and over BLE, and a model put on the
-      mini through MakeCode recognises the actions as well as one recorded with the data
-      collection program.
+- [x] **W4:** Trainer: switch Campus mode to the ML data program. Repository ml-trainer.
+      Campus mode uses `CampusConnection` (`getCampusDevice()` and `hasDataLink()` in
+      `src/campus-connection-hooks.ts`); `campusBluetooth.ts` is gone. The trainer follows
+      the widget over USB (once Campus reports `program: "ml-data"`) or Bluetooth, its
+      "Connect" flashes the ML data program through Campus instead of `universal-hex.hex`,
+      and it still never flashes unprompted. The live graph's "movement data comes via
+      Bluetooth" hint (`campus-connect-needs-bluetooth`) and its strings are gone; a mini on
+      USB without the ML data program gets the same "Connect transfers it" hint as one on
+      Bluetooth, under the kept `campus-microbit-usb-connected` title. `DataWindow` stays at
+      20 ms; the standalone trainer is unchanged. Tested by the owner on mini 2 and mini 3,
+      over USB and Bluetooth, recording, training, live testing and a model on the mini
+      through MakeCode (2026-11-21).
+
+      The end-to-end test found a defect outside the trainer: the microbit-connection patch
+      that the widget and Campus each carry decoded DAPLink serial reads with
+      `TextDecoder("iso-8859-1")`, which the Encoding Standard maps to windows-1252. Bytes
+      0x80-0x9F came back changed, so every frame holding one failed its checksum: on a
+      mini 3 over USB about a fifth of the samples and 0.6 s every 5 s were lost (39 instead
+      of 50 per second). Both patches now decode one code unit per byte
+      (`String.fromCharCode`); measured afterwards: 50.0 samples/s, none lost in 60 s.
+      Blocks frames read over DAPLink serial had the same flaw.
 
 ## Order and dependencies
 
