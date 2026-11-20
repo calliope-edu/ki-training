@@ -1,0 +1,11 @@
+{
+  "name": "calliope-ml-data",
+  "version": "1.0.0",
+  "description": "ML data program for the Calliope mini 1/2 (nRF51/DAL): data collection over BLE plus a framed accelerometer/button stream over USB serial.",
+  "license": "MIT",
+  "dependencies": {
+    "microbit": "calliope-mini/microbit#v2.2.0-rc6-calliope.rc5"
+  },
+  "targetDependencies": {},
+  "bin": "./source"
+}
