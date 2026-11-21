@@ -46,9 +46,9 @@ export class ConnectionStageActions {
     this.dataCollectionMicrobitStartConnect(options);
     this.setStatus(ConnectionStatus.NotConnected);
     if (isCampusMode()) {
-      // Campus picks the mini in its connection widget and the data collection
-      // program is flashed through it, so the trainer's connection dialogs are
-      // not needed.
+      // Campus picks the mini in its connection widget (USB or Bluetooth) and
+      // the ML data program is flashed through it, so the trainer's connection
+      // dialogs are not needed.
       void this.connectBluetooth(false);
       return;
     }

@@ -155,12 +155,6 @@
       "value": "crwdns362684:0crwdne362684:0"
     }
   ],
-  "campus-connect-needs-bluetooth": [
-    {
-      "type": 0,
-      "value": "Movement data comes via Bluetooth. Connect sets up the Bluetooth connection."
-    }
-  ],
   "campus-connect-needs-program": [
     {
       "type": 0,
