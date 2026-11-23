@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: MIT
  */
 import {
+  Button,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -14,9 +15,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { ComponentProps, useCallback, useEffect, useState } from "react";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
+import { useCampusStatus } from "../campus-connection-hooks";
 import { ConnectionStatus } from "../connect-status-hooks";
 import { useConnectionStage } from "../connection-stage-hooks";
+import { isCampusMode } from "../device/campus-host";
 import { ConnectOptions } from "../store";
 import { ButtonWithLoading } from "./ButtonWithLoading";
 
@@ -41,6 +44,29 @@ const ConnectFirstDialog = ({
     isDialogOpen: isConnectionDialogOpen,
   } = useConnectionStage();
   const [isWaiting, setIsWaiting] = useState<boolean>(false);
+  const intl = useIntl();
+
+  // In Campus a mini the widget holds is not "not connected": the action
+  // transfers the ML data program instead, which Campus does over USB only
+  // (over Bluetooth in its debug mode alone). As in the live graph panel, a
+  // mini on Bluetooth only gets a hint to plug in the cable, not the action.
+  const campus = useCampusStatus();
+  const isCampus = isCampusMode();
+  const campusUsb = isCampus && campus.usb === "connected";
+  const campusBleOnly = isCampus && !campusUsb && campus.ble === "connected";
+  const [titleId, bodyId] = !isCampus
+    ? ["microbit-not-connected", explanationTextId]
+    : campus.ble === "connected"
+    ? [
+        "campus-microbit-ble-connected",
+        campusUsb ? "campus-connect-needs-program" : "campus-connect-needs-usb",
+      ]
+    : campusUsb
+    ? ["campus-microbit-usb-connected", "campus-connect-needs-program"]
+    : ["microbit-not-connected", explanationTextId];
+  const actionId = campusUsb
+    ? "campus-transfer-program-action"
+    : "connect-action";
 
   const handleOnClose = useCallback(() => {
     setIsWaiting(false);
@@ -115,22 +141,35 @@ const ConnectFirstDialog = ({
       <ModalOverlay>
         <ModalContent>
           <ModalHeader>
-            <FormattedMessage id="microbit-not-connected" />
+            <FormattedMessage id={titleId} />
           </ModalHeader>
           <ModalBody>
             <ModalCloseButton />
             <Text>
-              <FormattedMessage id={explanationTextId} />
+              <FormattedMessage id={bodyId} />
             </Text>
           </ModalBody>
           <ModalFooter justifyContent="flex-end">
-            <ButtonWithLoading
-              variant="primary"
-              onClick={handleConnect}
-              isLoading={isWaiting}
-            >
-              <FormattedMessage id="connect-action" />
-            </ButtonWithLoading>
+            {campusBleOnly ? (
+              <Button variant="primary" onClick={handleOnClose}>
+                <FormattedMessage id="close-action" />
+              </Button>
+            ) : (
+              <ButtonWithLoading
+                variant="primary"
+                onClick={handleConnect}
+                isLoading={isWaiting}
+                aria-label={
+                  campusUsb
+                    ? intl.formatMessage({
+                        id: "campus-transfer-program-action-aria",
+                      })
+                    : undefined
+                }
+              >
+                <FormattedMessage id={actionId} />
+              </ButtonWithLoading>
+            )}
           </ModalFooter>
         </ModalContent>
       </ModalOverlay>
