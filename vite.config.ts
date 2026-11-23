@@ -5,6 +5,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
+import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import react from "@vitejs/plugin-react";
 import ejs from "ejs";
 import fs from "node:fs";
@@ -49,6 +50,35 @@ const viteEjsPlugin = (data: ejs.Data): Plugin => {
   };
 };
 
+/**
+ * The connection widget (@calliope-edu/mini-connection-widget) runs on its own,
+ * patched @microbit/microbit-connection 1.0.0-beta.1, installed under the alias
+ * `microbit-connection-widget` (bin/patch-widget-connection.cjs). The trainer
+ * keeps Calliope's fork of the library under the real name, so only the
+ * widget's imports are pointed at the alias.
+ */
+const widgetConnectionPlugin = (): Plugin => ({
+  name: "widget-microbit-connection",
+  enforce: "pre",
+  resolveId(source, importer, options) {
+    if (
+      !importer ||
+      !/[\\/]@calliope-edu[\\/]mini-connection-widget[\\/]/.test(importer) ||
+      !/^@microbit\/microbit-connection(\/|$)/.test(source)
+    ) {
+      return null;
+    }
+    return this.resolve(
+      source.replace(
+        "@microbit/microbit-connection",
+        "microbit-connection-widget"
+      ),
+      importer,
+      { ...options, skipSelf: true }
+    );
+  },
+});
+
 export default defineConfig(async ({ mode }): Promise<UserConfig> => {
   const strings: TemplateStrings = themePackageExternal
     ? // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
@@ -69,9 +99,25 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
         // script runs with Campus's rights, so it only loads what it pins.
         sharedAssets: process.env.CAMPUS_DIST !== "1",
       }),
+      widgetConnectionPlugin(),
       react(),
+      // The connection widget and calliope-ui ship Svelte 5 source.
+      svelte({ preprocess: vitePreprocess() }),
       svgr(),
     ],
+    optimizeDeps: {
+      // Shipped as unbuilt Svelte/TS source, which the dep optimizer cannot
+      // prebundle; their own dependencies are prebundled instead.
+      exclude: ["@calliope-edu/mini-connection-widget", "@calliope-edu/ui"],
+      include: [
+        "microbit-connection-widget",
+        "microbit-connection-widget/usb",
+        "microbit-connection-widget/bluetooth",
+        "nrf-intel-hex",
+        "bits-ui",
+        "svelte-sonner",
+      ],
+    },
     assetsInclude: ["**/*.hex"],
     define: {
       "import.meta.env.VITE_APP_VERSION": JSON.stringify(

@@ -8,6 +8,10 @@
  * owns the Calliope mini through its connection widget, so the trainer never
  * opens a USB or Bluetooth dialog itself. It asks Campus instead.
  *
+ * On its own page (the static build) the trainer runs in Campus mode too:
+ * the same connection widget sits on that page and widget-host.ts plays
+ * Campus' part there, without postMessage (see isWidgetMode).
+ *
  * Message protocol (Campus side: src/lib/kiTraining/kiTraining.ts):
  *   trainer -> campus:  {type: "mltrainer", action: "ready"}
  *                       {type: "mltrainer", action: "connect", reqId}
@@ -79,15 +83,36 @@ export const isCampusSimulation = (): boolean =>
   params.get("simulate") === "campus";
 
 /** True when the trainer runs embedded in Campus, which owns the mini. */
+const isEmbeddedInCampus = (): boolean =>
+  params.get("controller") === "2" &&
+  parentOrigin !== null &&
+  window.parent !== window;
+
+// The e2e tests drive the trainer's own connection dialogs against mock
+// devices (see App.tsx), and unit tests run without a page to put a widget on.
+const isTestRun = (): boolean =>
+  import.meta.env.MODE === "test" ||
+  document.cookie.split("; ").some((row) => row.startsWith("mockDevice="));
+
+/**
+ * True when the trainer runs on its own page (the static build, not embedded
+ * in Campus): the connection widget sits on the page and owns the mini, as on
+ * Campus' /ki-training, and the trainer runs in Campus mode against it
+ * (widget-host.ts).
+ */
+export const isWidgetMode = (): boolean =>
+  !isCampusSimulation() && !isEmbeddedInCampus() && !isTestRun();
+
+/**
+ * True when a connection widget owns the mini: Campus' (embedded, or
+ * simulated) or the one on the trainer's own page (isWidgetMode).
+ */
 export const isCampusMode = (): boolean =>
-  isCampusSimulation() ||
-  (params.get("controller") === "2" &&
-    parentOrigin !== null &&
-    window.parent !== window);
+  isCampusSimulation() || isEmbeddedInCampus() || isWidgetMode();
 
 /** True in a Campus room, where Campus keeps the project (see src/campus-room.ts). */
 export const isCampusRoomMode = (): boolean =>
-  !isCampusSimulation() && isCampusMode() && params.get("project") === "campus";
+  isEmbeddedInCampus() && params.get("project") === "campus";
 
 export type CampusLinkStatus = "connected" | "connecting" | "disconnected";
 
@@ -405,7 +430,11 @@ export const getCampusHost = (): CampusHost => {
   return host;
 };
 
-/** Makes `simulated` the page's Campus link (see campusSimulation.ts). */
-export const installCampusHost = (simulated: CampusHost) => {
-  host = simulated;
+/**
+ * Makes `replacement` the page's Campus link: a simulated Campus
+ * (campusSimulation.ts) or the widget on the trainer's own page
+ * (widget-host.ts).
+ */
+export const installCampusHost = (replacement: CampusHost) => {
+  host = replacement;
 };
