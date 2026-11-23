@@ -5,5 +5,8 @@
  */
 import App from "./App";
 import ReactDOM from "react-dom/client";
+import { logBuildInfoWhenEmbedded } from "./build-info";
+
+logBuildInfoWhenEmbedded();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(<App />);

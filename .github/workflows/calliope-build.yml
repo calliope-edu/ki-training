@@ -14,10 +14,17 @@ name: calliope-build
 #   tag calliope-vX.Y.Z      → build-live  (ki-training.calliope.cc; Campus pins it)
 #   push to calliope-main    → build-dev   (ki-training-dev.calliope.cc)
 #
+# calliope-ui and the connection widget follow the build's channel
+# (resolve-calliope-deps, from calliope-ui): a dev build takes their newest
+# commit on calliope-main, a live build their newest release tag within the
+# major package.json pins.
+#
 # Each build branch is ready to serve as it is: a Cloudflare Pages project on it
 # needs no build command and the repository root as its output directory. Each
-# commit carries BUILD.json (at the root and in editors/ki-training/) naming the
-# source commit and ref. Campus pins a commit of build-live as its editors/ki-training
+# commit carries BUILD.json (at the root and in editors/ki-training/, format in
+# docs/build-info.md) naming the channel, version, source commit and the states
+# of calliope-ui and the widget; the app compiles in the same values and shows
+# them at the bottom of its settings menu. Campus pins a commit of build-live as its editors/ki-training
 # submodule and moves the pin itself, so nothing built here reaches
 # campus.calliope.cc unreviewed.
 #
@@ -52,8 +59,40 @@ jobs:
           node-version: 22
           cache: npm
 
-      # postinstall generates the Chakra theme typings the type check needs.
-      - run: npm ci --no-audit --no-fund
+      # Rewrites the pins of calliope-ui and the widget in package.json to the
+      # channel's state (dev: newest commit on calliope-main; live: newest tag).
+      - name: Resolve calliope-ui and the widget
+        id: deps
+        uses: calliope-edu/calliope-ui/.github/actions/resolve-calliope-deps@calliope-main
+
+      # One set of build values for both builds and their BUILD.json
+      # (bin/build-info.cjs; vite.config.ts compiles them in).
+      - name: Build info
+        env:
+          REF_TYPE: ${{ github.ref_type }}
+          REF_NAME: ${{ github.ref_name }}
+          SHA: ${{ github.sha }}
+          DEPS: ${{ steps.deps.outputs.json }}
+        run: |
+          channel=dev
+          if [ "$REF_TYPE" = tag ]; then channel=live; fi
+          {
+            echo "BUILD_CHANNEL=$channel"
+            echo "BUILD_VERSION=$REF_NAME"
+            echo "BUILD_COMMIT=$SHA"
+            echo "BUILD_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "BUILD_DEPS=$DEPS"
+          } >> "$GITHUB_ENV"
+
+      # Everything else as the lockfile has it; the two Calliope packages are
+      # named explicitly, as npm keeps a git dependency's locked commit
+      # otherwise. postinstall generates the Chakra theme typings the type
+      # check needs and patches the widget's connection library.
+      - name: Install
+        run: |
+          specs=$(node -p "const d = require('./package.json').dependencies; ['@calliope-edu/ui', '@calliope-edu/mini-connection-widget'].map((n) => n + '@' + d[n]).join(' ')")
+          echo "$specs"
+          npm install --no-audit --no-fund $specs
 
       - name: Build for the site root
         run: npm run build && rm -f dist/test.html && mkdir -p "$RUNNER_TEMP/out" && cp -r dist/. "$RUNNER_TEMP/out/"
@@ -87,12 +126,11 @@ jobs:
           target=build-dev
           if [ "$REF_TYPE" = tag ]; then target=build-live; fi
           short=${SOURCE_SHA:0:7}
-          built=$(date -u +%Y-%m-%dT%H:%M:%SZ)
           out="$RUNNER_TEMP/out"
-          printf '{\n  "name": "%s",\n  "ref": "%s",\n  "source": "%s",\n  "base": "%s",\n  "built": "%s"\n}\n' \
-            "$name" "$SOURCE_REF" "$SOURCE_SHA" "/" "$built" > "$out/BUILD.json"
-          printf '{\n  "name": "%s",\n  "ref": "%s",\n  "source": "%s",\n  "base": "%s",\n  "built": "%s"\n}\n' \
-            "$name" "$SOURCE_REF" "$SOURCE_SHA" "/editors/$name/" "$built" > "$out/editors/$name/BUILD.json"
+          # The same values both builds compiled in (step "Build info").
+          node bin/build-info.cjs > "$out/BUILD.json"
+          cp "$out/BUILD.json" "$out/editors/$name/BUILD.json"
+          cat "$out/BUILD.json"
           mkdir publish && cd publish
           git init -q
           git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"

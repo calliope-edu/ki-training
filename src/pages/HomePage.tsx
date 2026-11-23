@@ -107,8 +107,6 @@ const HomePage = () => {
             />
           </Box>
         </VStack>
-
-
       </Container>
     </DefaultPageLayout>
   );

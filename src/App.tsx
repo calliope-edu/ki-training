@@ -45,7 +45,10 @@ import {
   isCampusMode,
   isCampusRoomMode,
   isCampusSimulation,
+  installCampusHost,
+  isWidgetMode,
 } from "./device/campus-host";
+import { WidgetCampusHost } from "./device/widget-host";
 import { MockWebBluetoothConnection } from "./device/mockBluetooth";
 import { MockRadioBridgeConnection } from "./device/mockRadioBridge";
 import { MockWebUSBConnection } from "./device/mockUsb";
@@ -91,6 +94,12 @@ const usb = isMockDeviceMode()
 // `?simulate=campus`: Campus mode against a simulated Campus and mini.
 if (isCampusSimulation()) {
   startCampusSimulation();
+}
+// On its own page the trainer has the connection widget beside it, as in
+// Campus (see device/widget-host.ts).
+const widgetHost = isWidgetMode() ? new WidgetCampusHost() : undefined;
+if (widgetHost) {
+  installCampusHost(widgetHost);
 }
 // In Campus, Campus holds the Bluetooth link (see device/campus-host.ts).
 const bluetooth = isMockDeviceMode()
@@ -144,6 +153,12 @@ const Layout = () => {
   const navigate = useNavigate();
   const toast = useToast();
   const intl = useIntl();
+
+  // The widget's texts follow the trainer's language.
+  const languageId = useStore((s) => s.settings.languageId);
+  useEffect(() => {
+    widgetHost?.setLanguage(languageId);
+  }, [languageId]);
 
   // Campus moves its connection button out of MakeCode's toolbar.
   const { pathname } = useLocation();

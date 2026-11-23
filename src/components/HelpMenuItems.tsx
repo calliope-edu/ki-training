@@ -23,7 +23,6 @@ const HelpMenuItems = ({
         onConnectFirstDialogOpen={onConnectFirstDialogOpen}
         tourTrigger={tourTrigger}
       />
-      
     </>
   );
 };
@@ -33,13 +32,9 @@ interface TourMenuItemProps {
   tourTrigger: TourTrigger | undefined;
 }
 
-const TourMenuItem = ({
-  tourTrigger,
-}: TourMenuItemProps) => {
+const TourMenuItem = ({ tourTrigger }: TourMenuItemProps) => {
   if (tourTrigger) {
-    return (
-        <FormattedMessage id="tour-action" />
-    );
+    return <FormattedMessage id="tour-action" />;
   }
   return null;
 };

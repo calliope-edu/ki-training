@@ -18,11 +18,42 @@ Micro:bit Educational Foundation applications, add and remove features, and
 revise the user experience for some features also in ML-Machine. We encourage
 you to review both projects and see which best fits your needs.
 
+## Branches and builds
+
+`calliope-main` is the Calliope branch: a push builds onto `build-dev`
+(`ki-training-dev.calliope.cc`), a tag `calliope-vX.Y.Z` onto `build-live`
+(`ki-training.calliope.cc`), both by `.github/workflows/calliope-build.yml`.
+Each build carries a `BUILD.json` and shows its version, with the states of
+calliope-ui and the connection widget, at the bottom of the settings menu:
+[`docs/build-info.md`](docs/build-info.md).
+
 ## Plans
 
 Plan docs for larger changes live in [`docs/plan/`](docs/plan/):
 
 - [Campus KI-Training gets motion data over USB too](docs/plan/01-campus-motion-data-over-usb.md)
+
+## The Calliope mini connection
+
+The trainer never connects the mini itself. The Calliope connection widget
+([`@calliope-edu/mini-connection-widget`](https://github.com/calliope-edu/mini-connection-widget))
+owns it: USB or Bluetooth, transferring programs, and the motion data the
+trainer records.
+
+- Embedded in Calliope Campus (`/ki-training`, `?controller=2&parentOrigin=…`),
+  Campus' widget does this and the trainer asks Campus
+  ([`src/device/campus-host.ts`](src/device/campus-host.ts)).
+- On its own page (the static build, e.g. on Cloudflare Pages) the same widget
+  sits on the trainer's page: its button top right, its banner and dialogs,
+  and [`src/device/widget-host.ts`](src/device/widget-host.ts) plays Campus'
+  part in the page ([`src/widget/`](src/widget/)).
+
+The widget runs on its own patched `@microbit/microbit-connection`
+1.0.0-beta.1, installed as `microbit-connection-widget` and patched by
+`postinstall` ([`bin/patch-widget-connection.cjs`](bin/patch-widget-connection.cjs));
+`vite.config.ts` points the widget's imports at it, while the trainer keeps
+Calliope's fork of that library. The e2e tests (mock devices) and
+`?simulate=campus` run without the widget.
 
 ## Building and running the app
 

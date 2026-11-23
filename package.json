@@ -11,7 +11,7 @@
     "dev": "cross-env VITE_VERSION=$npm_package_version vite",
     "invalidate": "invalidate-cloudfront-distribution",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "postinstall": "npm run theme",
+    "postinstall": "npm run theme && node bin/patch-widget-connection.cjs",
     "preview": "vite preview",
     "start": "vite dev",
     "test": "vitest --exclude **/ml4f-output.test.ts",
@@ -26,6 +26,7 @@
     "@chakra-ui/cli": "^2.4.1",
     "@formatjs/cli": "^6.2.7",
     "@playwright/test": "^1.42.1",
+    "@sveltejs/vite-plugin-svelte": "^5.1.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.0.0",
@@ -56,6 +57,8 @@
     "vitest-dom": "^0.1.1"
   },
   "dependencies": {
+    "@calliope-edu/mini-connection-widget": "github:calliope-edu/mini-connection-widget#v0.3.0",
+    "@calliope-edu/ui": "github:calliope-edu/calliope-ui#v0.1.0",
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
@@ -68,13 +71,16 @@
     "@tensorflow/tfjs": "^4.20.0",
     "@types/w3c-web-serial": "^1.0.6",
     "@types/w3c-web-usb": "^1.0.6",
+    "bits-ui": "^2.22.0",
     "bowser": "^2.11.0",
     "chart.js": "^4.2.1",
     "framer-motion": "^10.2.4",
     "lodash.camelcase": "^4.3.0",
     "lodash.debounce": "^4.0.8",
     "lodash.upperfirst": "^4.3.1",
+    "microbit-connection-widget": "npm:@microbit/microbit-connection@1.0.0-beta.1",
     "ml4f": "git://github.com/microsoft/ml4f#v1.10.1",
+    "nrf-intel-hex": "^1.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hotkeys-hook": "^4.6.1",
@@ -82,6 +88,13 @@
     "react-intl": "^6.6.8",
     "react-router": "^6.24.0",
     "react-router-dom": "^6.24.0",
+    "svelte": "^5.59.1",
+    "svelte-sonner": "^1.2.3",
     "zustand": "^4.5.5"
+  },
+  "overrides": {
+    "@calliope-edu/mini-connection-widget": {
+      "@microbit/microbit-connection": "$@microbit/microbit-connection"
+    }
   }
 }
