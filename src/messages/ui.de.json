@@ -168,7 +168,13 @@
   "campus-connect-needs-program": [
     {
       "type": 0,
-      "value": "Zum Aufzeichnen und Testen braucht er das Programm zur Datenerfassung. „Verbinden“ überträgt es."
+      "value": "Zum Aufzeichnen und Testen braucht er das Programm zur Datenerfassung."
+    }
+  ],
+  "campus-connect-needs-usb": [
+    {
+      "type": 0,
+      "value": "Zum Aufzeichnen und Testen braucht er das Programm zur Datenerfassung. Schließe ihn per USB-Kabel an, um es zu übertragen."
     }
   ],
   "campus-microbit-ble-connected": [
@@ -181,6 +187,18 @@
     {
       "type": 0,
       "value": "Dein Calliope mini ist über USB verbunden"
+    }
+  ],
+  "campus-transfer-program-action": [
+    {
+      "type": 0,
+      "value": "Programm übertragen"
+    }
+  ],
+  "campus-transfer-program-action-aria": [
+    {
+      "type": 0,
+      "value": "Programm zur Datenerfassung auf den Calliope mini übertragen"
     }
   ],
   "cancel-action": [

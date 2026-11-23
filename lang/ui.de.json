@@ -87,8 +87,12 @@
     "description": "Heading for browser support dialog"
   },
   "campus-connect-needs-program": {
-    "defaultMessage": "Zum Aufzeichnen und Testen braucht er das Programm zur Datenerfassung. „Verbinden“ überträgt es.",
-    "description": "Live graph hint in Calliope Campus below campus-microbit-ble-connected and campus-microbit-usb-connected"
+    "defaultMessage": "Zum Aufzeichnen und Testen braucht er das Programm zur Datenerfassung.",
+    "description": "Live graph hint in Calliope Campus below campus-microbit-usb-connected (or campus-microbit-ble-connected when the mini is also on USB), above campus-transfer-program-action"
+  },
+  "campus-connect-needs-usb": {
+    "defaultMessage": "Zum Aufzeichnen und Testen braucht er das Programm zur Datenerfassung. Schließe ihn per USB-Kabel an, um es zu übertragen.",
+    "description": "Live graph hint in Calliope Campus below campus-microbit-ble-connected when the mini is on Bluetooth only, where the program cannot be transferred"
   },
   "campus-microbit-ble-connected": {
     "defaultMessage": "Dein Calliope mini ist über Bluetooth verbunden",
@@ -97,6 +101,14 @@
   "campus-microbit-usb-connected": {
     "defaultMessage": "Dein Calliope mini ist über USB verbunden",
     "description": "Live graph status in Calliope Campus when the Calliope mini is connected via USB only in the Campus connection widget but does not run the ML data program"
+  },
+  "campus-transfer-program-action": {
+    "defaultMessage": "Programm übertragen",
+    "description": "Button in Calliope Campus that transfers the data collection program to the Calliope mini over USB"
+  },
+  "campus-transfer-program-action-aria": {
+    "defaultMessage": "Programm zur Datenerfassung auf den Calliope mini übertragen",
+    "description": "Aria label for campus-transfer-program-action"
   },
   "cancel-action": {
     "defaultMessage": "Abbrechen",
