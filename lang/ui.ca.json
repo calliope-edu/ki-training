@@ -88,8 +88,12 @@
     "description": "Heading for browser support dialog"
   },
   "campus-connect-needs-program": {
-    "defaultMessage": "To record and test it needs the data collection program. Connect transfers it.",
-    "description": "Live graph hint in Calliope Campus below campus-microbit-ble-connected and campus-microbit-usb-connected"
+    "defaultMessage": "To record and test it needs the data collection program.",
+    "description": "Live graph hint in Calliope Campus below campus-microbit-usb-connected (or campus-microbit-ble-connected when the mini is also on USB), above campus-transfer-program-action"
+  },
+  "campus-connect-needs-usb": {
+    "defaultMessage": "To record and test it needs the data collection program. Connect it with a USB cable to transfer it.",
+    "description": "Live graph hint in Calliope Campus below campus-microbit-ble-connected when the mini is on Bluetooth only, where the program cannot be transferred"
   },
   "campus-microbit-ble-connected": {
     "defaultMessage": "Your Calliope mini is connected via Bluetooth",
@@ -98,6 +102,14 @@
   "campus-microbit-usb-connected": {
     "defaultMessage": "Your Calliope mini is connected via USB",
     "description": "Live graph status in Calliope Campus when the Calliope mini is connected via USB only in the Campus connection widget but does not run the ML data program"
+  },
+  "campus-transfer-program-action": {
+    "defaultMessage": "Transfer program",
+    "description": "Button in Calliope Campus that transfers the data collection program to the Calliope mini over USB"
+  },
+  "campus-transfer-program-action-aria": {
+    "defaultMessage": "Transfer the data collection program to the Calliope mini",
+    "description": "Aria label for campus-transfer-program-action"
   },
   "cancel-action": {
     "defaultMessage": "Cancel·lar",

@@ -54,13 +54,24 @@ const LiveGraphPanel = ({
   // trainer says how the mini is connected there instead of "not connected".
   const campus = useCampusStatus();
   const isCampus = isCampusMode();
+  // There the action transfers the ML data program, which Campus does over
+  // USB only (over Bluetooth in its debug mode alone), so a mini on Bluetooth
+  // only gets a hint to plug in the cable instead of a button.
+  const campusUsb = isCampus && campus.usb === "connected";
+  const campusBleOnly = isCampus && !campusUsb && campus.ble === "connected";
   const [disconnectedTitleId, disconnectedBodyId] = !isCampus
     ? ["microbit-not-connected", disconnectedTextId]
     : campus.ble === "connected"
-    ? ["campus-microbit-ble-connected", "campus-connect-needs-program"]
-    : campus.usb === "connected"
+    ? [
+        "campus-microbit-ble-connected",
+        campusUsb ? "campus-connect-needs-program" : "campus-connect-needs-usb",
+      ]
+    : campusUsb
     ? ["campus-microbit-usb-connected", "campus-connect-needs-program"]
     : ["microbit-not-connected", disconnectedTextId];
+  const [actionId, actionAriaId] = campusUsb
+    ? ["campus-transfer-program-action", "campus-transfer-program-action-aria"]
+    : ["connect-action", "connect-action-aria"];
 
   const handleConnectOrReconnect = useCallback(() => {
     if (
@@ -79,7 +90,7 @@ const LiveGraphPanel = ({
     }
   }, [status, actions, logging]);
   useShortcut(keyboardShortcuts.connect, handleConnectOrReconnect, {
-    enabled: isDisconnected,
+    enabled: isDisconnected && !campusBleOnly,
   });
   const handleDisconnect = useCallback(() => {
     logging.event({
@@ -120,13 +131,15 @@ const LiveGraphPanel = ({
             <Text>
               <FormattedMessage id={disconnectedBodyId} />
             </Text>
-            <Button
-              variant="primary"
-              onClick={handleConnectOrReconnect}
-              aria-label={intl.formatMessage({ id: "connect-action-aria" })}
-            >
-              <FormattedMessage id="connect-action" />
-            </Button>
+            {!campusBleOnly && (
+              <Button
+                variant="primary"
+                onClick={handleConnectOrReconnect}
+                aria-label={intl.formatMessage({ id: actionAriaId })}
+              >
+                <FormattedMessage id={actionId} />
+              </Button>
+            )}
           </VStack>
         </HStack>
       )}

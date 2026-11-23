@@ -168,7 +168,13 @@
   "campus-connect-needs-program": [
     {
       "type": 0,
-      "value": "To record and test it needs the data collection program. Connect transfers it."
+      "value": "To record and test it needs the data collection program."
+    }
+  ],
+  "campus-connect-needs-usb": [
+    {
+      "type": 0,
+      "value": "To record and test it needs the data collection program. Connect it with a USB cable to transfer it."
     }
   ],
   "campus-microbit-ble-connected": [
@@ -181,6 +187,18 @@
     {
       "type": 0,
       "value": "Your Calliope mini is connected via USB"
+    }
+  ],
+  "campus-transfer-program-action": [
+    {
+      "type": 0,
+      "value": "Transfer program"
+    }
+  ],
+  "campus-transfer-program-action-aria": [
+    {
+      "type": 0,
+      "value": "Transfer the data collection program to the Calliope mini"
     }
   ],
   "cancel-action": [
