@@ -1,7 +1,15 @@
 {
-  "name": "ki-training",
-  "ref": "calliope-main",
-  "source": "87b7a80c6aa6c1786ab7e1aca738fea9ff111973",
-  "base": "/",
-  "built": "2026-11-23T19:33:09Z"
+  "channel": "dev",
+  "version": "calliope-main",
+  "commit": "e34ccebd3207d35c5a6d14d6777126689cd42d9f",
+  "builtAt": "2026-11-23T22:33:56Z",
+  "ui": {
+    "tag": "",
+    "commit": "519ae01a2aab7de35db78b09fbfb1994fd412ff0"
+  },
+  "widget": {
+    "tag": "",
+    "commit": "53a8a25d108f808e9b9ad1364e5568374eb2246a"
+  },
+  "libs": {}
 }
