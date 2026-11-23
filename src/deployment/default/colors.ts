@@ -32,8 +32,8 @@ const calliope = {
     500: "#1B1C1D", // Calliope Pink
   },
   neon: {
-  500: "#97f500",
-  }
+    500: "#97f500",
+  },
 };
 
 const colors = {
@@ -41,7 +41,7 @@ const colors = {
   gray,
   brand,
   brand2,
-  calliope
+  calliope,
 };
 
 export default colors;
