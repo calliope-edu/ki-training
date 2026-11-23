@@ -24,6 +24,28 @@ Plan docs for larger changes live in [`docs/plan/`](docs/plan/):
 
 - [Campus KI-Training gets motion data over USB too](docs/plan/01-campus-motion-data-over-usb.md)
 
+## The Calliope mini connection
+
+The trainer never connects the mini itself. The Calliope connection widget
+([`@calliope-edu/mini-connection-widget`](https://github.com/calliope-edu/mini-connection-widget))
+owns it: USB or Bluetooth, transferring programs, and the motion data the
+trainer records.
+
+- Embedded in Calliope Campus (`/ki-training`, `?controller=2&parentOrigin=…`),
+  Campus' widget does this and the trainer asks Campus
+  ([`src/device/campus-host.ts`](src/device/campus-host.ts)).
+- On its own page (the static build, e.g. on Cloudflare Pages) the same widget
+  sits on the trainer's page: its button top right, its banner and dialogs,
+  and [`src/device/widget-host.ts`](src/device/widget-host.ts) plays Campus'
+  part in the page ([`src/widget/`](src/widget/)).
+
+The widget runs on its own patched `@microbit/microbit-connection`
+1.0.0-beta.1, installed as `microbit-connection-widget` and patched by
+`postinstall` ([`bin/patch-widget-connection.cjs`](bin/patch-widget-connection.cjs));
+`vite.config.ts` points the widget's imports at it, while the trainer keeps
+Calliope's fork of that library. The e2e tests (mock devices) and
+`?simulate=campus` run without the widget.
+
 ## Building and running the app
 
 Getting up and running:

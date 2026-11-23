@@ -18,7 +18,14 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* The connection widget ships TS source typed against another connection library: see src/widget/mini-connection-widget.d.ts */
+    "paths": {
+      "@calliope-edu/mini-connection-widget": [
+        "./src/widget/mini-connection-widget.d.ts"
+      ]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
