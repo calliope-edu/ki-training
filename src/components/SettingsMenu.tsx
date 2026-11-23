@@ -14,6 +14,7 @@ import {
 import { useRef } from "react";
 import { RiSettings2Line } from "react-icons/ri";
 import { useIntl } from "react-intl";
+import BuildInfoLine from "./BuildInfoLine";
 import LanguageMenuItem from "./LanguageMenuItem";
 import SettingsMenuItem from "./SettingsMenuItem";
 
@@ -54,6 +55,7 @@ const SettingsMenu = ({
           <MenuList>
             <LanguageMenuItem onOpen={onLanguageDialogOpen} />
             <SettingsMenuItem onOpen={onSettingsDialogOpen} />
+            <BuildInfoLine />
           </MenuList>
         </Portal>
       </Menu>

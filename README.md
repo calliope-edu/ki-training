@@ -18,6 +18,15 @@ Micro:bit Educational Foundation applications, add and remove features, and
 revise the user experience for some features also in ML-Machine. We encourage
 you to review both projects and see which best fits your needs.
 
+## Branches and builds
+
+`calliope-main` is the Calliope branch: a push builds onto `build-dev`
+(`ki-training-dev.calliope.cc`), a tag `calliope-vX.Y.Z` onto `build-live`
+(`ki-training.calliope.cc`), both by `.github/workflows/calliope-build.yml`.
+Each build carries a `BUILD.json` and shows its version, with the states of
+calliope-ui and the connection widget, at the bottom of the settings menu:
+[`docs/build-info.md`](docs/build-info.md).
+
 ## Plans
 
 Plan docs for larger changes live in [`docs/plan/`](docs/plan/):

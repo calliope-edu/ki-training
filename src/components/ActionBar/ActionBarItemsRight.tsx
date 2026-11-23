@@ -10,6 +10,7 @@ import { useLocation } from "react-router";
 import { keyboardShortcuts, useShortcut } from "../../keyboard-shortcut-hooks";
 import { useStore } from "../../store";
 import AboutDialog from "../AboutDialog";
+import BuildInfoLine from "../BuildInfoLine";
 import ConnectFirstDialog from "../ConnectFirstDialog";
 // import HelpMenu from "../HelpMenu";
 import HelpMenuItems, { tourMap } from "../HelpMenuItems";
@@ -90,6 +91,7 @@ const ItemsRight = ({ menuItems, toolbarItems }: ItemsRightProps) => {
         {menuItems}
         <LanguageMenuItem onOpen={languageDialogOnOpen} />
         <SettingsMenuItem onOpen={settingsDialogOnOpen} />
+        <BuildInfoLine />
       </ToolbarMenu>
       {/* Toolbar items when sm window size. */}
       <ToolbarMenu
@@ -106,6 +108,7 @@ const ItemsRight = ({ menuItems, toolbarItems }: ItemsRightProps) => {
           onConnectFirstDialogOpen={connectFirstDialogOnOpen}
           tourTrigger={tourTrigger}
         />
+        <BuildInfoLine />
       </ToolbarMenu>
     </>
   );

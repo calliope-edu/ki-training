@@ -9,6 +9,7 @@ import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 import react from "@vitejs/plugin-react";
 import ejs from "ejs";
 import fs from "node:fs";
+import { createRequire } from "node:module";
 import path from "node:path";
 import {
   IndexHtmlTransformContext,
@@ -36,6 +37,12 @@ const themePackageExternal = fs.existsSync(external);
 const themePackageAlias = themePackageExternal
   ? theme
   : path.resolve(__dirname, internal);
+
+// The build's version, the same object the workflow writes to BUILD.json
+// (bin/build-info.cjs, docs/build-info.md).
+const { buildInfo } = createRequire(import.meta.url)(
+  "./bin/build-info.cjs"
+) as { buildInfo: () => Record<string, unknown> };
 
 const viteEjsPlugin = (data: ejs.Data): Plugin => {
   return {
@@ -122,6 +129,9 @@ export default defineConfig(async ({ mode }): Promise<UserConfig> => {
     define: {
       "import.meta.env.VITE_APP_VERSION": JSON.stringify(
         process.env.npm_package_version
+      ),
+      "import.meta.env.VITE_BUILD_INFO": JSON.stringify(
+        JSON.stringify(buildInfo())
       ),
     },
     build: {

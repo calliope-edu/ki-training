@@ -57,8 +57,8 @@
     "vitest-dom": "^0.1.1"
   },
   "dependencies": {
-    "@calliope-edu/mini-connection-widget": "github:calliope-edu/mini-connection-widget#ef473cb49c41742a86dca24d06f8a344f22618d1",
-    "@calliope-edu/ui": "github:calliope-edu/calliope-ui#fe0bde5e7ad6b64805af8a015c0c13be48dc1cb3",
+    "@calliope-edu/mini-connection-widget": "github:calliope-edu/mini-connection-widget#v0.3.0",
+    "@calliope-edu/ui": "github:calliope-edu/calliope-ui#v0.1.0",
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
