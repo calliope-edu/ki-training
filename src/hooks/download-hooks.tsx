@@ -172,7 +172,7 @@ export class DownloadProjectActions {
       const connectedDevice = this.connectActions.getUsbDevice();
       if (connectedDevice) {
         temporaryUsbConnection.setRequestDeviceExclusionFilters([
-          { serialNumber: connectedDevice.serialNumber },
+          { serialNumber: connectedDevice.serialNumber ?? undefined },
         ]);
       }
       connectionAndFlashOptions = {
