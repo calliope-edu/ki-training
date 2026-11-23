@@ -86,13 +86,15 @@ jobs:
 
       # Everything else as the lockfile has it; the two Calliope packages are
       # named explicitly, as npm keeps a git dependency's locked commit
-      # otherwise. postinstall generates the Chakra theme typings the type
+      # otherwise. `npm install <packages>` skips the app's own postinstall,
+      # so it runs on its own: it generates the Chakra theme typings the type
       # check needs and patches the widget's connection library.
       - name: Install
         run: |
           specs=$(node -p "const d = require('./package.json').dependencies; ['@calliope-edu/ui', '@calliope-edu/mini-connection-widget'].map((n) => n + '@' + d[n]).join(' ')")
           echo "$specs"
           npm install --no-audit --no-fund $specs
+          npm run postinstall
 
       - name: Build for the site root
         run: npm run build && rm -f dist/test.html && mkdir -p "$RUNNER_TEMP/out" && cp -r dist/. "$RUNNER_TEMP/out/"
