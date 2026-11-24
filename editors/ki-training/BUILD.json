@@ -2,10 +2,10 @@
   "channel": "live",
   "version": "calliope-v1.1.0",
   "commit": "e34ccebd3207d35c5a6d14d6777126689cd42d9f",
-  "builtAt": "2026-11-23T22:36:08Z",
+  "builtAt": "2026-11-24T17:47:19Z",
   "ui": {
-    "tag": "v0.1.0",
-    "commit": "4e015326cdd155e6db7e74bc08138ee3f870dbfb"
+    "tag": "v0.1.1",
+    "commit": "57618fac83f4cb2761ac8399e52115c13f7d05dc"
   },
   "widget": {
     "tag": "v0.3.0",
