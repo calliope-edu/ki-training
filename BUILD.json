@@ -2,7 +2,7 @@
   "channel": "dev",
   "version": "calliope-main",
   "commit": "00fc484bd6270562f2cc41fd9659ddd57c189e68",
-  "builtAt": "2026-11-24T17:34:22Z",
+  "builtAt": "2026-11-24T17:36:19Z",
   "ui": {
     "tag": "",
     "commit": "504eafab3fe074b85d0559dd6ddffc0a03bd77c8"
