@@ -2,14 +2,14 @@
   "channel": "dev",
   "version": "calliope-main",
   "commit": "00fc484bd6270562f2cc41fd9659ddd57c189e68",
-  "builtAt": "2026-11-24T07:05:50Z",
+  "builtAt": "2026-11-24T17:34:22Z",
   "ui": {
     "tag": "",
-    "commit": "519ae01a2aab7de35db78b09fbfb1994fd412ff0"
+    "commit": "504eafab3fe074b85d0559dd6ddffc0a03bd77c8"
   },
   "widget": {
     "tag": "",
-    "commit": "53a8a25d108f808e9b9ad1364e5568374eb2246a"
+    "commit": "36f5f11bf1a107007af51fd68756f5b258be0e35"
   },
   "libs": {}
 }
