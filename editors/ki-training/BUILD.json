@@ -2,10 +2,10 @@
   "channel": "dev",
   "version": "calliope-main",
   "commit": "00fc484bd6270562f2cc41fd9659ddd57c189e68",
-  "builtAt": "2026-11-24T17:44:45Z",
+  "builtAt": "2026-11-24T17:47:15Z",
   "ui": {
     "tag": "",
-    "commit": "dd084d286538e66dea0668590da75e2e3913c3cd"
+    "commit": "57618fac83f4cb2761ac8399e52115c13f7d05dc"
   },
   "widget": {
     "tag": "",
